@@ -2,11 +2,11 @@
 <html lang="es">
     <head>
         <meta charset="utf-8">
-        <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" />
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="theme-color" content="#de1c2f" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <meta name="description" content="Aventuras.pe - Aventuras Tours nace como una agencia de turistismo enfocado en brindar la mejor experiencia al aventurero.">
+        <meta name="description" content="Encuentra los mejores tours en Perú, tenemos los paquetes turísticos más completos para una experiencia de completa aventura.">
         <meta property="og:image" content="<?=base_url()."public/img/tours/".$imagen_tours;?>" />
         <meta property="og:image:width" content="828" />
         <meta property="og:image:height" content="450" />
@@ -88,12 +88,13 @@
                 </a>
 
                 <?php
-                    if($titulo!='Su pago se procesó exitosamente  - Aventuras' && $titulo!='Resumen de la reserva a realizar en Aventuras' && $titulo!="Introduce tus datos para hacer la reserva - Aventuras" && $titulo!="Realizar pago - Aventuras") {
+                    if($titulo!='Su pago se procesó exitosamente  - Aventuras' && $titulo!='Resumen de la reserva a realizar en Aventuras' && $titulo!="Introduce tus datos para hacer la reserva - Aventuras" && $titulo!="Realizar pago - Aventuras"){
                 ?>
                     <nav id="menu" class="main-menu">
                         <ul>
-                                <li><span><a href="javascript:void(0);">Contáctanos</a></span>
-                                    <ul style="margin-left:38px;">
+                                <li>
+									<span><a href="javascript:void(0);">Contáctanos</a></span>
+                                    <ul class="ml-3">
                                         <li><a href="https://m.me/AventurasdelPeru" target="_blank"><i class="icon-chat"></i>&nbsp;&nbsp;&nbsp;FACEBOOK</a></li>  
                                         <li><a href="https://api.whatsapp.com/send?phone=51979180559&text=Hola%20me%20brindas%20informaci%C3%B3n%20sobre%20el%20paquete%20que%20vi%20en%20la%20web&source=&data=" target="_blank"><i class="icon-chat"></i>&nbsp;&nbsp;&nbsp;WHATSAPP</a></li>           
                                         <li><a href="tel://+51910926882" target="_blank"><i class="icon-phone"></i>&nbsp;&nbsp;&nbsp;(+51) 910 926 882</a></li>  
@@ -105,13 +106,13 @@
                                 <li><span><a href="<?= site_url("paquetes/listado/$moneda");?>">Paquetes</a></span></li>
                             
                                 <li><span><a href="javascript:void(0);"><?= @$monedaI->simbolo;?></a></span>
-                                    <ul style="margin-left:-3px;">
+                                    <ul class="drop-moneda">
                                         <?php
                                             if($monedas) {
                                                 foreach($monedas as $row) {
                                                     $stilo='';
                                                     if($monedaI->id==$row->id) {
-                                                        $stilo='style="color:#e01c2f;"';
+                                                        $stilo='class="activo"';
                                                     }
                                                     if($row->id=='1') {
                                                         $link='href="'.site_url($url).'"';
@@ -132,13 +133,13 @@
                         <nav id="menu" class="main-menu">
                             <ul>    
                                 <li><span><a href="javascript:void(0);"><?= @$monedaI->simbolo;?></a></span>
-                                    <ul style="margin-left:-3px;">
+                                    <ul class="drop-moneda">
                                         <?php
                                             if($monedas) {
                                                 foreach($monedas as $row) {
                                                     $stilo='';
                                                     if($monedaI->id==$row->id) {
-                                                        $stilo='style="color:#e01c2f;"';
+                                                        $stilo='class="activo"';
                                                     }
                                                     if($row->id=='1') {
                                                         $link='href="'.site_url($url).'"';
