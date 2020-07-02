@@ -19,6 +19,7 @@
         <link href="<?= base_url();?>public/front-end/css/style.css?v=<?= time();?>" rel="stylesheet">
         <link href="<?= base_url();?>public/front-end/css/vendors.css?v=<?= time();?>" rel="stylesheet">
         <link href="<?= base_url();?>public/front-end/css/jquery-ui.css?v=<?= time();?>" rel="stylesheet">
+		<link rel="canonical" href="https://www.aventuras.pe/" />
         <!-- Global site tag (gtag.js) - Google Analytics -->
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-065KQG1VB8"></script>
         <script>
