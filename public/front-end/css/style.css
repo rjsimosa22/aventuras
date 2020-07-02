@@ -1582,14 +1582,14 @@ footer {
   color: #fbfbfb;
   color: rgba(255, 255, 255, 0.7);
 }
-footer h5 {
+footer h5, footer h4 {
   color: #fff;
   margin: 25px 0;
   font-size: 18px;
   font-size: 1.125rem;
 }
 @media (max-width: 575px) {
-  footer h5 {
+  footer h5, footer h4 {
     margin: 25px 0 10px 0;
   }
 }
