@@ -1,0 +1,1 @@
+<script src="<?= base_url();?>public/front-end/js/inicio.js?v=<?= time();?>"></script>

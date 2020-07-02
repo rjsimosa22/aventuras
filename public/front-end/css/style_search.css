@@ -1,0 +1,185 @@
+.navbar-form {
+    position:absolute;
+    right:0px;
+    top:0px;
+    margin-top:13000px;
+}
+
+/* Definimos las transiciones */
+.navbar-form .form-control[type=text] {
+    background: transparent;
+    display:inline-block;
+    transition: all .5s;
+    border-radius: 4px 4px 0px 0px;   
+}
+/* Al situar el puntero en el campo de búsqueda este cambia su color de fondo a blanco, el color de la letra, el borde y la sombra */
+.navbar-form .form-control[type=text]:focus {
+    background-color: #fff;
+    border-color: #ffffff;
+    color:#333;
+    -webkit-box-shadow: 0 0 5px rgba(109,207,246,.5);
+    -moz-box-shadow: 0 0 5px rgba(109,207,246,.5);
+    box-shadow: 0 0 5px rgba(109,207,246,.5);
+}
+
+/* Para pantallas grandes hacemos que el formulario se despliegue con amplitud ya que disponemos de espacio en la barra de navegación, la busqueda se ejecuta con intro o pinchando en el icono de la lupa */
+@media (min-width:1200px) {
+    .navbar-form input.form-control[type=text] { width: 350px; }
+    .navbar-form input.form-control[type=text]:focus { width: 610px; }
+}
+
+@media (max-width:992px) {
+    .navbar-form input.form-control[type=text] { width: 250px; }
+    .navbar-form input.form-control[type=text]:focus { width: 510px; }
+}
+
+@media (max-width:991px) {
+    .navbar-form input.form-control[type=text] { width: 250px; }
+    .navbar-form input.form-control[type=text]:focus { width: 410px; }
+}
+
+@media (max-width:810px) {
+    .navbar-form input.form-control[type=text] { width: 200px; }
+    .navbar-form input.form-control[type=text]:focus { width: 400px; }
+}
+
+@media (max-width:610px) {
+    .navbar-form input.form-control[type=text] { width: 200px; }
+    .navbar-form input.form-control[type=text]:focus { width: 350px; }
+}
+
+@media (max-width:529px) {
+    .navbar-form input.form-control[type=text] { width: 200px; }
+    .navbar-form input.form-control[type=text]:focus { width: 300px; }
+}
+
+@media (max-width:529px) {
+    .navbar-form input.form-control[type=text] { width: 200px; }
+    .navbar-form input.form-control[type=text]:focus { width: 280px; }
+}
+
+@media (max-width:450px) {
+    .navbar-form input.form-control[type=text] { width: 200px; }
+    .navbar-form input.form-control[type=text]:focus { width: 240px; }
+}
+
+@media (max-width:410px) {
+    .navbar-form input.form-control[type=text] { width: 200px; }
+    .navbar-form input.form-control[type=text]:focus { width: 210px; }
+}
+
+@media (max-width:385px) {
+    .navbar-form input.form-control[type=text] { width: 190px; }
+    .navbar-form input.form-control[type=text]:focus { width: 190px; }
+}
+
+
+
+/* Para pantallas menores reducimos el campo de busqueda y hacemos que se despliegue cuando hacemos focus sobre el icono de la lupa. La busqueda se ejecuta con intro o pinchando de nuevo en el icono de la lupa */
+
+@media (min-width:811px) {
+    .navbar-form .form-control[type=text] {
+        position:absolute;
+        right:5px;
+        z-index:1000;
+        padding:8px 12px;
+        height:66px;
+        width:500px;
+        border-radius: 4px 4px 0px 0px;   
+    }
+}    
+
+@media (max-width:810px) {
+    .navbar-form .form-control[type=text] {
+        position:absolute;
+        right:5px;
+         z-index:1000;
+        padding:8px 12px;
+        height:66px;
+        width:350px;
+        border-radius: 4px 4px 0px 0px;   
+    }
+}
+
+@media (max-width:767px) {
+    .navbar-form .form-control[type=text] {
+        position:absolute;
+        right:5px;
+         z-index:1000;
+        padding:8px 12px;
+        height:66px;
+        width:250px;
+        border-radius: 4px 4px 0px 0px;   
+    }
+}
+
+@media (max-width:610) {
+    .navbar-form .form-control[type=text] {
+        position:absolute;
+        right:5px;
+         z-index:1000;
+        padding:8px 12px;
+        height:66px;
+        width:100px;
+        border-radius: 4px 4px 0px 0px;   
+    }
+}
+
+  
+.navbar-form,
+.navbar-form div.input-group {
+    width:1px;
+    height:0px;
+    right:10px;
+}
+
+.navbar-form .form-control[type=text]:focus {
+    position:absolute;
+    right:10px; 
+    border-radius: 4px 4px 0px 0px;   
+}
+
+@media (max-width:767px) {
+    .navbar-form,
+    .navbar-form div.input-group {
+        width:1px;
+        height:0px;
+        right:60px;
+    }
+}
+
+@media (max-width:600px) {
+    .navbar-form,
+    .navbar-form div.input-group {
+        width:1px;
+        height:0px;
+        right:70px;
+    }
+}
+
+@media (max-width:440px) {
+    .navbar-form,
+    .navbar-form div.input-group {
+        width:1px;
+        height:0px;
+        right:70px;
+    }
+}
+
+@media (max-width:440px) {
+    .navbar-form,
+    .navbar-form div.input-group {
+        width:1px;
+        height:0px;
+        right:60px;
+    }
+}
+
+@media (max-width:330px) {
+    .navbar-form,
+    .navbar-form div.input-group {
+        width:1px;
+        height:0px;
+        right:57px;
+    }
+}
