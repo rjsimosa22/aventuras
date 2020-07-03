@@ -206,21 +206,35 @@ $(document).ready(function() {
 
     Dropzone.autoDiscover=false;
     $("div#dropzone").dropzone({ 
+        init: function() {
+            this.on('thumbnail', function(file) {
+              if (file.accepted !== false) {
+                if (file.width < 1024 || file.height < 768) {
+                  file.rejectDimensions();
+                }
+                else {
+                  file.acceptDimensions();
+                }
+              }
+            });
+        },
         accept: function(file, done) {
-            console.log(file.type);
-            if(file.type!="image/jpeg") {
-                done("Error! No se aceptan archivos de este tipo, solo JPG");
+            file.acceptDimensions = done;
+            file.rejectDimensions = function() {
+              done('La imagen debe tener al menos 1600 x 1060 píxeles de tamaño.');
+            };
+            if(file.size <= '2097152') {
+                if(file.type!="image/jpeg") {
+                    done("Error! La imagen debe ser JPG o JPEG");
+                } else {
+                    done("")
+                }
             } else {
-                done("")
+                done("Error! La imagen debe tener un peso menor a 2MB");
             }
         },
         url:$('#urlinsertImg').val()
     });
-    
-    /*$("div#dropzone").dropzone({ 
-        
-        url:$('#urlinsertImg').val() 
-    });*/
 });
 
 function completeUpload(success,fileName,url_imagen,url,id_tours,nombre,accion) {
