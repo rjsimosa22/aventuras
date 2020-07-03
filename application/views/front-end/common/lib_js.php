@@ -17,7 +17,7 @@
                         </div>
                     </div>
                     <div class="col-lg-3 col-md-6 ml-lg-auto">
-                        <h5>Soporte</h5>
+                        <h4>Soporte</h4>
                         <ul class="links">
                             <li><a href="#0">Centro de ayuda</a></li>
                             <li><a href="#">Politicas de privacidad</a></li>
@@ -26,7 +26,7 @@
                         </ul>
                     </div>
                     <div class="col-lg-3 col-md-6">
-                        <h5>Contacte con nosotros</h5>
+                        <h4>Contacte con nosotros</h4>
                         <ul class="contacts">
                             <li><a href="https://api.whatsapp.com/send?phone=51979180559&text=Hola%20me%20brindas%20informaci%C3%B3n%20sobre%20el%20paquete%20que%20vi%20en%20la%20web&source=&data=" target="_blank"><i class="icon-phone"></i>+51 910 926 882</a></li>
                             <li><a href="https://api.whatsapp.com/send?phone=51979180559&text=Hola%20me%20brindas%20informaci%C3%B3n%20sobre%20el%20paquete%20que%20vi%20en%20la%20web&source=&data=" target="_blank"><i class="icon-phone"></i>+51 979 180 559</a></li>

@@ -1582,14 +1582,14 @@ footer {
   color: #fbfbfb;
   color: rgba(255, 255, 255, 0.7);
 }
-footer h5 {
+footer h5, footer h4 {
   color: #fff;
   margin: 25px 0;
   font-size: 18px;
   font-size: 1.125rem;
 }
 @media (max-width: 575px) {
-  footer h5 {
+  footer h5, footer h4 {
     margin: 25px 0 10px 0;
   }
 }
@@ -2636,22 +2636,21 @@ video {
   background-color: black;
   background-color: rgba(0, 0, 0, 0.25);
 }
-.hero_single.version_2 .wrapper h3 {
-  font-size: 42px;
-  font-size: 2.325rem;
+.hero_single.version_2 .wrapper h3, .big-title {
+  font-size: 2.325rem !important;
   text-shadow: 4px 4px 12px rgba(0, 0, 0, 0.3);
+	font-weight: 700 !important;
+	line-height: 1.2;
 }
 @media (max-width: 767px) {
-  .hero_single.version_2 .wrapper h3 {
-    font-size: 26px;
-    font-size: 1.625rem;
-    margin-top: 60px;
+  .hero_single.version_2 .wrapper h3, .big-title {
+    font-size: 1.625rem !important;
+    margin-top: 60px !important;
   }
 }
 @media (max-width: 575px) {
-  .hero_single.version_2 .wrapper h3 {
-    font-size: 22px;
-    font-size: 1.375rem;
+  .hero_single.version_2 .wrapper h3, .big-title {
+    font-size: 1.375rem !important;
   }
 }
 .hero_single.version_2 .wrapper p {
@@ -2660,6 +2659,14 @@ video {
   padding: 0;
   font-size: 21px;
   font-size: 1.125rem;
+  text-shadow: 4px 4px 12px rgba(0, 0, 0, 0.3);
+}
+.hero_single.version_2 .wrapper h1 {
+	color: #fff !important;
+  font-weight: 600;
+  margin: 5px 0 0 0;
+  padding: 0;
+  font-size: 1.125rem !important;
   text-shadow: 4px 4px 12px rgba(0, 0, 0, 0.3);
 }
 .img-banner-fondo {
@@ -2764,16 +2771,22 @@ video {
 @media (max-width: 767px) {
   .hero_single.version_2 .wrapper p {
     padding: 0;
-    font-size: 14px;
     font-size: 0.875rem;
+  }
+	.hero_single.version_2 .wrapper h1 {
+    padding: 0;
+    font-size: 0.875rem !important;
   }
 }
 
 @media (max-width: 401px) {
   .hero_single.version_2 .wrapper p {
     padding: 0;
-    font-size: 14px;
     font-size: 0.635rem;
+  }
+	.hero_single.version_2 .wrapper h1 {
+    padding: 0;
+    font-size: 0.7rem !important;
   }
 }
 #custom-search-input {
@@ -2861,14 +2874,17 @@ video {
   -moz-border-radius: 5px;
   -ms-border-radius: 5px;
   border-radius: 5px;
-  margin-top: 15px;
-  width:60%;
+	width:60%;
+margin: 15px auto;
   -webkit-box-shadow: 0px 0px 30px 0px rgba(0, 0, 0, 0.3);
   -moz-box-shadow: 0px 0px 30px 0px rgba(0, 0, 0, 0.3);
   box-shadow: 0px 0px 30px 0px rgba(0, 0, 0, 0.3);
 
 }
 
+.drop-moneda{
+	margin-left: -3px !important;
+}
 @media (max-width: 991px) {
   .custom-search-input-2 {
     width:100%;
@@ -3643,26 +3659,24 @@ a.box_feat h3 {
     margin-right: 0;
   }
 }
-
-.score strong {
+.score span {
+  display: inline-block;
+  position: relative;
+  font-size: 0.8rem;
+  text-align: right;
+  line-height: 1.1;
+  font-weight: 500;
+}
+.score strong, .score .strong {
   background-color: #de1c2f;
   color: #fff;
   line-height: 1;
   -webkit-border-radius: 0px 0px 0px 9px;
   padding: 10px;
   display: inline-block;
+	font-weight: 600;
 }
-.score span {
-  display: inline-block;
-  position: relative;
-  top: 7px;
-  margin-right: 8px;
-  font-size: 12px;
-  font-size: 0.75rem;
-  text-align: right;
-  line-height: 1.1;
-  font-weight: 500;
-}
+
 .score span em {
   display: block;
   font-weight: normal;
@@ -6928,9 +6942,15 @@ ul.list_feat li p {
     position: relative;
     padding: 0px 10px;
   }
-.box_faq h4 {
-  font-size: 18px;
+.box_faq h4, .name_review {
   font-size: 1.125rem;
+}
+.name_review{
+	font-weight: 500;
+	color: #555;	
+}
+.ver-todo, .strong{
+	font-weight: 600;
 }
 .box_faq i {
   font-size: 36px;
@@ -8330,3 +8350,9 @@ a.social_bt.google:before {
 	.d-none{
 		display:none;
 	}
+
+/*********css from html*************/
+
+.activo{
+	color:#e01c2f !important;
+}

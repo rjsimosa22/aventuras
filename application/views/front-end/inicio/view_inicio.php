@@ -2,9 +2,8 @@
 <section class="hero_single version_2">
 	<div class="wrapper">
 		<div class="container top-banner">
-			<h3>Reservar experiencias únicas</h3>
-			<p>Explora los mejores tours y paquetes de todo el Perú</p>
-			<center>
+			<p class="big-title">Reservar experiencias únicas</p>
+			<h1>Explora los mejores tours y paquetes de todo el Perú</h1>
 				<div class="row no-gutters custom-search-input-2">
 					<div class="col-lg-10">
 						<div class="form-group">
@@ -24,7 +23,6 @@
 						<input type="submit" class="btn_search" value="Buscar" onclick="validar_busquedad()">
 					</div>
 				</div>
-			</center>
 		</div>
 		<div class="container top-banner-1">
 			<div class="col-lg-12">
@@ -60,7 +58,7 @@
 							<table class="tam-table">
 								<tr height="80px">
 									<td class="tam-td-1"><img src="<?=base_url('public/img/facebook/stefany_carrion.jpg');?>" alt="" class="img-fluid mr-3 radius-redondo"></td>
-									<td class="tam-td-2"><h4>Stefany Carrion</h4><span>Viajero</span></td>	
+									<td class="tam-td-2"><span class="name_review">Stefany Carrion</span><br/><span>Viajero</span></td>	
 								</tr>
 							</table>		
 						</div>
@@ -76,7 +74,7 @@
 							<table class="tam-table">
 								<tr height="80px">
 									<td class="tam-td-1"><img src="<?=base_url('public/img/facebook/ruben_fernandez.jpg');?>" alt="" class="img-fluid mr-3 radius-redondo"></td>
-									<td class="tam-td-2"><h4>Ruben Fernandez</h4><span>Viajero</span></td>	
+									<td class="tam-td-2"><span class="name_review">Ruben Fernandez</span><br/><span>Viajero</span></td>	
 								</tr>
 							</table>		
 						</div>
@@ -92,7 +90,7 @@
 							<table class="tam-table">
 								<tr height="80px">
 									<td class="tam-td-1"><img src="<?=base_url('public/img/facebook/flor_marticorena.jpg');?>" alt="" class="img-fluid mr-3 radius-redondo"></td>
-									<td class="tam-td-2"><h4>Flor Marticorena</h4><span>Viajero</span></td>	
+									<td class="tam-td-2"><span class="name_review">Flor Marticorena</span><br/><span>Viajero</span></td>	
 								</tr>
 							</table>		
 						</div>
@@ -194,7 +192,7 @@
 			<?php $this->load->view('front-end/inicio/view_paquetes_inf');?>
 		</div>
 		
-		<a href="<?= $url_paquetes;?>"><strong>Ver todo (<?= $cantidad_paquetes[0]->cantidad;?>) <i class="arrow_carrot-right"></i></strong></a>
+		<a class="ver-todo" href="<?= $url_paquetes;?>">Ver todo (<?= $cantidad_paquetes[0]->cantidad;?>) <i class="arrow_carrot-right"></i></a>
 	</section>
 	<br><br>
 </div>
@@ -203,8 +201,7 @@
 <!-- /subcribirse-->
 <section class="ofertas-ccs">
 	<div class="wrapper">
-		<div class="container">
-			<center>
+		<div class="container" align="center">
 				<h3><span class="color-titulo">Recibe las últimas ofertas</span></h3>
 				<div class="row no-gutters custom-search-input-2">
 					<div class="col-lg-10">
@@ -218,7 +215,6 @@
 						<input type="submit" class="btn_search" value="Suscribirse" onclick="suscripcion();">
 					</div>
 				</div>
-			</center>
 		</div>
 	</div>
 </section>

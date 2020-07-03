@@ -23,7 +23,7 @@
                                     
                                     <ul id="adaptacion">
                                         <li>&nbsp;</li>
-                                        <a href="'.$row->url.'"><li><strong class="ocultar-css-link">Desde&nbsp;&nbsp;<span class="font-precio-1 color-precio">'.$monedaI->simbolo.' '.number_format($row->precio).'</span></strong></a><!--"a href="'.$row->url.'"><input type="button" class="btn_3 full-width purchase" value="Reservar"></a--></li>
+                                        <a href="'.$row->url.'"><li><span class="ocultar-css-link strong">Desde&nbsp;&nbsp;<span class="font-precio-1 color-precio">'.$monedaI->simbolo.' '.number_format($row->precio).'</span></span></a><!--"a href="'.$row->url.'"><input type="button" class="btn_3 full-width purchase" value="Reservar"></a--></li>
 						            </ul>
                                     <span class="espacio-movil-listado"><br></br></span>
                                 </div>
