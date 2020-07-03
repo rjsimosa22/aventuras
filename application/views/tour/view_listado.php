@@ -41,7 +41,7 @@
                                         if(count($listado) > 0) {
                                             foreach($listado as $row) {
                                     ?>
-                                                <tr class="odd gradeX">
+                                                <tr class="odd gradeX mayuscula">
                                                     <td><?= $row->nombre;?></td>
                                                     <td><?= $row->departamento.' / '.$row->provincia.' / '.$row->distrito;?></td>
                                                     <td><?= $row->duracion;?></td>

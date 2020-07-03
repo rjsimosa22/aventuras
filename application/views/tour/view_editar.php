@@ -35,20 +35,22 @@
                                         <input type="hidden" name="id" id="id" class="form-control" value="<?= $info->id;?>" />
                                         <input type="hidden" name="url1" id="url1" class="form-control" value="<?= site_url();?>" />
                                         <input type="hidden" name="url" id="url" class="form-control" value="<?= site_url('edittours/editar');?>" />
-                                        <input type="text" name="nombre" id="nombre" class="form-control" placeholder="Ingresé nombre" autocomplete="off" value="<?= strtoupper($info->nombre);?>" />
+                                        <input type="text" name="nombre" id="nombre" class="form-control" placeholder="Ingresé nombre" autocomplete="off" value="<?= $info->nombre;?>"/>
+                                        <br>
+                                        <input type="text" name="nombre_posic" id="nombre_posic" class="form-control" placeholder="Ingresé nombre posicionamiento" autocomplete="off" value="<?= $info->nombre_posic;?>"/>
                                     </div>
                                 </div>
 
                                 <div class="form-group">
                                     <div class="col-sm-6">
                                         <label class="col-sm-0 control-label" id="title_Depart">Departamento:</label>
-                                        <select class="js-example-basic-single" name="departamento" id="departamento" style="width:100%;">
+                                        <select class="js-example-basic-single mayuscula" name="departamento" id="departamento" style="width:100%;">
                                             <?php 
                                                 foreach($departamento as $row1) {
                                                     if($info->id_departamento!=$row1->id) {
-                                                        echo '<option value="'.$row1->id.'">'.strtoupper($row1->nombre).'</option>';
+                                                        echo '<option value="'.$row1->id.'">'.$row1->nombre.'</option>';
                                                     } else {
-                                                        echo '<option value="'.$row1->id.'" selected>'.strtoupper($row1->nombre).'</option>';
+                                                        echo '<option value="'.$row1->id.'" selected>'.$row1->nombre.'</option>';
                                                     }   
                                                 }
                                             ?>
@@ -58,13 +60,13 @@
 
                                     <div class="col-sm-6">
                                         <label class="col-sm-0 control-label" id="title_Prov">Provincia:</label>
-                                        <select class="js-example-basic-single" name="provincia" id="provincia" style="width:100%;">
+                                        <select class="js-example-basic-single mayuscula" name="provincia" id="provincia" style="width:100%;">
                                             <?php 
                                                 foreach($provincia as $row1) {
                                                     if($info->id_provincia!=$row1->id) {
-                                                        echo '<option value="'.$row1->id.'">'.strtoupper($row1->nombre).'</option>';
+                                                        echo '<option value="'.$row1->id.'">'.$row1->nombre.'</option>';
                                                     } else {
-                                                        echo '<option value="'.$row1->id.'" selected>'.strtoupper($row1->nombre).'</option>';
+                                                        echo '<option value="'.$row1->id.'" selected>'.$row1->nombre.'</option>';
                                                     }  
                                                 }
                                             ?>
@@ -76,13 +78,13 @@
                                 <div class="form-group">
                                     <div class="col-sm-6">
                                         <label class="col-sm-0 control-label" id="title_Dist">Distrito:</label>
-                                        <select class="js-example-basic-single" name="distrito" id="distrito" style="width:100%;">
+                                        <select class="js-example-basic-single mayuscula" name="distrito" id="distrito" style="width:100%;">
                                             <?php 
                                                 foreach($distrito as $row1) {
                                                     if($info->id_distrito!=$row1->id) {
-                                                        echo '<option value="'.$row1->id.'">'.strtoupper($row1->nombre).'</option>';
+                                                        echo '<option value="'.$row1->id.'">'.$row1->nombre.'</option>';
                                                     } else {
-                                                        echo '<option value="'.$row1->id.'" selected>'.strtoupper($row1->nombre).'</option>';
+                                                        echo '<option value="'.$row1->id.'" selected>'.$row1->nombre.'</option>';
                                                     }   
                                                 }
                                             ?>
@@ -92,13 +94,13 @@
                                                         
                                     <div class="col-sm-6">
                                         <label class="col-sm-0 control-label">Duración:</label>
-                                        <select class="form-control" name="duracion" id="duracion" style="width:100%;">
+                                        <select class="form-control mayuscula" name="duracion" id="duracion" style="width:100%;">
                                             <?php 
                                                 foreach($duracion as $row1) {
                                                     if($info->id_duracion!=$row1->id){
-                                                        echo '<option value="'.$row1->id.'">'.strtoupper($row1->nombre).'</option>';
+                                                        echo '<option value="'.$row1->id.'">'.$row1->nombre.'</option>';
                                                     } else {
-                                                        echo '<option value="'.$row1->id.'" selected>'.strtoupper($row1->nombre).'</option>';
+                                                        echo '<option value="'.$row1->id.'" selected>'.$row1->nombre.'</option>';
                                                     }  
                                                 }
                                             ?>
@@ -109,13 +111,13 @@
                                 <div class="form-group">
                                     <div class="col-sm-6">
                                         <label class="col-sm-0 control-label">Moneda:</label>
-                                        <select class="form-control" name="moneda" id="moneda" style="width:100%;">
+                                        <select class="form-control mayuscula" name="moneda" id="moneda" style="width:100%;">
                                             <?php 
                                                 foreach($monedas as $row1) {
                                                     if($info->id_moneda!=$row1->id){
-                                                        echo '<option value="'.$row1->id.'">'.strtoupper($row1->nombre).'</option>';
+                                                        echo '<option value="'.$row1->id.'">'.$row1->nombre.'</option>';
                                                     } else {
-                                                        echo '<option value="'.$row1->id.'" selected>'.strtoupper($row1->nombre).'</option>';
+                                                        echo '<option value="'.$row1->id.'" selected>'.$row1->nombre.'</option>';
                                                     }   
                                                 }
                                             ?>
@@ -136,7 +138,7 @@
 
                                     <div class="col-sm-6">
                                         <label class="col-sm-0 control-label" id="title_Tematica">Temática:</label>
-                                        <select class="js-example-basic-multiple" name="tematica[]" id="tematica" multiple="multiple" style="width:100%;">
+                                        <select class="js-example-basic-multiple mayuscula" name="tematica[]" id="tematica" multiple="multiple" style="width:100%;">
                                             <?php 
                                                 foreach($tematicas as $row1) {
                                                     $selected="";
@@ -145,7 +147,7 @@
                                                             $selected="selected";
                                                         }
                                                     }    
-                                                    echo '<option value="'.$row1->id.'" '.$selected.'>'.strtoupper($row1->nombre).'</option>';
+                                                    echo '<option value="'.$row1->id.'" '.$selected.'>'.$row1->nombre.'</option>';
                                                 }
                                             ?>
                                         </select>
@@ -164,6 +166,8 @@
                                     <div class="col-sm-12">
                                         <label class="col-sm-0 control-label">Descripción:</label>
                                         <textarea id="descripcion" name="descripcion" style="display:none;" class="mayuscula"><?= $info->descripcion;?></textarea>
+                                        <br>
+                                        <textarea id="descripcion_posic" name="descripcion_posic" style="display:none;" class="mayuscula"><?= $info->descripcion_posic;?></textarea>
                                     </div> 
                                 </div>
 
@@ -209,7 +213,7 @@
 
                                         <div class="panel-body collapse in">
                                             <div class="table-responsive" style="border:0;">
-                                                <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered datatables" id="example" width="100%">
+                                                <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered datatables mayuscula" id="example" width="100%">
                                                     <?php include 'application/views/notificacion/alert_modal.php';?>
                                                     <thead>
                                                         <tr>

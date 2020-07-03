@@ -10,8 +10,8 @@
   -moz-border-radius: 0 !important;
   border-radius: 0 !important;
 }
-.text-uppercase {
-  text-transform: uppercase;
+.text-capitalize {
+  text-transform: capitalize;
 }
 .text-justify {
   text-align: justify;
@@ -641,7 +641,7 @@ hr {
   margin-top: 30px;
 }
 #chat-form .chat-group > strong {
-  text-transform: uppercase;
+  text-transform: capitalize;
   color: #ededed;
   display: block;
   padding: 6px 35px;
@@ -1607,7 +1607,7 @@ ul.chats li.out .message a.chat-datetime {
   font-weight: bold;
   text-align: center;
   margin: 0;
-  text-transform: uppercase;
+  text-transform: capitalize;
 }
 .page-form .body-content {
   padding: 15px 20px;
@@ -1659,7 +1659,7 @@ ul.chats li.out .message a.chat-datetime {
   text-decoration: none;
 }
 .page-form .body-content .forget-password h4 {
-  text-transform: uppercase;
+  text-transform: capitalize;
   font-size: 16px;
 }
 .page-form .body-content hr {
@@ -2611,7 +2611,7 @@ ul.ul-edit.nav.nav-tabs li.active a {
   transform: translateY(100%);
 }
 .gallery-pages .mix-grid .mix .hover-effect .info h3 {
-  text-transform: uppercase;
+  text-transform: capitalize;
   color: #fff;
   text-align: center;
   font-size: 16px;

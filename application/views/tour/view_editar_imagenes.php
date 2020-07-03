@@ -21,7 +21,7 @@
 
                 <div class="panel-body collapse in">
                     <div class="table-responsive" style="border:0;">
-                        <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered datatables" id="example" width="100%">
+                        <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered datatables mayuscula" id="example" width="100%">
                             <?php include 'application/views/notificacion/alert.php';?>
                                 <thead>
                                     <tr>
@@ -39,8 +39,8 @@
                                 
                                             <tr class="odd gradeX">
                                                 <td><img src="<?= site_url('public/img/tours/'.$row->nombre_extension);?>" width="120px" height="70px" /></td>
-                                                <td><?= strtoupper($row->nombre);?></td>
-                                                <td align="center" style="background:<?= $row->color;?>;color:#FFF;"><?= strtoupper($row->nombre_status);?></td>
+                                                <td><?= $row->nombre;?></td>
+                                                <td align="center" style="background:<?= $row->color;?>;color:#FFF;"><?= $row->nombre_status;?></td>
                                                 <td align="center">
                                                     <a href="javascript:void(0);" onClick="consultar('<?= base64_encode($row->id_tours);?>','<?= base64_encode($row->id);?>','<?= site_url('/tours/imagen_personal/')?>','<?= site_url('public/img/tours/')?>')" style="color:#000;text-decoration:none;"><i style="font-size: 20px;"class="icon-edit" title="Editar"></i></a>&nbsp;
                                                                         

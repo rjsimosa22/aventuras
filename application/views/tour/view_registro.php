@@ -37,17 +37,19 @@
                                             <input type="hidden" name="url1" id="url1" class="form-control" value="<?= site_url();?>" />
                                             <input type="hidden" name="url" id="url" class="form-control" value="<?= site_url('registours/registrar');?>" />
                                             <input type="text" name="nombre" id="nombre" class="form-control" placeholder="Ingresé nombre" autocomplete="off" />
+                                            <br>
+                                            <input type="text" name="nombre_posic" id="nombre_posic" class="form-control" placeholder="Ingresé nombre posicionamiento" autocomplete="off" />
                                         </div>
                                     </div>
                                     
                                     <div class="form-group">
                                         <div class="col-sm-6">
                                             <label class="col-sm-0 control-label" id="title_Depart">Departamento:</label>
-                                            <select class="js-example-basic-single" name="departamento" id="departamento" style="width:100%;">
-                                                <option value=''>SELECCIONAR</option>
+                                            <select class="js-example-basic-single mayuscula" name="departamento" id="departamento" style="width:100%;">
+                                                <option value=''>Seleccionar</option>
                                                 <?php 
                                                     foreach ($departamento as $row) {
-                                                        echo '<option value="'.$row->id.'">'.strtoupper($row->nombre).'</option>';
+                                                        echo '<option value="'.$row->id.'">'.$row->nombre.'</option>';
                                                     }
                                                 ?>
                                             </select>
@@ -56,7 +58,7 @@
 
                                         <div class="col-sm-6">
                                             <label class="col-sm-0 control-label" id="title_Prov">Provincia:</label>
-                                            <select class="js-example-basic-single" name="provincia" id="provincia" style="width:100%;"></select>
+                                            <select class="js-example-basic-single mayuscula" name="provincia" id="provincia" style="width:100%;"></select>
                                             <label for="" id="val_Prov" style="display:none;">Campo requerido.</label>    
                                         </div>
                                     </div>
@@ -64,17 +66,17 @@
                                     <div class="form-group">
                                         <div class="col-sm-6">
                                             <label class="col-sm-0 control-label" id="title_Dist">Distrito:</label>
-                                            <select class="js-example-basic-single" name="distrito" id="distrito" style="width:100%;"></select>
+                                            <select class="js-example-basic-single mayuscula" name="distrito" id="distrito" style="width:100%;"></select>
                                             <label for="" id="val_Dist" style="display:none;">Campo requerido.</label>    
                                         </div>
 
                                         <div class="col-sm-6">
                                             <label class="col-sm-0 control-label">Duración:</label>
-                                            <select class="form-control" name="duracion" id="duracion" style="width:100%;">
-                                                <option value=''>SELECCIONAR</option>
+                                            <select class="form-control mayuscula" name="duracion" id="duracion" style="width:100%;">
+                                                <option value=''>Seleccionar</option>
                                                     <?php 
                                                         foreach ($duracion as $row) {
-                                                            echo '<option value="'.$row->id.'">'.strtoupper($row->nombre).'</option>';
+                                                            echo '<option value="'.$row->id.'">'.$row->nombre.'</option>';
                                                         }
                                                     ?>
                                                 </option>    
@@ -85,11 +87,11 @@
                                     <div class="form-group">
                                         <div class="col-sm-6">
                                             <label class="col-sm-0 control-label">Moneda:</label>
-                                            <select class="form-control" name="moneda" id="moneda" style="width:100%;">
-                                                <option value=''>SELECCIONAR</option>
+                                            <select class="form-control mayuscula" name="moneda" id="moneda" style="width:100%;">
+                                                <option value=''>Seleccionar</option>
                                                 <?php 
                                                     foreach ($monedas as $row) {
-                                                        echo '<option value="'.$row->id.'">'.strtoupper($row->nombre).'</option>';
+                                                        echo '<option value="'.$row->id.'">'.$row->nombre.'</option>';
                                                     }
                                                 ?>
                                             </select>    
@@ -109,10 +111,10 @@
 
                                         <div class="col-sm-6">
                                             <label class="col-sm-0 control-label" id="title_Tematica">Temática:</label>
-                                            <select class="js-example-basic-multiple" name="tematica[]" id="tematica" multiple="multiple" style="width:100%;">
+                                            <select class="js-example-basic-multiple mayuscula" name="tematica[]" id="tematica" multiple="multiple" style="width:100%;">
                                                 <?php 
                                                     foreach ($tematicas as $row) {
-                                                        echo '<option value="'.$row->id.'">'.strtoupper($row->nombre).'</option>';
+                                                        echo '<option value="'.$row->id.'">'.$row->nombre.'</option>';
                                                     }
                                                 ?>
                                             </select>
@@ -131,6 +133,8 @@
                                         <div class="col-sm-12">
                                             <label class="col-sm-0 control-label">Descripción:</label>
                                             <textarea id="descripcion" name="descripcion" style="display:none;" class="mayuscula"></textarea>
+                                            <br>
+                                            <textarea id="descripcion_posic" name="descripcion_posic" style="display:none;" class="mayuscula"></textarea>
                                         </div> 
                                     </div>
 
@@ -160,7 +164,8 @@
                                         <div class="col-sm-12">
                                             <label class="col-sm-0 control-label">Subir Imágenes:</label>
                                             <input type="hidden" name="imagenes" id="imagenes" />
-                                            <div name="frmImage" action="<?= site_url('regtoursimagen/registrar_imagenes');?>" class="dropzone" id="dropzone"></div> 
+                                            <input type="hidden" name="urlinsertImg" id="urlinsertImg" value="<?= site_url('regtoursimagen/registrar_imagenes');?>">
+                                            <div name="frmImage"  class="dropzone" id="dropzone"></div> 
                                         </div>
                                     </div>                      
                                 </fieldset>

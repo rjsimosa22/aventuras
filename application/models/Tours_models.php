@@ -138,7 +138,7 @@ class Tours_models extends CI_Model {
 
     public function listado() {
         
-        $this->db->select('a.id,a.nombre,a.precio_minimo,a.precio_maximo,a.status,b.descripcion as nombre_status,b.color,c.nombre AS duracion,e.nombre AS departamento,d.nombre AS provincia,f.nombre AS distrito,g.simbolo');
+        $this->db->select('a.id,a.nombre,a.nombre_posic,a.precio_minimo,a.precio_maximo,a.status,b.descripcion as nombre_status,b.color,c.nombre AS duracion,e.nombre AS departamento,d.nombre AS provincia,f.nombre AS distrito,g.simbolo');
         $this->db->from('bd_tours as a');
         $this->db->join('bd_estatus_global as b','b.id=a.status');
         $this->db->join('bd_duracion as c','a.duracion=c.id');
@@ -488,7 +488,7 @@ class Tours_models extends CI_Model {
     public function consultar($id) {
 
         if(isset($id)) {
-            $this->db->select('a.id,a.id_provincia,a.id_departamento,a.id_distrito,a.duracion AS id_duracion,a.moneda AS id_moneda,a.nombre,a.descripcion,a.detalle,a.recomendacion,a.precio_minimo,a.precio_maximo,a.status,b.descripcion as nombre_status,b.color,c.nombre AS duracion,d.nombre AS provincia,e.nombre AS moneda,e.tipo_cambio,e.simbolo,f.nombre AS distrito,g.nombre AS departamento');
+            $this->db->select('a.id,a.id_provincia,a.id_departamento,a.id_distrito,a.duracion AS id_duracion,a.moneda AS id_moneda,a.nombre,a.nombre_posic,a.descripcion,a.descripcion_posic,a.detalle,a.recomendacion,a.precio_minimo,a.precio_maximo,a.status,b.descripcion as nombre_status,b.color,c.nombre AS duracion,d.nombre AS provincia,e.nombre AS moneda,e.tipo_cambio,e.simbolo,f.nombre AS distrito,g.nombre AS departamento');
             $this->db->from('bd_tours as a');
             $this->db->join('bd_estatus_global as b','b.id=a.status');
             $this->db->join('bd_duracion as c','a.duracion=c.id');

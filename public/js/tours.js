@@ -6,7 +6,7 @@ $(document).ready(function() {
         ignore:[],
         debug:false,
         rules:{    
-            nombre: {
+            /*nombre: {
                 required:true,
                 minlength: 3,
             },
@@ -40,7 +40,7 @@ $(document).ready(function() {
             },
             imagenes:{
                 required:true,
-            },
+            },*/
         },
         messages: {
             "departamento": "",
@@ -110,7 +110,7 @@ $(document).ready(function() {
         $("#fileInput:hidden").trigger('click');
     });
     
-    $("#fileInput").on('change', function(){
+    $("#fileInput").on('change',function() {
         var id=$('#id_imagen').val();
         var image=$('#fileInput').val();
         var img_ex=/(\.jpg|\.jpeg|\.png|\.gif)$/i;
@@ -143,12 +143,12 @@ $(document).ready(function() {
                     var resultado=JSON.parse(data);
                     for(var i=0;i<resultado.length;i++) {
                         var id=resultado[i]['id'];
-                        var nombre=resultado[i]['nombre'].toUpperCase();
-                        $("#provincia").select2({data:[{id:"",text:"TODOS"},{id:id,text:nombre}]});
+                        var nombre=titulojs(resultado[i]['nombre']);
+                        $("#provincia").select2({data:[{id:"",text:"Todos"},{id:id,text:nombre}]});
                         $('#provincia').val("").trigger('change.select2');
                     } 
                 } else {
-                    $("#provincia").select2({data:[{id:"",text:"DEBE SELECCIONAR DEPARTAMENTO"}]});
+                    $("#provincia").select2({data:[{id:"",text:"Debe seleccionar departamento"}]});
                     $('#provincia').val("").trigger('change.select2');
                 }
             });			
@@ -172,12 +172,12 @@ $(document).ready(function() {
                     var resultado=JSON.parse(data);
                     for(var i=0;i<resultado.length;i++) {
                         var id=resultado[i]['id'];
-                        var nombre=resultado[i]['nombre'].toUpperCase();
-                        $("#distrito").select2({data:[{id:"",text:"TODOS"},{id:id,text:nombre}]});
+                        var nombre=titulojs(resultado[i]['nombre']);
+                        $("#distrito").select2({data:[{id:"",text:"Todos"},{id:id,text:nombre}]});
                         $('#distrito').val("").trigger('change.select2');
                     } 
                 } else {
-                    $("#distrito").select2({data:[{id:"",text:"DEBE SELECCIONAR DEPARTAMENTO"}]});
+                    $("#distrito").select2({data:[{id:"",text:"Debe seleccionar departamento"}]});
                     $('#distrito').val("").trigger('change.select2');
                 }
             });			
@@ -203,10 +203,28 @@ $(document).ready(function() {
             $('#title_Tematica').css('color','##527f26');
         }
     });
+
+    Dropzone.autoDiscover=false;
+    $("div#dropzone").dropzone({ 
+        accept: function(file, done) {
+            console.log(file.type);
+            if(file.type!="image/jpeg") {
+                done("Error! No se aceptan archivos de este tipo, solo JPG");
+            } else {
+                done("")
+            }
+        },
+        url:$('#urlinsertImg').val()
+    });
+    
+    /*$("div#dropzone").dropzone({ 
+        
+        url:$('#urlinsertImg').val() 
+    });*/
 });
 
 function completeUpload(success,fileName,url_imagen,url,id_tours,nombre,accion) {
-
+    alert('a');
     if(success==1) {
         $('#siDiv').show();
         $('.uploadProcess').hide();
@@ -216,11 +234,11 @@ function completeUpload(success,fileName,url_imagen,url,id_tours,nombre,accion) 
 
         if(accion=='editar'){
             $('#divSi').text('La imagen');           
-            $('#divSi1').text(' '+nombre.toUpperCase()+' ').css("font-weight","bold");           
+            $('#divSi1').text(' '+nombre.toLowerCase()+' ').css("font-weight","bold");           
             $('#divSi2').text('se modificado correctamente.');
         } else {
             $('#divSi').text('La imagen');           
-            $('#divSi1').text(' '+nombre.toUpperCase()+' ').css("font-weight","bold");           
+            $('#divSi1').text(' '+nombre.toLowerCase()+' ').css("font-weight","bold");           
             $('#divSi2').text('se registro correctamente.');
         }
       
@@ -246,7 +264,7 @@ function inactivar_imagenes(id) {
         }
     }
 
-    var con=confirm("¿Esta seguro de inactivar este registro : "+nombre.toUpperCase()+"?");
+    var con=confirm("¿Esta seguro de inactivar este registro : "+nombre.toLowerCase()+"?");
     if(con) {
         $.ajax({
             data: {
@@ -258,9 +276,9 @@ function inactivar_imagenes(id) {
             success:function(data) {
                 $('#siDiv').show();
                 $('#divSi').text('La imagen');           
-                $('#divSi1').text(' '+nombre.toUpperCase()+' ').css("font-weight","bold");           
+                $('#divSi1').text(' '+nombre.toLowerCase()+' ').css("font-weight","bold");           
                 $('#divSi2').text('se inactivo correctamente.');           
-                alert("Se inactivo el siguiente registro : "+nombre.toUpperCase());
+                alert("Se inactivo el siguiente registro : "+nombre.toLowerCase());
                 listado_imagenes();
             }
         });
@@ -278,7 +296,7 @@ function activar_imagenes(id) {
         }
     }
 
-    var con=confirm("¿Esta seguro de activar este registro : "+nombre.toUpperCase()+"?");
+    var con=confirm("¿Esta seguro de activar este registro : "+nombre.toLowerCase()+"?");
     if(con) {
         $.ajax({
             data: {
@@ -290,9 +308,9 @@ function activar_imagenes(id) {
             success:function(data) {
                 $('#siDiv').show();
                 $('#divSi').text('La imagen');           
-                $('#divSi1').text(' '+nombre.toUpperCase()+' ').css("font-weight","bold");           
+                $('#divSi1').text(' '+nombre.toLowerCase()+' ').css("font-weight","bold");           
                 $('#divSi2').text('se activo correctamente.');           
-                alert("Se activo el siguiente registro : "+nombre.toUpperCase());
+                alert("Se activo el siguiente registro : "+nombre.toLowerCase());
                 listado_imagenes();
             }
         });
@@ -353,8 +371,8 @@ function listado_imagenes() {
                 
                 arrayImagenesL=[
                     img,
-                    resultado[i]['nombre'].toUpperCase(),
-                    resultado[i]['nombre_status'].toUpperCase(),
+                    resultado[i]['nombre'].toLowerCase(),
+                    resultado[i]['nombre_status'].toLowerCase(),
                     action
                 ];
                 arrayImagenes.push(arrayImagenesL);

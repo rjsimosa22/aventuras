@@ -58,11 +58,13 @@ class Tours extends CI_Controller {
         $provincia=$this->input->get_post('provincia',true);
         $arraytematica=$this->input->get_post('tematica',true);
         $descripcion=$this->input->get_post('descripcion',true);
+        $nombre_posic=$this->input->get_post('nombre_posic',true);
         $departamento=$this->input->get_post('departamento',true);
         $precio_minimo=$this->input->get_post('precio_minimo',true); 
         $precio_maximo=$this->input->get_post('precio_maximo',true);
         $recomendacion=$this->input->get_post('recomendacion',true);
-        
+        $descripcion_posic=$this->input->get_post('descripcion_posic',true);
+                
         if(isset($nombre,$arraytematica)) {    
             $bd_tours=array(    
                 'status'=>'1',
@@ -73,11 +75,13 @@ class Tours extends CI_Controller {
                 'id_distrito'=>$distrito,
                 'id_provincia'=>$provincia,
                 'descripcion'=>$descripcion,
+                'nombre_posic'=>$nombre_posic,
                 'precio_minimo'=>$precio_minimo,
                 'precio_maximo'=>$precio_maximo,
                 'recomendacion'=>$recomendacion,
                 'id_departamento'=>$departamento,
-                'fecha_registro'=>date('Y-m-d H:i:s')
+                'fecha_registro'=>date('Y-m-d H:i:s'),
+                'descripcion_posic'=>$descripcion_posic,
             );
             
             $id=$this->Tours_models->registrar($bd_tours,$arraytematica,$this->session->userdata('cedula'));
@@ -250,10 +254,12 @@ class Tours extends CI_Controller {
         $provincia= $this->input->get_post('provincia',true);
         $arraytematica=$this->input->get_post('tematica',true);
         $descripcion=$this->input->get_post('descripcion',true);
+        $nombre_posic=$this->input->get_post('nombre_posic',true);
         $departamento= $this->input->get_post('departamento',true);
         $precio_minimo=$this->input->get_post('precio_minimo',true); 
         $precio_maximo=$this->input->get_post('precio_maximo',true);
         $recomendacion=$this->input->get_post('recomendacion',true);
+        $descripcion_posic=$this->input->get_post('descripcion_posic',true);
         
         if(isset($id,$nombre)) {
             $bd_tours=array(    
@@ -264,10 +270,12 @@ class Tours extends CI_Controller {
                 'id_distrito'=>$distrito,
                 'id_provincia'=>$provincia,
                 'descripcion'=>$descripcion,
+                'nombre_posic'=>$nombre_posic,
                 'precio_minimo'=>$precio_minimo,
                 'precio_maximo'=>$precio_maximo,
                 'recomendacion'=>$recomendacion,
                 'id_departamento'=>$departamento,
+                'descripcion_posic'=>$descripcion_posic,
             );
 
             $comprobar=$this->Tours_models->editar($id,$bd_tours,$arraytematica);
@@ -348,24 +356,29 @@ class Tours extends CI_Controller {
     public function registrar_imagenes() {
 
         if(!empty($_FILES)) {
-            $targetPath=$_SERVER['DOCUMENT_ROOT']."/public/img/tours/";
-            $imagePath=isset($_FILES["file"]["name"]) ? $_FILES["file"]["name"] : "Undefined";
-            $imagePath=$targetPath . $imagePath;
-            $tempFile=$_FILES['file']['tmp_name'];
-            $targetFile=$targetPath . $_FILES['file']['name'];
-            
-            if(move_uploaded_file($tempFile,$targetFile)) {
-                $comprobar=$this->Tours_models->registrar_imagenes($_FILES['file']['name'],$this->session->userdata('cedula'));
+            //if($_FILES['file']['type'] == "image/jpg"){
+                //$targetPath=$_SERVER['DOCUMENT_ROOT']."/public/img/tours/";
+                $targetPath=$_SERVER['DOCUMENT_ROOT']."/aventuras/public/img/tours/";
+                $imagePath=isset($_FILES["file"]["name"]) ? $_FILES["file"]["name"] : "Undefined";
+                $imagePath=$targetPath . $imagePath;
+                $tempFile=$_FILES['file']['tmp_name'];
+                $targetFile=$targetPath . $_FILES['file']['name'];
                 
-                if($comprobar==true) { 
-                    echo "true";
+                if(move_uploaded_file($tempFile,$targetFile)) {
+                    $comprobar=$this->Tours_models->registrar_imagenes($_FILES['file']['name'],$this->session->userdata('cedula'));
+                    
+                    if($comprobar==true) { 
+                        echo "true";
+                    } else {
+                        echo "false";
+                    }
+                    
                 } else {
                     echo "false";
                 }
-                
-            } else {
+            /*} else {
                 echo "false";
-            }
+            } */   
         }
     }
 

@@ -98,4 +98,12 @@
             return false;
         }
     } 
+
+    function titulojs(string){
+        return string.toLowerCase()
+            .trim()
+            .split(' ')
+            .map( v => v[0].toUpperCase() + v.substr(1) )
+            .join(' ');  
+    }
 </script>

@@ -1,11 +1,11 @@
 <meta charset="utf-8" />
-<title>Aventuras.PE</title>
+<title>Aventuras - BackEnd</title>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <meta name="description" content="Avant" />
 <meta name="author" content="Ronny Simosa" />
-<link rel="icon" type="image/png" href="<?= base_url();?>public/img/icono.ico" />
+<link rel="shortcut icon" href="<?= base_url();?>public/front-end/img/favicon.ico" type="image/x-icon">     
 <link rel='stylesheet' type='text/css' href='<?= base_url();?>public/css/select2.css' /> 
 <link href="<?= base_url();?>public/css/styles.min.css" rel="stylesheet" type='text/css' media="all" />
 <link href="<?= base_url();?>public/css/pace.css" rel="stylesheet" type='text/css' media="all" />
