@@ -34,22 +34,29 @@
                                         <label class="col-sm-0 control-label">Nombre del Tours:</label>
                                         <input type="hidden" name="url1" id="url1" class="form-control" value="<?= site_url();?>" />
                                         <input type="hidden" name="url" id="url" class="form-control" value="<?= site_url('tours/editar');?>" />
-                                        <input type="text" name="nombre" id="nombre" class="form-control" placeholder="Ingresé nombre" onKeyPress="return soloLetras(event)" autocomplete="off" value="<?= strtoupper($info->nombre);?>" disabled />
+                                        <input type="text" name="nombre" id="nombre" class="form-control" placeholder="Ingresé nombre" onKeyPress="return soloLetras(event)" autocomplete="off" value="<?= $info->nombre;?>" disabled />
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="col-sm-12">
+                                        <label class="col-sm-0 control-label">Nombre del Tours CEO:</label>
+                                        <input type="text" name="nombre_posic" id="nombre_posic" class="form-control" placeholder="Ingresé nombre posicionamiento" onKeyPress="return soloLetras(event)" autocomplete="off" value="<?= $info->nombre_posic;?>" disabled />
                                     </div>
                                 </div>
 
                                 <div class="form-group">
                                     <div class="col-sm-6">
                                         <label class="col-sm-0 control-label">Departamento:</label>
-                                        <select class="form-control" name="departamento_a" id="departamento_a" style="width:100%;" disabled>
-                                            <option value="<?php if($info->id_departamento) { echo $info->departamento; } else { echo "0"; }?>"><?php if($info->departamento) { echo strtoupper($info->departamento); } else { echo 'SELECCIONAR';}?></option>
+                                        <select class="form-control mayuscula" name="departamento_a" id="departamento_a" style="width:100%;" disabled>
+                                            <option value="<?php if($info->id_departamento) { echo $info->departamento; } else { echo "0"; }?>"><?php if($info->departamento) { echo $info->departamento; } else { echo 'Seleccionar';}?></option>
                                         </select>    
                                     </div>
 
                                     <div class="col-sm-6">
                                         <label class="col-sm-0 control-label">Provincia:</label>
-                                        <select class="form-control" name="provincia_a" id="provincia_a" style="width:100%;" disabled>
-                                            <option value="<?php if($info->id_provincia) { echo $info->provincia; } else { echo "0"; }?>"><?php if($info->provincia) { echo strtoupper($info->provincia); } else { echo 'SELECCIONAR';}?></option>
+                                        <select class="form-control mayuscula" name="provincia_a" id="provincia_a" style="width:100%;" disabled>
+                                            <option value="<?php if($info->id_provincia) { echo $info->provincia; } else { echo "0"; }?>"><?php if($info->provincia) { echo $info->provincia; } else { echo 'Seleccionar';}?></option>
                                         </select>    
                                     </div>
                                 </div>
@@ -57,15 +64,15 @@
                                 <div class="form-group">
                                     <div class="col-sm-6">
                                         <label class="col-sm-0 control-label">Distrito:</label>
-                                        <select class="form-control" name="distrito_a" id="distrito_a" style="width:100%;" disabled>
-                                            <option value="<?php if($info->id_distrito) { echo $info->id_distrito; } else { echo "0"; }?>"><?php if($info->distrito) { echo strtoupper($info->distrito); } else { echo 'SELECCIONAR';}?></option>
+                                        <select class="form-control mayuscula" name="distrito_a" id="distrito_a" style="width:100%;" disabled>
+                                            <option value="<?php if($info->id_distrito) { echo $info->id_distrito; } else { echo "0"; }?>"><?php if($info->distrito) { echo $info->distrito; } else { echo 'Seleccionar';}?></option>
                                         </select>    
                                     </div> 
 
                                     <div class="col-sm-6">
                                         <label class="col-sm-0 control-label">Duración:</label>
-                                        <select class="form-control" name="duracion" id="duracion" style="width:100%;" disabled>
-                                            <option value="<?php if($info->id_duracion) { echo $info->id_duracion; } else { echo "0"; }?>"><?php if($info->duracion) { echo strtoupper($info->duracion); } else { echo 'SELECCIONAR';}?></option>
+                                        <select class="form-control mayuscula" name="duracion" id="duracion" style="width:100%;" disabled>
+                                            <option value="<?php if($info->id_duracion) { echo $info->id_duracion; } else { echo "0"; }?>"><?php if($info->duracion) { echo $info->duracion; } else { echo 'Seleccionar';}?></option>
                                         </select>
                                     </div>   
                                 </div>
@@ -73,8 +80,8 @@
                                 <div class="form-group">
                                     <div class="col-sm-6">
                                         <label class="col-sm-0 control-label">Moneda:</label>
-                                        <select class="form-control" name="moneda" id="moneda" style="width:100%;" disabled>
-                                            <option value="<?php if($info->id_moneda) { echo $info->id_moneda; } else { echo "0"; }?>"><?php if($info->moneda) { echo strtoupper($info->moneda); } else { echo 'SELECCIONAR';}?></option>
+                                        <select class="form-control mayuscula" name="moneda" id="moneda" style="width:100%;" disabled>
+                                            <option value="<?php if($info->id_moneda) { echo $info->id_moneda; } else { echo "0"; }?>"><?php if($info->moneda) { echo $info->moneda; } else { echo 'Seleccionar';}?></option>
                                         </select>    
                                     </div>
 
@@ -92,7 +99,7 @@
 
                                     <div class="col-sm-6">
                                         <label class="col-sm-0 control-label">Temática:</label>
-                                        <select class="js-example-basic-multiple" name="tematica[]" id="tematica" multiple="multiple" style="width:100%;" disabled>
+                                        <select class="js-example-basic-multiple mayuscula" name="tematica[]" id="tematica" multiple="multiple" style="width:100%;" disabled>
                                             <?php 
                                                 foreach($tematicas as $row1) {
                                                     $selected="";
@@ -101,7 +108,7 @@
                                                             $selected="selected";
                                                         }
                                                     }    
-                                                    echo '<option value="'.$row1->id.'" '.$selected.'>'.strtoupper($row1->nombre).'</option>';
+                                                    echo '<option value="'.$row1->id.'" '.$selected.'>'.$row1->nombre.'</option>';
                                                 }
                                             ?>
                                         </select>
@@ -119,6 +126,13 @@
                                     <div class="col-sm-12">
                                         <label class="col-sm-0 control-label">Descripción:</label>
                                         <textarea id="descripcion" name="descripcion" style="display:none;" disabled><?= $info->descripcion;?></textarea>
+                                    </div> 
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="col-sm-12">
+                                        <label class="col-sm-0 control-label">Descripción CEO:</label>
+                                        <textarea id="descripcion_posic" name="descripcion_posic" style="display:none;" disabled><?= $info->descripcion_posic;?></textarea>
                                     </div> 
                                 </div>
 
@@ -152,7 +166,7 @@
 
                                         <div class="panel-body collapse in">
                                             <div class="table-responsive" style="border:0;">
-                                                <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered datatables" id="example" width="100%">
+                                                <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered datatables mayuscula" id="example" width="100%">
                                                     <thead>
                                                         <tr>
                                                             <th>Imagen</th>
@@ -167,8 +181,8 @@
                                                     ?>
                                                                 <tr class="odd gradeX">
                                                                     <td><img src="<?= site_url('public/img/tours/'.$row->nombre_extension);?>" width="120px" height="70px" /></td>
-                                                                    <td><?= $row->nombre;?></td>
-                                                                    <td align="center" style="background:<?= $row->color;?>;color:#FFF;"><?= strtoupper($row->nombre_status);?></td>
+                                                                    <td><?= ucwords(strtolower($row->nombre));?></td>
+                                                                    <td align="center" style="background:<?= $row->color;?>;color:#FFF;"><?= $row->nombre_status;?></td>
                                                                 </tr>
                                                     <?php        
                                                         }

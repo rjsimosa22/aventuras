@@ -20,7 +20,7 @@
   height: 2px;
 }
 .mayuscula{
-  text-transform:uppercase;
+  text-transform:capitalize;
 }
 
 .pace .pace-progress-inner {
