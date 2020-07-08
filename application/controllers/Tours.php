@@ -368,20 +368,57 @@ class Tours extends CI_Controller {
             }
         }
     }
-
+	
     public function editar_imagen() {
         
         $id_tours=$this->input->get_post('id_tours',true);
         $id_imagen=$this->input->get_post('id_imagen',true);
-        
+		$imagena=$_FILES['picture']['name'];
+        //echo "<script>console.log('Antes Objects: " . $imagena . "' );</script>";
         if(!empty($_FILES['picture']['name'])){
+			/////////////////////////////////////////////
+			// Primero, hay que validar que se trata de un JPG/GIF/PNG
+       
+			$allowedExts = array("jpg", "jpeg", "gif", "png", "JPG", "GIF", "PNG");
+        	$get_extension = explode(".", $_FILES["picture"]["name"]);
+			$extension = $get_extension[1];
+        	if ((($_FILES["picture"]["type"] == "image/gif")
+                || ($_FILES["picture"]["type"] == "image/jpeg")
+                || ($_FILES["picture"]["type"] == "image/png")
+                || ($_FILES["picture"]["type"] == "image/pjpeg"))
+                && in_array($extension, $allowedExts)) {
+            // el archivo es un JPG/GIF/PNG, entonces...
+            
+            //$extension = end(explode('.', $_FILES['foto']['name']));
+            $foto = $_FILES['picture']['name'];
+            $directorio = $_SERVER['DOCUMENT_ROOT']."/public/img/tours/"; // directorio de tu elección
+			//$from = 'E:\xampp-7.4\htdocs\test\subir';
+			$directorio1 =$_SERVER['DOCUMENT_ROOT']."/public/img/tours/small/"; // directorio de tu elección
+            //$minFoto = 'min_'.$foto;
+			//$mobFoto = 'mobil_'.$foto;
+            $optFoto = 'op_'.$foto;
+            // almacenar imagen en el servidor
+            move_uploaded_file($_FILES['picture']['tmp_name'], $directorio.'/'.$foto);
+            resizeImagen($directorio.'/', $directorio1.'/', $foto, 530, 800,$optFoto,$extension);
+			//resizeImagen($directorio.'/', $directorio2.'/', $foto, 370, 600,$minFoto,$extension);
+            resizeImagen($directorio.'/', $directorio.'/', $foto, 1060, 1600,$optFoto,$extension);
+            unlink($directorio.'/'.$foto);
+			}else { // El archivo no es JPG/GIF/PNG
+            	$malformato = $_FILES["foto"]["type"];
+            		//header("Location: cargarImagen.php?error=noFormato&formato=$malformato");
+            	exit;
+			}
+			
+			
+			////////////////////////////////////////////
             $result=0;
             $uploadDir=$_SERVER['DOCUMENT_ROOT']."/public/img/tours/";
-            $fileName=$_FILES['picture']['name'];
+			//$uploadDir='E:\xampp-7.4\htdocs\test\subir';
+            $fileName='op_'.$_FILES['picture']['name'];
             $nombre=explode('.',$fileName);
             $targetPath=$uploadDir. $fileName;
             
-            if(move_uploaded_file($_FILES['picture']['tmp_name'], $targetPath)) {
+            if(1==1) {
                 
                 if($id_imagen && $id_tours) {
                     $accion='editar';
@@ -402,10 +439,10 @@ class Tours extends CI_Controller {
                 }
             }
             //Load JavaScript function to show the upload status
-            echo '<script type="text/javascript">window.top.window.completeUpload('.$result.',\''.$fileName .'\',\''.site_url('public/img/tours/').'\',\''.site_url().'\',\''.$id_tours.'\',\''.$nombre[0].'\',\''.$accion.'\');</script>  ';
+            echo '<script type="text/javascript">window.top.window.completeUpload('.$result.',\''.$fileName .'\',\''.site_url('/public/img/tours/').'\',\''.site_url().'\',\''.$id_tours.'\',\''.$nombre[0].'\',\''.$accion.'\');</script>  ';
         }
     }
-
+	
     public function activar_imagenes() {
         
         $id=$this->input->get_post('id',true);
@@ -424,4 +461,37 @@ class Tours extends CI_Controller {
             print_r(json_encode( $comprobar));
         }
     }
+}
+function resizeImagen($from, $ruta, $nombre, $alto, $ancho,$nombreN,$extension){
+    $rutaImagenOriginal = $from.$nombre;
+    if($extension == 'GIF' || $extension == 'gif'){
+    $img_original = imagecreatefromgif($rutaImagenOriginal);
+    }
+    if($extension == 'jpg' || $extension == 'JPG'){
+    $img_original = imagecreatefromjpeg($rutaImagenOriginal);
+    }
+    if($extension == 'png' || $extension == 'PNG'){
+    $img_original = imagecreatefrompng($rutaImagenOriginal);
+    }
+    $max_ancho = $ancho;
+    $max_alto = $alto;
+    list($ancho,$alto)=getimagesize($rutaImagenOriginal);
+    $x_ratio = $max_ancho / $ancho;
+    $y_ratio = $max_alto / $alto;
+    
+	if( ($ancho <= $max_ancho) && ($alto <= $max_alto) ){//Si ancho 
+  	$ancho_final = $ancho;
+		$alto_final = $alto;
+	} elseif (($x_ratio * $alto) < $max_alto){
+		$alto_final = ceil($x_ratio * $alto);
+		$ancho_final = $max_ancho;
+	} else{
+		$ancho_final = ceil($y_ratio * $ancho);
+		$alto_final = $max_alto;
+	}
+    $tmp=imagecreatetruecolor($ancho_final,$alto_final);
+    imagecopyresampled($tmp,$img_original,0,0,0,0,$ancho_final, $alto_final,$ancho,$alto);
+    imagedestroy($img_original);
+    $calidad=60;
+    imagejpeg($tmp,$ruta.$nombreN,$calidad);
 }
