@@ -42,6 +42,7 @@ class Tours extends CI_Controller {
             $this->load->view('home/view_footer');
             $this->load->view('common/lib_js');
             $this->load->view('common/lib_tours_js');
+            $this->load->view('common/lib_tours_dropzone_js');
         } else {
             $this->session->sess_destroy();
             redirect('login');
@@ -356,29 +357,23 @@ class Tours extends CI_Controller {
     public function registrar_imagenes() {
 
         if(!empty($_FILES)) {
-            //if($_FILES['file']['type'] == "image/jpg"){
-                //$targetPath=$_SERVER['DOCUMENT_ROOT']."/public/img/tours/";
-                $targetPath=$_SERVER['DOCUMENT_ROOT']."/aventuras/public/img/tours/";
-                $imagePath=isset($_FILES["file"]["name"]) ? $_FILES["file"]["name"] : "Undefined";
-                $imagePath=$targetPath . $imagePath;
-                $tempFile=$_FILES['file']['tmp_name'];
-                $targetFile=$targetPath . $_FILES['file']['name'];
-                
-                if(move_uploaded_file($tempFile,$targetFile)) {
-                    $comprobar=$this->Tours_models->registrar_imagenes($_FILES['file']['name'],$this->session->userdata('cedula'));
-                    
-                    if($comprobar==true) { 
-                        echo "true";
-                    } else {
-                        echo "false";
-                    }
-                    
+            $bytes=$_FILES["file"]["size"];
+             $targetPath=$_SERVER['DOCUMENT_ROOT']."/public/img/tours/";
+             $imagePath=isset($_FILES["file"]["name"]) ? $_FILES["file"]["name"] : "Undefined";
+             $imagePath=$targetPath . $imagePath;
+             $tempFile=$_FILES['file']['tmp_name'];
+             $targetFile=$targetPath . $_FILES['file']['name'];
+              
+            if(move_uploaded_file($tempFile,$targetFile)) {
+                $comprobar=$this->Tours_models->registrar_imagenes($_FILES['file']['name'],$this->session->userdata('cedula'));
+                if($comprobar==true) { 
+                    echo "true";
                 } else {
                     echo "false";
-                }
-            /*} else {
+                }     
+            } else {
                 echo "false";
-            } */   
+            }
         }
     }
 

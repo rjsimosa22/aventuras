@@ -647,5 +647,5 @@ class Tours_models extends CI_Model {
             $this->db->update('bd_tours_imagenes',$bd_tours_imagenes);
             return true;
         }
-    }
+    } 
 }

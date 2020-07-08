@@ -33,8 +33,13 @@
                                     <div class="col-sm-12">
                                         <label class="col-sm-0 control-label">Nombre del Tours:</label>
                                         <input type="text" name="nombre" id="nombre" class="form-control" placeholder="Ingresé nombre" onKeyPress="return soloLetras(event)" autocomplete="off" value="<?= $info->nombre;?>" disabled />
-                                        <br>
-                                        <input type="text" name="nombre_posic" id="nombre_posic" class="form-control" placeholder="Ingresé nombre posicionamiento" onKeyPress="return soloLetras(event)" autocomplete="off" value="<?= $info->nombre_posic;?>" disabled />
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="col-sm-12">
+                                        <label class="col-sm-0 control-label">Nombre del Tours CEO:</label>
+                                        <input type="text" name="nombre_posic" id="nombre_posic" class="form-control" placeholder="Ingresé nombre CEO" onKeyPress="return soloLetras(event)" autocomplete="off" value="<?= $info->nombre_posic;?>" disabled />
                                     </div>
                                 </div>
 
@@ -133,7 +138,12 @@
                                     <div class="col-sm-12">
                                         <label class="col-sm-0 control-label">Descripción:</label>
                                         <textarea id="descripcion" name="descripcion" style="display:none;" disabled><?= $info->descripcion;?></textarea>
-                                        <br>
+                                    </div> 
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="col-sm-12">
+                                        <label class="col-sm-0 control-label">Descripción CEO:</label>
                                         <textarea id="descripcion_posic" name="descripcion_posic" style="display:none;" disabled><?= $info->descripcion_posic;?></textarea>
                                     </div> 
                                 </div>

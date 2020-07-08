@@ -5,8 +5,8 @@ $(document).ready(function() {
     $("#wizard").validate({
         ignore:[],
         debug:false,
-        rules:{    
-            /*nombre: {
+        /*rules:{    
+            nombre: {
                 required:true,
                 minlength: 3,
             },
@@ -40,8 +40,8 @@ $(document).ready(function() {
             },
             imagenes:{
                 required:true,
-            },*/
-        },
+            },
+        },*/
         messages: {
             "departamento": "",
             "provincia": "",
@@ -202,38 +202,6 @@ $(document).ready(function() {
             $('#val_Tematica').hide();
             $('#title_Tematica').css('color','##527f26');
         }
-    });
-
-    Dropzone.autoDiscover=false;
-    $("div#dropzone").dropzone({ 
-        init: function() {
-            this.on('thumbnail', function(file) {
-              if (file.accepted !== false) {
-                if (file.width < 1024 || file.height < 768) {
-                  file.rejectDimensions();
-                }
-                else {
-                  file.acceptDimensions();
-                }
-              }
-            });
-        },
-        accept: function(file, done) {
-            file.acceptDimensions = done;
-            file.rejectDimensions = function() {
-              done('La imagen debe tener al menos 1600 x 1060 píxeles de tamaño.');
-            };
-            if(file.size <= '2097152') {
-                if(file.type!="image/jpeg") {
-                    done("Error! La imagen debe ser JPG o JPEG");
-                } else {
-                    done("")
-                }
-            } else {
-                done("Error! La imagen debe tener un peso menor a 2MB");
-            }
-        },
-        url:$('#urlinsertImg').val()
     });
 });
 
