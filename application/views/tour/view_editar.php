@@ -41,8 +41,8 @@
 
                                 <div class="form-group">
                                     <div class="col-sm-12">
-                                        <label class="col-sm-0 control-label">Nombre del Tours CEO:</label>
-                                        <input type="text" name="nombre_posic" id="nombre_posic" class="form-control" placeholder="Ingresé nombre CEO" autocomplete="off" value="<?= $info->nombre_posic;?>"/>
+                                        <label class="col-sm-0 control-label">Nombre del Tours SEO:</label>
+                                        <input type="text" name="nombre_posic" id="nombre_posic" class="form-control" placeholder="Ingresé nombre SEO" autocomplete="off" value="<?= $info->nombre_posic;?>"/>
                                     </div>
                                 </div>
 
@@ -176,7 +176,7 @@
 
                                 <div class="form-group">
                                     <div class="col-sm-12">
-                                        <label class="col-sm-0 control-label">Descripción CEO:</label>
+                                        <label class="col-sm-0 control-label">Descripción SEO:</label>
                                         <textarea id="descripcion_posic" name="descripcion_posic" style="display:none;" class="mayuscula"><?= $info->descripcion_posic;?></textarea>
                                     </div> 
                                 </div>
@@ -268,22 +268,37 @@
                                 <div class="form-group">
                                     <div class="col-sm-12">
                                         <div class="user-box">
+                                            <div class="form-group" style="margin-top:20px;">
+                                                <label class="col-sm-0 control-label">ALT SEO:</label>
+                                                <input type="text" name="alt_imagen" id="alt_imagen" class="form-control" placeholder="Ingresé ALT SEO" autocomplete="off"/>
+                                                
+                                                <br>
+                                                <div align="right"><input type="submit" class="btn-primary btn" value="Guardar"></div>
+                                            </div>
+
                                             <div class="img-relative">
                                                 <div class="overlay uploadProcess" style="display: none;">
                                                     <div class="overlay-content"><img src="<?= site_url('public/img/loader.gif');?>"/></div>
                                                 </div>
-                                                    
+
                                                 <form method="POST" action="<?= site_url('editoursimagenes/editar_imagen');?>" enctype="multipart/form-data" id="picUploadForm" target="uploadTarget">
                                                     <input type="hidden" name="id_tours" id="id_tours">
                                                     <input type="hidden" name="id_imagen" id="id_imagen">
+                                                    <input type="hidden" name="nombre_imagen_2" id="nombre_imagen_2">
                                                     <input type="file" name="picture" id="fileInput" style="display:none"/>
                                                 </form>
                                                    
                                                 <iframe id="uploadTarget" name="uploadTarget" src="#" style="width:0;height:0;border:0px solid #fff;"></iframe>
-                                                <a class="editLink" href="javascript:void(0);" id="ocultarbtn"><button class="btn-primary btn" value="Editar Imagen" style="margin-top:-20px;width:100%;">Editar Imagen</button></a>
+                                                <a class="editLink" href="javascript:void(0);" id="ocultarbtn" style="top:167px;"><button class="btn btn-dark" value="Editar Imagen" style="width:100%;">Editar Imagen</button></a>
                                                 <img src="#" id="imagePreview">
                                             </div>
-                                                
+
+                                            <div align="center" class="name_errors" style="margin-top:20px;display:none;">
+                                                <div class="alert alert-danger alert-dismissable">
+                                                    <strong>¡Error!</strong> <span id="errors_imagen"></span>
+                                                </div>
+                                            </div>
+
                                             <div class="name" style="margin-top:20px;">
                                                 <h3><span id="nombre_imagen"></span></h3>
                                             </div>

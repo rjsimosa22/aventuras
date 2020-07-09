@@ -93,6 +93,7 @@
                                                 <form method="POST" action="<?= site_url('editoursimagenes/editar_imagen');?>" enctype="multipart/form-data" id="picUploadForm" target="uploadTarget">
                                                     <input type="hidden" name="id_tours" id="id_tours">
                                                     <input type="hidden" name="id_imagen" id="id_imagen">
+                                                    <input type="hidden" name="nombre_imagen_2" id="nombre_imagen_2">
                                                     <input type="file" name="picture" id="fileInput" style="display:none"/>
                                                 </form>
                                                 

@@ -1,11 +1,10 @@
 var arrayImagenes=new Array;
 var arrayListadoImagenes=new Array;
-
 $(document).ready(function() {
     $("#wizard").validate({
         ignore:[],
         debug:false,
-        /*rules:{    
+        rules:{    
             nombre: {
                 required:true,
                 minlength: 3,
@@ -41,7 +40,7 @@ $(document).ready(function() {
             imagenes:{
                 required:true,
             },
-        },*/
+        },
         messages: {
             "departamento": "",
             "provincia": "",
@@ -110,19 +109,44 @@ $(document).ready(function() {
         $("#fileInput:hidden").trigger('click');
     });
     
+    var _URL = window.URL || window.webkitURL;
     $("#fileInput").on('change',function() {
         var id=$('#id_imagen').val();
         var image=$('#fileInput').val();
-        var img_ex=/(\.jpg|\.jpeg|\.png|\.gif)$/i;
-            
-        if(!img_ex.exec(image)){
-            $('#fileInput').val('');
-            $('#id_imagen').val('');
-            return false;
-        }else{
-            $('.uploadProcess').show();
-            $('#uploadForm').hide();
-            $( "#picUploadForm" ).submit();
+        var img_ex=/(\.jpg|\.jpeg)$/i;
+        var file=document.getElementById("fileInput").files[0];
+   
+        if(file.size <= '2097152') {
+            var file, img;
+            if ((file = this.files[0])) {
+                img = new Image();
+                img.onload = function() {
+                    if(this.width >= 1600 && this.height >= 1060) {
+                        $('.name_errors').hide();
+                        $('#errors_imagen').text('');
+
+                        if(!img_ex.exec(image)){
+                            $('.name_errors').show();
+                            $('#errors_imagen').text('La imagen debe ser JPG o JPEG');
+                            return false;
+                        }else{
+                            $('#uploadForm').hide();
+                            $('.name_errors').hide();
+                            $('.uploadProcess').show();
+                            $('#errors_imagen').text('');
+                            $('#picUploadForm').submit();
+                        }
+                    } else {    
+                        $('.name_errors').show();
+                        $('#errors_imagen').text('La imagen debe tener al menos 1600 x 1060 píxeles');return;
+                    }
+                };
+                img.src=_URL.createObjectURL(file)
+            }
+           
+        } else {
+            $('.name_errors').show();
+            $('#errors_imagen').text('La imagen debe tener un peso menor a 2MB');return;
         }
     });
     
@@ -206,8 +230,8 @@ $(document).ready(function() {
 });
 
 function completeUpload(success,fileName,url_imagen,url,id_tours,nombre,accion) {
-    alert('a');
-    if(success==1) {
+    
+    if(success==true) {
         $('#siDiv').show();
         $('.uploadProcess').hide();
         $('#nombre_imagen').text(fileName);
@@ -344,7 +368,7 @@ function listado_imagenes() {
             
             for(i in resultado) {
 
-                var img="<img src='"+$('#url1').val()+"public/img/tours/"+resultado[i]['nombre_extension']+"' width='120px' height='70px'/>";
+                var img="<img src='"+$('#url1').val()+"public/img/tours/small/"+resultado[i]['nombre_extension']+"' width='120px' height='70px' title='"+resultado[i]['nombre'].toLowerCase()+"'/>";
                 if(resultado[i]['status']=='1') {
                     var action="<a href='javascript:void(0);' onClick='consultar_imagenes("+resultado[i]['id']+",1)' style='color:#000;text-decoration:none;'><i style='font-size: 20px;' class='icon-eye-open' title='Visualizar'></i></a>&nbsp;<a href='javascript:void(0);' onClick='consultar_imagenes("+resultado[i]['id']+",0)' style='color:#000;text-decoration:none;'><i style='font-size: 20px;' class='icon-edit' title='Editar'></i></a>&nbsp;<a href='javascript:void(0);' onClick='inactivar_imagenes("+resultado[i]['id']+")' style='color:#000;text-decoration:none;'><i style='font-size: 20px;' class='icon-ban-circle' title='Inactivar'></i></a>";
                 } else {
@@ -376,7 +400,8 @@ function listado_imagenes() {
                         {"width":"16%"},
                     ],
                     "rowCallback":function(row,data) {
-                        if(data[2]=="ACTIVO") { 
+                        console.log(data[2]);
+                        if(data[2]=="activo") { 
                             $($(row).find("td")[2]).css('color','#FFF');
                             $($(row).find("td")[2]).css('text-align','center');
                             $($(row).find("td")[2]).css('background','#09af01');
@@ -394,9 +419,8 @@ function listado_imagenes() {
 }
 
 function consultar_imagenes(id,val) {
-   
+    
     $('#siDiv').hide();
-
     if(id) {
         $.ajax({
             data: {
@@ -413,6 +437,7 @@ function consultar_imagenes(id,val) {
                         $("#id_tours").val(data.id_tours);
                         $("#nombre_imagen").text(data.nombre);
                         $("#imagePreview").prop('disabled', true);
+                        $("#nombre_imagen_2").val(data.nombre_extension);
                         $('.title-formulario').text('Visualización Imagen');
                         $("#imagePreview").attr("src",$('#url1').val()+'public/img/tours/'+data.nombre_extension);
                     } else {
@@ -421,6 +446,7 @@ function consultar_imagenes(id,val) {
                         $("#id_tours").val(data.id_tours);
                         $("#nombre_imagen").text(data.nombre);
                         $('.title-formulario').text('Editar Imagen');
+                        $("#nombre_imagen_2").val(data.nombre_extension);
                         $("#imagePreview").attr("src",$('#url1').val()+'public/img/tours/'+data.nombre_extension);
                     }
                     
@@ -429,6 +455,7 @@ function consultar_imagenes(id,val) {
                 } else {
                     $("#id_imagen").val('');
                     $("#nombre_imagen").text('');
+                    $("#nombre_imagen_2").val('');
                     $("#imagePreview").attr("src","");
 
                     //mensaje de errors
@@ -439,6 +466,7 @@ function consultar_imagenes(id,val) {
     } else {
         $('#ocultarbtn').show();
         $("#id_imagen").val('');
+        $("#nombre_imagen_2").val('');
         $("#id_tours").val($('#id').val());
         $("#nombre_imagen").text('No Hay Imagen');
         $('.title-formulario').text('Registrar Imagen');

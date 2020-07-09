@@ -42,7 +42,7 @@ class Tours extends CI_Controller {
             $this->load->view('home/view_footer');
             $this->load->view('common/lib_js');
             $this->load->view('common/lib_tours_js');
-            $this->load->view('common/lib_tours_dropzone_js');
+            $this->load->view('common/lib_dropzone_js');
         } else {
             $this->session->sess_destroy();
             redirect('login');
@@ -355,99 +355,92 @@ class Tours extends CI_Controller {
     }
 
     public function registrar_imagenes() {
-
+        $nombre=$this->input->get_post('name',true);
         if(!empty($_FILES)) {
             $bytes=$_FILES["file"]["size"];
-             $targetPath=$_SERVER['DOCUMENT_ROOT']."/public/img/tours/";
-             $imagePath=isset($_FILES["file"]["name"]) ? $_FILES["file"]["name"] : "Undefined";
-             $imagePath=$targetPath . $imagePath;
-             $tempFile=$_FILES['file']['tmp_name'];
-             $targetFile=$targetPath . $_FILES['file']['name'];
-              
-            if(move_uploaded_file($tempFile,$targetFile)) {
-                $comprobar=$this->Tours_models->registrar_imagenes($_FILES['file']['name'],$this->session->userdata('cedula'));
-                if($comprobar==true) { 
-                    echo "true";
-                } else {
-                    echo "false";
-                }     
+            $targetPath=$_SERVER['DOCUMENT_ROOT']."/public/img/tours/";
+            $imagePath=isset($_FILES["file"]["name"]) ? $_FILES["file"]["name"] : "Undefined";
+            $imagePath=$targetPath . $imagePath;
+            $tempFile=$_FILES['file']['tmp_name'];
+            $size=getimagesize($tempFile);
+            $targetFile=$targetPath . $_FILES['file']['name'];
+            if($size[0] >= 1600 && $size[1] >= 1060) {
+                $allowedExts=array("jpg", "jpeg", "gif", "png", "JPG", "GIF", "PNG");
+                $get_extension=explode(".", $_FILES["file"]["name"]);
+                $extension=$get_extension[1];
+                if((($_FILES["file"]["type"] == "image/jpeg") || ($_FILES["file"]["type"] == "image/jpg")) && in_array($extension, $allowedExts)) {
+                        $foto=str_replace(" ","-",$_FILES['file']['name']);
+                        $directorio=$targetPath;
+                        $directorio1=$targetPath.'/small/';
+                        $optFoto=$nombre.''.date('YmdHis').'.'.$extension;
+                        move_uploaded_file($tempFile,$directorio.'/'.$foto);
+                        resizeImagen($directorio.'/',$directorio1.'/',$foto,530,800,$optFoto,$extension);
+                        resizeImagen($directorio.'/',$directorio.'/',$foto,1060,1600,$optFoto,$extension);
+                        unlink($directorio.'/'.$foto);
+                } else { 
+                   echo "false";exit();
+                } 
+            } else {
+                echo "false";exit();
+            }
+            
+            $comprobar=$this->Tours_models->registrar_imagenes($optFoto,$this->session->userdata('cedula'));
+            if($comprobar==true) { 
+                echo "true";
             } else {
                 echo "false";
-            }
+            } 
         }
     }
 	
     public function editar_imagen() {
         
+        $imagena=$_FILES['picture']['name'];
+        $tempFile=$_FILES['picture']['tmp_name'];
+        $alt_seo=$this->input->get_post('alt_seo',true);
         $id_tours=$this->input->get_post('id_tours',true);
         $id_imagen=$this->input->get_post('id_imagen',true);
-		$imagena=$_FILES['picture']['name'];
-        //echo "<script>console.log('Antes Objects: " . $imagena . "' );</script>";
-        if(!empty($_FILES['picture']['name'])){
-			/////////////////////////////////////////////
-			// Primero, hay que validar que se trata de un JPG/GIF/PNG
-       
+        $nombre_imagen_2=$this->input->get_post('nombre_imagen_2',true);
+        $targetPath=$_SERVER['DOCUMENT_ROOT']."/aventuras/public/img/tours/";
+        
+        if(!empty($imagena)) {
 			$allowedExts = array("jpg", "jpeg", "gif", "png", "JPG", "GIF", "PNG");
-        	$get_extension = explode(".", $_FILES["picture"]["name"]);
+        	$get_extension=explode(".",$_FILES["picture"]["name"]);
 			$extension = $get_extension[1];
-        	if ((($_FILES["picture"]["type"] == "image/gif")
-                || ($_FILES["picture"]["type"] == "image/jpeg")
-                || ($_FILES["picture"]["type"] == "image/png")
-                || ($_FILES["picture"]["type"] == "image/pjpeg"))
-                && in_array($extension, $allowedExts)) {
-            // el archivo es un JPG/GIF/PNG, entonces...
-            
-            //$extension = end(explode('.', $_FILES['foto']['name']));
-            $foto = $_FILES['picture']['name'];
-            $directorio = $_SERVER['DOCUMENT_ROOT']."/public/img/tours/"; // directorio de tu elección
-			//$from = 'E:\xampp-7.4\htdocs\test\subir';
-			$directorio1 =$_SERVER['DOCUMENT_ROOT']."/public/img/tours/small/"; // directorio de tu elección
-            //$minFoto = 'min_'.$foto;
-			//$mobFoto = 'mobil_'.$foto;
-            $optFoto = 'op_'.$foto;
-            // almacenar imagen en el servidor
-            move_uploaded_file($_FILES['picture']['tmp_name'], $directorio.'/'.$foto);
-            resizeImagen($directorio.'/', $directorio1.'/', $foto, 530, 800,$optFoto,$extension);
-			//resizeImagen($directorio.'/', $directorio2.'/', $foto, 370, 600,$minFoto,$extension);
-            resizeImagen($directorio.'/', $directorio.'/', $foto, 1060, 1600,$optFoto,$extension);
-            unlink($directorio.'/'.$foto);
-			}else { // El archivo no es JPG/GIF/PNG
-            	$malformato = $_FILES["foto"]["type"];
-            		//header("Location: cargarImagen.php?error=noFormato&formato=$malformato");
-            	exit;
+        	if((($_FILES["picture"]["type"] == "image/jpeg") || ($_FILES["picture"]["type"] == "image/jpg")) && in_array($extension, $allowedExts)) {
+                $foto=str_replace(" ","-",$_FILES['picture']['name']);
+                $directorio=$targetPath;
+                $directorio1=$targetPath.'/small/';
+                $optFoto='foto-tour-'.date('YmdHis').'.'.$extension;
+                move_uploaded_file($tempFile,$directorio.'/'.$foto);
+                resizeImagen($directorio.'/',$directorio1.'/',$foto,530,800,$optFoto,$extension);
+                resizeImagen($directorio.'/',$directorio.'/',$foto,1060,1600,$optFoto,$extension);
+                unlink($directorio.'/'.$foto);
+			}else { 
+            	echo "false";exit();
 			}
-			
-			
-			////////////////////////////////////////////
-            $result=0;
-            $uploadDir=$_SERVER['DOCUMENT_ROOT']."/public/img/tours/";
-			//$uploadDir='E:\xampp-7.4\htdocs\test\subir';
-            $fileName='op_'.$_FILES['picture']['name'];
-            $nombre=explode('.',$fileName);
-            $targetPath=$uploadDir. $fileName;
             
-            if(1==1) {
-                
-                if($id_imagen && $id_tours) {
-                    $accion='editar';
-                    $comprobar=$this->Tours_models->editar_imagenes($fileName,$id_imagen);
-                    if($comprobar==true) { 
-                        $result=1;
-                    } else {
-                        echo "false";
-                    }
+            $nombre=explode('.',$optFoto);
+            if($id_imagen && $id_tours) {
+                $accion='editar';
+                $comprobar=$this->Tours_models->editar_imagenes($optFoto,$id_imagen);
+                if($comprobar==true) { 
+                    unlink($directorio.'/'.$nombre_imagen_2);
+                    unlink($directorio1.'/'.$nombre_imagen_2);
+                    $result=true;
                 } else {
-                    $accion='registrar';
-                    $comprobar=$this->Tours_models->registrar_imagenes_personal($fileName,$id_tours);
-                    if($comprobar==true) { 
-                        $result=1;
-                    } else {
-                        echo "false";
-                    }
+                    echo "false";
+                }
+            } else {
+                $accion='registrar';
+                $comprobar=$this->Tours_models->registrar_imagenes_personal($optFoto,$id_tours);
+                if($comprobar==true) { 
+                    $result=1;
+                } else {
+                    echo "false";
                 }
             }
-            //Load JavaScript function to show the upload status
-            echo '<script type="text/javascript">window.top.window.completeUpload('.$result.',\''.$fileName .'\',\''.site_url('/public/img/tours/').'\',\''.site_url().'\',\''.$id_tours.'\',\''.$nombre[0].'\',\''.$accion.'\');</script>  ';
+            echo '<script type="text/javascript">window.top.window.completeUpload('.$result.',\''.$optFoto .'\',\''.site_url('/public/img/tours/').'\',\''.site_url().'\',\''.$id_tours.'\',\''.$nombre[0].'\',\''.$accion.'\');</script>  ';
         }
     }
 	
@@ -470,7 +463,8 @@ class Tours extends CI_Controller {
         }
     }
 }
-function resizeImagen($from, $ruta, $nombre, $alto, $ancho,$nombreN,$extension){
+
+function resizeImagen($from,$ruta,$nombre,$alto,$ancho,$nombreN,$extension){
     $rutaImagenOriginal = $from.$nombre;
     if($extension == 'GIF' || $extension == 'gif'){
     $img_original = imagecreatefromgif($rutaImagenOriginal);

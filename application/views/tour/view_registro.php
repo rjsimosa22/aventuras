@@ -36,14 +36,14 @@
                                             <label class="col-sm-0 control-label">Nombre del Tours:</label>
                                             <input type="hidden" name="url1" id="url1" class="form-control" value="<?= site_url();?>" />
                                             <input type="hidden" name="url" id="url" class="form-control" value="<?= site_url('registours/registrar');?>" />
-                                            <input type="text" name="nombre" id="nombre" class="form-control" placeholder="Ingresé nombre" autocomplete="off" />
+                                            <input type="text" name="nombre" id="nombre" class="form-control" placeholder="Ingresé nombre" autocomplete="off"/>
                                         </div>
                                     </div>
 
                                     <div class="form-group">
                                         <div class="col-sm-12">
-                                            <label class="col-sm-0 control-label">Nombre del Tours CEO:</label>
-                                            <input type="text" name="nombre_posic" id="nombre_posic" class="form-control" placeholder="Ingresé nombre CEO" autocomplete="off" />
+                                            <label class="col-sm-0 control-label">Nombre del Tours SEO:</label>
+                                            <input type="text" name="nombre_posic" id="nombre_posic" class="form-control" placeholder="Ingresé nombre SEO" autocomplete="off" />
                                         </div>
                                     </div>
                                     
@@ -143,7 +143,7 @@
 
                                     <div class="form-group">
                                         <div class="col-sm-12">
-                                            <label class="col-sm-0 control-label">Descripción CEO:</label>
+                                            <label class="col-sm-0 control-label">Descripción SEO:</label>
                                             <textarea id="descripcion_posic" name="descripcion_posic" style="display:none;" class="mayuscula"></textarea>
                                         </div> 
                                     </div>

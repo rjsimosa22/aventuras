@@ -5115,6 +5115,7 @@ li [class*=" icon-"].icon-large {
   border-color: #e5e5e5 !important;
   border-left: 0;
 }
+
 .tabbable.tabs-right .nav-tabs > li > a {
   border-left: 0;
   min-width: 74px;
