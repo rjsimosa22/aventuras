@@ -171,6 +171,7 @@
                                                         <tr>
                                                             <th>Imagen</th>
                                                             <th>Nombre</th>
+                                                            <th>Alt SEO</th>
                                                             <th><center>Estatus</center></th>
                                                         </tr>
                                                     </thead>
@@ -182,6 +183,7 @@
                                                                 <tr class="odd gradeX">
                                                                     <td><img src="<?= site_url('public/img/tours/'.$row->nombre_extension);?>" width="120px" height="70px" /></td>
                                                                     <td><?= ucwords(strtolower($row->nombre));?></td>
+                                                                    <td><?= ucwords(strtolower($row->alt_seo));?></td>
                                                                     <td align="center" style="background:<?= $row->color;?>;color:#FFF;"><?= $row->nombre_status;?></td>
                                                                 </tr>
                                                     <?php        

@@ -397,9 +397,9 @@ class Tours extends CI_Controller {
         
         $imagena=$_FILES['picture']['name'];
         $tempFile=$_FILES['picture']['tmp_name'];
-        $alt_seo=$this->input->get_post('alt_seo',true);
         $id_tours=$this->input->get_post('id_tours',true);
         $id_imagen=$this->input->get_post('id_imagen',true);
+        $alt_seo=$this->input->get_post('alt_imagen_2',true);
         $nombre_imagen_2=$this->input->get_post('nombre_imagen_2',true);
         $targetPath=$_SERVER['DOCUMENT_ROOT']."/aventuras/public/img/tours/";
         
@@ -433,7 +433,7 @@ class Tours extends CI_Controller {
                 }
             } else {
                 $accion='registrar';
-                $comprobar=$this->Tours_models->registrar_imagenes_personal($optFoto,$id_tours);
+                $comprobar=$this->Tours_models->registrar_imagenes_personal($optFoto,$id_tours,$alt_seo);
                 if($comprobar==true) { 
                     $result=1;
                 } else {
@@ -443,7 +443,17 @@ class Tours extends CI_Controller {
             echo '<script type="text/javascript">window.top.window.completeUpload('.$result.',\''.$optFoto .'\',\''.site_url('/public/img/tours/').'\',\''.site_url().'\',\''.$id_tours.'\',\''.$nombre[0].'\',\''.$accion.'\');</script>  ';
         }
     }
-	
+    
+    public function registrar_imagen_alt() {
+
+        $id=$this->input->get_post('id_imagen',true);
+        $alt_imagen=$this->input->get_post('alt_imagen',true);
+        if(isset($id)) {
+            $comprobar=$this->Tours_models->registrar_imagen_alt($id,$alt_imagen);
+            print_r(json_encode($comprobar));
+        }
+    }
+
     public function activar_imagenes() {
         
         $id=$this->input->get_post('id',true);

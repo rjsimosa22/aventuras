@@ -123,6 +123,8 @@ $route['modtours/(:any)']='tours/visualizar/$1';
 $route['edittours/(:any)']='tours/editar/$1';
 // registrar tours imagenes
 $route['regtoursimagen/(:any)']='tours/registrar_imagenes/$1';
+// registrar tours imagenes ALT SEO
+$route['registrarimagenalt/(:any)']='tours/registrar_imagen_alt/$1';
 // editar tours imagenes
 $route['editoursimagenes/(:any)']='tours/editar_imagen/$1';
 // listado de  tours imagenes

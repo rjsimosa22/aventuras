@@ -149,6 +149,40 @@ $(document).ready(function() {
             $('#errors_imagen').text('La imagen debe tener un peso menor a 2MB');return;
         }
     });
+
+    $("#FormAltSEO").validate({
+        rules:{
+            alt_imagen: {
+                minlength:3,
+                required:true,
+            }
+        },
+        submitHandler: function(form) { 
+            var url=$('#urlALTSEO').val();
+            var mensj="CONFIRMA QUE LOS DATOS INGRESADO SON CORRECTOS?";
+            var confirma=window.confirm(mensj);	
+            if(confirma) {
+                $.ajax({
+                    url:url,
+                    type:"POST",
+                    data:'alt_imagen='+$('#alt_imagen').val()+'&id_imagen='+$('#id_imagen').val(),
+                    success:function(data) {
+                        if(data=='true') {
+                            $('#name_success').show();
+                            $('#success_imagen').text('Registro exitoso');
+                            setTimeout(function(){$('#name_success').hide();},1000);
+                        } 
+                    }
+                });
+            }
+        },
+        highlight: function(element){
+            $(element).parent().removeClass('has-success').addClass('has-error');
+        },
+        success: function(element){
+            $(element).parent().removeClass('has-error').addClass('has-success');
+        }
+    });  
     
     $("#departamento").on('change',function() {
         $('#provincia').empty();        
@@ -353,6 +387,7 @@ function consultar(id_tours,val,url,url_imagen) {
                 }
             }
         }); 
+        $('.name_errors').hide();
     }
 }
 
@@ -374,10 +409,16 @@ function listado_imagenes() {
                 } else {
                     var action="<a href='javascript:void(0);' onClick='consultar_imagenes("+resultado[i]['id']+",1)' style='color:#000;text-decoration:none;'><i style='font-size: 20px;' class='icon-eye-open' title='Visualizar'></i></a>&nbsp;<a href='javascript:void(0);' onClick='consultar_imagenes("+resultado[i]['id']+",0)' style='color:#000;text-decoration:none;'><i style='font-size: 20px;' class='icon-edit' title='Editar'></i></a>&nbsp;<a href='javascript:void(0);' onClick='activar_imagenes("+resultado[i]['id']+")' style='color:#000;text-decoration:none;'><i style='font-size: 20px;' class='icon-ok' title='Activar'></i></a>";
                 }
+
+                var alt_seo='N/A';
+                if(resultado[i]['alt_seo']) {
+                    var alt_seo=resultado[i]['alt_seo'].toLowerCase();
+                }
                 
                 arrayImagenesL=[
                     img,
                     resultado[i]['nombre'].toLowerCase(),
+                    alt_seo,
                     resultado[i]['nombre_status'].toLowerCase(),
                     action
                 ];
@@ -398,19 +439,20 @@ function listado_imagenes() {
                         {"width":"16%"},
                         {"width":"16%"},
                         {"width":"16%"},
+                        {"width":"16%"},
                     ],
                     "rowCallback":function(row,data) {
                         console.log(data[2]);
-                        if(data[2]=="activo") { 
-                            $($(row).find("td")[2]).css('color','#FFF');
-                            $($(row).find("td")[2]).css('text-align','center');
-                            $($(row).find("td")[2]).css('background','#09af01');
+                        if(data[3]=="activo") { 
+                            $($(row).find("td")[3]).css('color','#FFF');
+                            $($(row).find("td")[3]).css('text-align','center');
+                            $($(row).find("td")[3]).css('background','#09af01');
                         } else {
-                            $($(row).find("td")[2]).css('color','#FFF');
-                            $($(row).find("td")[2]).css('text-align','center');
-                            $($(row).find("td")[2]).css('background','#961b01');
+                            $($(row).find("td")[3]).css('color','#FFF');
+                            $($(row).find("td")[3]).css('text-align','center');
+                            $($(row).find("td")[3]).css('background','#961b01');
                         }
-                        $($(row).find("td")[3]).css('text-align','center');
+                        $($(row).find("td")[4]).css('text-align','center');
                     },
                 });
             }
@@ -419,6 +461,14 @@ function listado_imagenes() {
 }
 
 function consultar_imagenes(id,val) {
+
+    if(id) {
+        $('#btnCargarALT').val('Editar ALT');
+        $('#btnEditarIMG').text('Editar Imagen');
+    } else {
+        $('#btnCargarALT').val('Guardar ALT');
+        $('#btnEditarIMG').text('Cargar Imagen');
+    }
     
     $('#siDiv').hide();
     if(id) {
@@ -432,19 +482,31 @@ function consultar_imagenes(id,val) {
             success:function(data) {
                 if(data) {
                     if(val > 0) {
+                        $('#divAltSEO').hide();
+                        $('#FormAltSEO').show();
                         $('#ocultarbtn').hide();
+                        $('.btnCargarALT').hide();
+                        $('#alt_imagen_2').val('');
                         $("#id_imagen").val(data.id);
                         $("#id_tours").val(data.id_tours);
+                        $('#alt_imagen').val(data.alt_seo);
                         $("#nombre_imagen").text(data.nombre);
-                        $("#imagePreview").prop('disabled', true);
+                        $("#alt_imagen").prop('disabled',true);
+                        $("#imagePreview").prop('disabled',true);
                         $("#nombre_imagen_2").val(data.nombre_extension);
                         $('.title-formulario').text('Visualización Imagen');
                         $("#imagePreview").attr("src",$('#url1').val()+'public/img/tours/'+data.nombre_extension);
                     } else {
+                        $('#divAltSEO').hide();
+                        $('#FormAltSEO').show();
                         $('#ocultarbtn').show();
+                        $('.btnCargarALT').show();
+                        $('#alt_imagen_2').val('');
                         $("#id_imagen").val(data.id);
                         $("#id_tours").val(data.id_tours);
+                        $('#alt_imagen').val(data.alt_seo);
                         $("#nombre_imagen").text(data.nombre);
+                        $("#alt_imagen").prop('disabled',false);
                         $('.title-formulario').text('Editar Imagen');
                         $("#nombre_imagen_2").val(data.nombre_extension);
                         $("#imagePreview").attr("src",$('#url1').val()+'public/img/tours/'+data.nombre_extension);
@@ -453,10 +515,15 @@ function consultar_imagenes(id,val) {
                     //modal
                     $("#myModalimagenes").modal();
                 } else {
+                    $('#divAltSEO').show();
+                    $('#FormAltSEO').hide();
                     $("#id_imagen").val('');
+                    $('#alt_imagen').val('');
+                    $('#alt_imagen_2').val('');
                     $("#nombre_imagen").text('');
                     $("#nombre_imagen_2").val('');
                     $("#imagePreview").attr("src","");
+                    $("#alt_imagen").prop('disabled',false);
 
                     //mensaje de errors
                     alert('Error en el modulo de imagenes');
@@ -464,10 +531,15 @@ function consultar_imagenes(id,val) {
             }
         }); 
     } else {
+        $('#divAltSEO').show();
+        $('#FormAltSEO').hide();
         $('#ocultarbtn').show();
         $("#id_imagen").val('');
+        $('#alt_imagen').val('');
+        $('#alt_imagen_2').val('');
         $("#nombre_imagen_2").val('');
         $("#id_tours").val($('#id').val());
+        $("#alt_imagen").prop('disabled',false);
         $("#nombre_imagen").text('No Hay Imagen');
         $('.title-formulario').text('Registrar Imagen');
         $("#imagePreview").attr("src",$('#url1').val()+'public/img/not-available.png');
@@ -475,4 +547,6 @@ function consultar_imagenes(id,val) {
         //modal
         $("#myModalimagenes").modal();
     }
+    $('#name_errors').hide();
+    $('#name_success').hide();
 }

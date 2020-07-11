@@ -115,13 +115,14 @@ class Tours_models extends CI_Model {
         }
     }
 
-    public function registrar_imagenes_personal($nombre_extension,$id_tours) { 
+    public function registrar_imagenes_personal($nombre_extension,$id_tours,$alt_seo) { 
 
         if(!empty($nombre_extension)) {
             $nombre=explode('.',$nombre_extension);
             $bd_tours_imagenes=array(
                 'status'=>'1',
                 'nombre'=>$nombre[0],
+                'alt_seo'=>$alt_seo,
                 'id_tours'=>$id_tours,
                 'nombre_extension'=>$nombre_extension,
                 'fecha_registro'=>date('Y-m-d H:i:s'),
@@ -514,7 +515,7 @@ class Tours_models extends CI_Model {
     public function imagen_personal($id) {
 
         if(isset($id)) {
-            $this->db->select('a.id,a.nombre,a.id_tours,a.status,a.nombre_extension,b.descripcion as nombre_status,b.color');
+            $this->db->select('a.id,a.nombre,a.id_tours,a.status,a.nombre_extension,a.alt_seo,b.descripcion as nombre_status,b.color');
             $this->db->from('bd_tours_imagenes as a');
             $this->db->join('bd_estatus_global as b','b.id=a.status');
             $this->db->order_by('a.id','asc');
@@ -531,13 +532,13 @@ class Tours_models extends CI_Model {
     public function listado_imagenes($id) {
 
         if(isset($id)) {
-            $this->db->select('a.id,a.id_tours,a.nombre,a.id_tours,a.status,a.nombre_extension,b.descripcion as nombre_status,b.color');
+            $this->db->select('a.id,a.id_tours,a.nombre,a.alt_seo,a.id_tours,a.status,a.nombre_extension,b.descripcion as nombre_status,b.color');
             $this->db->from('bd_tours_imagenes as a');
             $this->db->join('bd_estatus_global as b','b.id=a.status');
             $this->db->order_by('a.id','asc');
             $this->db->where('a.status','1');
             $this->db->where('a.id_tours',$id);
-            $this->db->limit(6);  
+            $this->db->limit(6);
             
             $query=$this->db->get();
             if($query->num_rows() > 0) {
@@ -568,6 +569,20 @@ class Tours_models extends CI_Model {
                 }
                 return $data;
             }
+        }
+    }
+
+    function registrar_imagen_alt($id,$alt_seo) {
+        
+        if(isset($id)) {
+            $bd_tours_imagenes=array(
+                'alt_seo'=>$alt_seo,
+            );
+            $this->db->where('id',$id);
+            $this->db->update('bd_tours_imagenes',$bd_tours_imagenes);
+            return true;
+        } else {
+            return false;
         }
     }
 

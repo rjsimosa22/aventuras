@@ -5,7 +5,7 @@
         this.on('thumbnail',function(file) {
           if(file.accepted !== false) {
             if(file.width >= 1600 && file.height >= 1060) {
-              file.acceptDimensions();
+              console.log();
             } else {
               file.rejectDimensions();
             }
