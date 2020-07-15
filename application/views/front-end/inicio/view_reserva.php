@@ -69,6 +69,9 @@
                                     $precio_total='0';
                                     $cantidad=count($listado_compra);
                                     foreach($listado_compra as $row) {
+                                        $corte=explode("tours/",$row['textimagen']);
+                                        $imagen=$corte[0].'tours/small/'.$corte[1];
+
                                         if($moneda=='') {
                                             $precio=($row['infoPrecio']) * $row['textqtyAdulto'];
                                             $precio=round(ceil((($precio) + $row['textprecio_hotel'])),2);
@@ -96,7 +99,7 @@
                                                 <td style="display:none;" id="textprecio">'.$precio.'</td>
                                                 
                                                 <td>
-                                                    <div class="thumb_cart"><img src="'.$row['textimagen'].'" alt="Image"></div>
+                                                    <div class="thumb_cart"><img src="'.$imagen.'" alt="Image"></div>
                                                 </td>
 
                                                 <td>

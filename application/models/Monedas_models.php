@@ -74,6 +74,21 @@ class Monedas_models extends CI_Model {
             }
         }
     }
+
+    public function consultar_listado($id) {
+        if(isset($id)) {
+            $this->db->select('a.id,a.nombre,a.tipo_mercado_pago as simbolo_act,a.tipo_cambio,a.tipo_mercado_pago,a.descripcion,a.simbolo,a.status,a.fecha_registro,b.descripcion as nombre_status,b.color');
+            $this->db->from('bd_monedas as a');
+            $this->db->join('bd_estatus_global as b','b.id=a.status');
+            $this->db->order_by('a.nombre','desc');
+            $this->db->where('a.id',$id); 
+            
+            $query=$this->db->get();
+            if($query->num_rows()>0) {
+                return $query->row();
+            }
+        }
+    }
     
     public function editar($id,$bd_monedas=array()) {
         if(isset($id)) {

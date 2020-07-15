@@ -111,6 +111,8 @@
                             <?php
                                 if($listado_compra) {
                                     foreach($listado_compra as $row) { 
+                                        /*$corte=explode("tours/",$row['textimagen']);
+                                        $imagen=$corte[0].'tours/small/'.$corte[1];*/
                                         if($moneda=='') {
                                             $precio=($row['infoPrecio']) * $row['textqtyAdulto'];
                                             $precio=round(ceil((($precio) + $row['textprecio_hotel'])),2);
@@ -136,18 +138,18 @@
                                         echo '  <input type="hidden" name="servicio" id="servicio_'.$row['textidservicio'].'" value="'.$row['textidservicio'].'">
                                                 <table width="100%" class="inf-web">
                                                     <tr>
-                                                        <td width="200px"><img src="'.$row['textimagen'].'" alt="" class="img-fluid mr-3"></td>
+                                                        <!--td width="200px"><img src="$imagen" alt="" class="img-fluid mr-3"></td-->
                                                         <td>
                                                             <table width="98%" border="0" align="center">
                                                                 <tr>
-                                                                    <td class="titulo-detalle" colspan="4"><b>'.$row['textservicio'].'</b></td>
+                                                                    <td class="titulo-detalle" colspan="5"><b>'.$row['textservicio'].'</b></td>
                                                                 </tr>
                                                                 
                                                                 <tr style="color:#795548;">
-                                                                    <td style="background:#cccccc7a;border-right:2px solid #f38b5a;width:25%" align="center"><i class="icon-calendar-inv tamano-icono-res"></i><br>'.$row['textfecha'].'<br>Llegada&nbsp;</td>
-                                                                    <td style="background:#cccccc7a;border-right:2px solid #f38b5a;width:25%" align="center"><i class="icon-adult tamano-icono-res"></i><br>'.$row['textqtyAdulto'].'<br>Adultos&nbsp;</td>
-                                                                    <td style="background:#cccccc7a;border-right:2px solid #f38b5a;width:25%" align="center"><i class="icon-child tamano-icono-res"></i><br>'.$row['textqtyNino'].'<br>Niños&nbsp;</td>
-                                                                    <td style="background:#cccccc7a;border-right:0px solid #f38b5a;width:25%" align="center"><i class="icon-stopwatch-1 tamano-icono-res"></i><br>'.ucfirst(strtolower($row['textduracion'])).'<br>Duración&nbsp;</td>
+                                                                    <td style="background:#cccccc7a;border-left:2px solid #f38b5a;width:25%" align="center"><i class="icon-calendar-inv tamano-icono-res"></i><br>'.$row['textfecha'].'<br>Llegada&nbsp;</td>
+                                                                    <td style="background:#cccccc7a;border-left:2px solid #f38b5a;width:25%" align="center"><i class="icon-adult tamano-icono-res"></i><br>'.$row['textqtyAdulto'].'<br>Adultos&nbsp;</td>
+                                                                    <td style="background:#cccccc7a;border-left:2px solid #f38b5a;width:25%" align="center"><i class="icon-child tamano-icono-res"></i><br>'.$row['textqtyNino'].'<br>Niños&nbsp;</td>
+                                                                    <td style="background:#cccccc7a;border-left:2px solid #f38b5a;width:25%;border-right:2px solid #f38b5a;width:25%" align="center"><i class="icon-stopwatch-1 tamano-icono-res"></i><br>'.ucfirst(strtolower($row['textduracion'])).'<br>Duración&nbsp;</td>
                                                                 </tr>
                                                             </table>
                                                         </td>
@@ -156,26 +158,26 @@
 
                                                 <table width="100%" class="inf-movil">
                                                     <tr>
-                                                        <td class="titulo-detalle" colspan="4"><b>'.$row['textservicio'].'</u></td>
+                                                        <td class="titulo-detalle" colspan="5"><b>'.$row['textservicio'].'</u></td>
                                                     </tr>
 
                                                     <tr>
-                                                        <td colspan="4"><b>&nbsp;</u></td>
+                                                        <td colspan="5"><b>&nbsp;</u></td>
                                                     </tr>
 
-                                                    <tr>
+                                                    <!--tr>
                                                          <td colspan="4"><img src="'.$row['textimagen'].'" alt="" class="img-fluid mr-3"></td>
                                                     </tr>
 
                                                     <tr>
                                                         <td>&nbsp;</td>
-                                                    </tr>
+                                                    </tr-->
                                                     
                                                     <tr style="color:#795548;">
-                                                        <td style="background:#cccccc7a;border-right:2px solid #f38b5a;width:25%" align="center"><i class="icon-calendar-inv tamano-icono-res"></i><br>'.$row['textfecha'].'<br>Llegada&nbsp;</td>
-                                                        <td style="background:#cccccc7a;border-right:2px solid #f38b5a;width:25%" align="center"><i class="icon-adult tamano-icono-res"></i><br>'.$row['textqtyAdulto'].'<br>Adultos&nbsp;</td>
-                                                        <td style="background:#cccccc7a;border-right:2px solid #f38b5a;width:25%" align="center"><i class="icon-child tamano-icono-res"></i><br>'.$row['textqtyNino'].'<br>Niños&nbsp;</td>
-                                                        <td style="background:#cccccc7a;border-right:0px solid #f38b5a;width:25%" align="center"><i class="icon-stopwatch-1 tamano-icono-res"></i><br>'.ucfirst(strtolower($row['textduracion'])).'<br>Duración&nbsp;</td>
+                                                        <td style="background:#cccccc7a;border-left:2px solid #f38b5a;width:25%" align="center"><i class="icon-calendar-inv tamano-icono-res"></i><br>'.$row['textfecha'].'<br>Llegada&nbsp;</td>
+                                                        <td style="background:#cccccc7a;border-left:2px solid #f38b5a;width:25%" align="center"><i class="icon-adult tamano-icono-res"></i><br>'.$row['textqtyAdulto'].'<br>Adultos&nbsp;</td>
+                                                        <td style="background:#cccccc7a;border-left:2px solid #f38b5a;width:25%" align="center"><i class="icon-child tamano-icono-res"></i><br>'.$row['textqtyNino'].'<br>Niños&nbsp;</td>
+                                                        <td style="background:#cccccc7a;border-left:2px solid #f38b5a;width:25%;border-right:2px solid #f38b5a;width:25%" align="center"><i class="icon-stopwatch-1 tamano-icono-res"></i><br>'.ucfirst(strtolower($row['textduracion'])).'<br>Duración&nbsp;</td>
                                                     </tr>
                                                 </table>
                                                 <br>
@@ -241,7 +243,10 @@
                     $divOculto='style="display:none;"';
                     if($listado_compra) {
                         $divOculto='style="display:block;"';
-                        foreach($listado_compra as $row) { 
+                        foreach($listado_compra as $row) {
+                            $corte=explode("tours/",$row['textimagen']);
+                            $imagen=$corte[0].'tours/small/'.$corte[1];
+                             
                             if($moneda=='') {
                                 $precio=($row['infoPrecio']) * $row['textqtyAdulto'];
                                 $precio=round(ceil((($precio) + $row['textprecio_hotel'])),2);   
@@ -266,7 +271,7 @@
 
                             echo '
                                     <ul class="cart_details">
-                                        <li class="titulo-detalle"><img src="'.$row['textimagen'].'" alt="" class="img-fluid mr-3"></li>
+                                        <li class="titulo-detalle"><img src="'.$imagen.'" alt="" class="img-fluid mr-3"></li>
                                         <li class="titulo-detalle"><b>'.$row['textservicio'].'</b></li>
                                         <li>Llegada:<span>'.$row['textfecha'].'</span></li>
                                         <li>Personas:<span>'.$row['textqtyAdulto'].' Adultos<br>'.$row['textqtyNino'].' Niños</span></li>

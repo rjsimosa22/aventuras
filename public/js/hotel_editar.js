@@ -176,19 +176,79 @@ $(document).ready(function() {
         $("#fileInput:hidden").trigger('click');
     });
     
-    $("#fileInput").on('change', function(){
+    var _URL = window.URL || window.webkitURL;
+    $("#fileInput").on('change',function() {
         var id=$('#id_imagen').val();
         var image=$('#fileInput').val();
-        var img_ex=/(\.jpg|\.jpeg|\.png|\.gif)$/i;
-            
-        if(!img_ex.exec(image)){
-            $('#fileInput').val('');
-            $('#id_imagen').val('');
-            return false;
-        }else{
-            $('.uploadProcess').show();
-            $('#uploadForm').hide();
-            $( "#picUploadForm" ).submit();
+        var img_ex=/(\.jpg|\.jpeg)$/i;
+        var file=document.getElementById("fileInput").files[0];
+   
+        if(file.size <= '2097152') {
+            var file, img;
+            if ((file = this.files[0])) {
+                img = new Image();
+                img.onload = function() {
+                    if(this.width >= 1600 && this.height >= 1060) {
+                        $('.name_errors').hide();
+                        $('#errors_imagen').text('');
+
+                        if(!img_ex.exec(image)){
+                            $('.name_errors').show();
+                            $('#errors_imagen').text('La imagen debe ser JPG o JPEG');
+                            return false;
+                        }else{
+                            $('#uploadForm').hide();
+                            $('.name_errors').hide();
+                            $('.uploadProcess').show();
+                            $('#errors_imagen').text('');
+                            $('#picUploadForm').submit();
+                        }
+                    } else {    
+                        $('.name_errors').show();
+                        $('#errors_imagen').text('La imagen debe tener al menos 1600 x 1060 píxeles');return;
+                    }
+                };
+                img.src=_URL.createObjectURL(file)
+            }
+           
+        } else {
+            $('.name_errors').show();
+            $('#errors_imagen').text('La imagen debe tener un peso menor a 2MB');return;
+        }
+    });
+
+    $("#FormAltSEO").validate({
+        rules:{
+            alt_imagen: {
+                minlength:3,
+                required:true,
+            }
+        },
+        submitHandler: function(form) { 
+            var url=$('#urlALTSEO').val();
+            var mensj="CONFIRMA QUE LOS DATOS INGRESADO SON CORRECTOS?";
+            var confirma=window.confirm(mensj);	
+            if(confirma) {
+                $.ajax({
+                    url:url,
+                    type:"POST",
+                    data:'alt_imagen='+$('#alt_imagen').val()+'&id_imagen='+$('#id_imagen').val(),
+                    success:function(data) {
+                        if(data=='true') {
+                            listado_imagenes();
+                            $('#name_success').show();
+                            $('#success_imagen').text('Registro exitoso');
+                            setTimeout(function(){$('#name_success').hide();},1000);
+                        } 
+                    }
+                });
+            }
+        },
+        highlight: function(element){
+            $(element).parent().removeClass('has-success').addClass('has-error');
+        },
+        success: function(element){
+            $(element).parent().removeClass('has-error').addClass('has-success');
         }
     });
 
@@ -210,12 +270,12 @@ $(document).ready(function() {
                     var resultado=JSON.parse(data);
                      for(i in resultado) {
                         var id=resultado[i]['id'];
-                        var nombre=resultado[i]['nombre'].toUpperCase();
-                        $("#provincia").select2({data:[{id:"",text:"TODOS"},{id:id,text:nombre}]});
+                        var nombre=titulojs(resultado[i]['nombre']);
+                        $("#provincia").select2({data:[{id:"",text:"Todos"},{id:id,text:nombre}]});
                         $('#provincia').val("").trigger('change.select2');
                     } 
                 } else {
-                    $("#provincia").select2({data:[{id:"",text:"DEBE SELECCIONAR DEPARTAMENTO"}]});
+                    $("#provincia").select2({data:[{id:"",text:"Debe Seleccionar deparamento"}]});
                     $('#provincia').val("").trigger('change.select2');
                 }
             });			
@@ -240,12 +300,12 @@ $(document).ready(function() {
                     var resultado=JSON.parse(data);
                     for(i in resultado) {
                         var id=resultado[i]['id'];
-                        var nombre=resultado[i]['nombre'].toUpperCase();
-                        $("#distrito").select2({data:[{id:"",text:"TODOS"},{id:id,text:nombre}]});
+                        var nombre=titulojs(resultado[i]['nombre']);
+                        $("#distrito").select2({data:[{id:"",text:"Todos"},{id:id,text:nombre}]});
                         $('#distrito').val("").trigger('change.select2');
                     } 
                 } else {
-                    $("#distrito").select2({data:[{id:"",text:"DEBE SELECCIONAR DEPARTAMENTO"}]});
+                    $("#distrito").select2({data:[{id:"",text:"Debe Seleccionar deparamento"}]});
                     $('#distrito').val("").trigger('change.select2');
                 }
             });			
@@ -435,9 +495,16 @@ function activar_imagenes(id) {
 }
 
 function consultar_imagenes(id,val) {
-   
+    
+    if(id) {
+        $('#btnCargarALT').val('Editar ALT');
+        $('#btnEditarIMG').text('Editar Imagen');
+    } else {
+        $('#btnCargarALT').val('Guardar ALT');
+        $('#btnEditarIMG').text('Cargar Imagen');
+    }
+    
     $('#siDiv').hide();
-
     if(id) {
         $.ajax({
             data: {
@@ -449,28 +516,48 @@ function consultar_imagenes(id,val) {
             success:function(data) {
                 if(data) {
                     if(val > 0) {
+                        $('#divAltSEO').hide();
+                        $('#FormAltSEO').show();
                         $('#ocultarbtn').hide();
+                        $('.btnCargarALT').hide();
+                        $('#alt_imagen_2').val('');
                         $("#id_imagen").val(data.id);
+                        $('#alt_imagen').val(data.alt_seo);
                         $("#id_hoteles").val(data.id_hoteles);
                         $("#nombre_imagen").text(data.nombre);
+                        $("#alt_imagen").prop('disabled',true);
                         $("#imagePreview").prop('disabled', true);
+                        $("#nombre_imagen_2").val(data.nombre_extension);
                         $('.title-formulario').text('Visualización Imagen');
                         $("#imagePreview").attr("src",$('#url').val()+'public/img/hoteles/'+data.nombre_extension);
                     } else {
+                        $('#divAltSEO').hide();
+                        $('#FormAltSEO').show();
                         $('#ocultarbtn').show();
+                        $('.btnCargarALT').show();
+                        $('#alt_imagen_2').val('');
                         $("#id_imagen").val(data.id);
+                        $('#alt_imagen').val(data.alt_seo);
                         $("#id_hoteles").val(data.id_hoteles);
                         $("#nombre_imagen").text(data.nombre);
+                        $("#alt_imagen").prop('disabled',false);
                         $('.title-formulario').text('Editar Imagen');
+                        $("#nombre_imagen_2").val(data.nombre_extension);
                         $("#imagePreview").attr("src",$('#url').val()+'public/img/hoteles/'+data.nombre_extension);
                     }
                     
                     //modal
                     $("#myModalimagenes").modal();
                 } else {
+                    $('#divAltSEO').show();
+                    $('#FormAltSEO').hide();
                     $("#id_imagen").val('');
+                    $('#alt_imagen').val('');
+                    $('#alt_imagen_2').val('');
                     $("#nombre_imagen").text('');
+                    $("#nombre_imagen_2").val('');
                     $("#imagePreview").attr("src","");
+                    $("#alt_imagen").prop('disabled',false);
 
                     //mensaje de errors
                     alert('Error en el modulo de imagenes');
@@ -478,9 +565,15 @@ function consultar_imagenes(id,val) {
             }
         }); 
     } else {
+        $('#divAltSEO').show();
+        $('#FormAltSEO').hide();
         $('#ocultarbtn').show();
         $("#id_imagen").val('');
+        $('#alt_imagen').val('');
+        $('#alt_imagen_2').val('');
+        $("#nombre_imagen_2").val('');
         $("#id_hoteles").val($('#id').val());
+        $("#alt_imagen").prop('disabled',false);
         $("#nombre_imagen").text('No Hay Imagen');
         $('.title-formulario').text('Registrar Imagen');
         $("#imagePreview").attr("src",$('#url').val()+'public/img/not-available.png');
@@ -488,6 +581,8 @@ function consultar_imagenes(id,val) {
         //modal
         $("#myModalimagenes").modal();
     }
+    $('#name_errors').hide();
+    $('#name_success').hide();
 }
 
 function consultar_habitaciones(id,val) {
@@ -496,7 +591,7 @@ function consultar_habitaciones(id,val) {
     $('#siDiv').hide();
     for(i in arrayListadoHabitaciones) {
         if(id==arrayListadoHabitaciones[i]['id_habitaciones']) {
-            var nombre=arrayListadoHabitaciones[i]['nombre'];
+            var nombretitulojs=titulojs(arrayListadoHabitaciones[i]['nombre']);
         }
     }
     
@@ -611,7 +706,7 @@ function actualizar_selected_habitacion(id,val,url) {
             if(val=='0') {
             var option=document.createElement("option");
                 option.value='';
-                option.text='SELECCIONAR';
+                option.text='Seleccionar';
                 select.add(option);
             }
 
@@ -628,7 +723,7 @@ function actualizar_selected_habitacion(id,val,url) {
 
             var option=document.createElement("option");
             option.value='';
-            option.text='NO HAY SELECCIÓN';
+            option.text='No hay selección';
             select.add(option);
         } 
     });			
@@ -646,17 +741,23 @@ function listado_imagenes() {
 
             for(i in resultado) {
 
-                var img="<img src='"+$('#url').val()+"public/img/hoteles/"+resultado[i]['nombre_extension']+"' width='120px' height='70px'/>";
+                var img="<img src='"+$('#url').val()+"public/img/hoteles/small/"+resultado[i]['nombre_extension']+"' width='120px' height='70px'/>";
                 if(resultado[i]['status']=='1') {
                     var action="<a href='javascript:void(0);' onClick='consultar_imagenes("+resultado[i]['id']+",1)' style='color:#000;text-decoration:none;'><i style='font-size: 20px;' class='icon-eye-open' title='Visualizar'></i></a>&nbsp;<a href='javascript:void(0);' onClick='consultar_imagenes("+resultado[i]['id']+",0)' style='color:#000;text-decoration:none;'><i style='font-size: 20px;' class='icon-edit' title='Editar'></i></a>&nbsp;<a href='javascript:void(0);' onClick='inactivar_imagenes("+resultado[i]['id']+")' style='color:#000;text-decoration:none;'><i style='font-size: 20px;' class='icon-ban-circle' title='Inactivar'></i></a>";
                 } else {
                     var action="<a href='javascript:void(0);' onClick='consultar_imagenes("+resultado[i]['id']+",1)' style='color:#000;text-decoration:none;'><i style='font-size: 20px;' class='icon-eye-open' title='Visualizar'></i></a>&nbsp;<a href='javascript:void(0);' onClick='consultar_imagenes("+resultado[i]['id']+",0)' style='color:#000;text-decoration:none;'><i style='font-size: 20px;' class='icon-edit' title='Editar'></i></a>&nbsp;<a href='javascript:void(0);' onClick='activar_imagenes("+resultado[i]['id']+")' style='color:#000;text-decoration:none;'><i style='font-size: 20px;' class='icon-ok' title='Activar'></i></a>";
                 }
+
+                var alt_seo='N/A';
+                if(resultado[i]['alt_seo']) {
+                    var alt_seo=resultado[i]['alt_seo'].toLowerCase();
+                }
                 
                 arrayImagenesL=[
                     img,
-                    resultado[i]['nombre'].toUpperCase(),
-                    resultado[i]['nombre_status'].toUpperCase(),
+                    resultado[i]['nombre'].toLowerCase(),
+                    alt_seo,
+                    resultado[i]['nombre_status'].toLowerCase(),
                     action
                 ];
                 arrayImagenes.push(arrayImagenesL);
@@ -676,16 +777,17 @@ function listado_imagenes() {
                         {"width":"16%"},
                         {"width":"16%"},
                         {"width":"16%"},
+                        {"width":"16%"},
                     ],
                     "rowCallback":function(row,data) {
-                        if(data[2]=="ACTIVO") { 
-                            $($(row).find("td")[2]).css('color','#FFF');
-                            $($(row).find("td")[2]).css('text-align','center');
-                            $($(row).find("td")[2]).css('background','#09af01');
+                        if(data[3]=="activo") { 
+                            $($(row).find("td")[3]).css('color','#FFF');
+                            $($(row).find("td")[3]).css('text-align','center');
+                            $($(row).find("td")[3]).css('background','#09af01');
                         } else {
-                            $($(row).find("td")[2]).css('color','#FFF');
-                            $($(row).find("td")[2]).css('text-align','center');
-                            $($(row).find("td")[2]).css('background','#961b01');
+                            $($(row).find("td")[3]).css('color','#FFF');
+                            $($(row).find("td")[3]).css('text-align','center');
+                            $($(row).find("td")[3]).css('background','#961b01');
                         }
                         $($(row).find("td")[3]).css('text-align','center');
                     },
@@ -715,11 +817,11 @@ function listado_habitaciones() {
                 }
                 
                 arrayHabitacionesL=[
-                    resultado[i]['nombre'].toUpperCase(),
-                    resultado[i]['cantidad_personas'].toUpperCase(),
-                    resultado[i]['simbolo'].toUpperCase()+' '+resultado[i]['precio_minimo'].toUpperCase(),
-                    resultado[i]['simbolo'].toUpperCase()+' '+resultado[i]['precio_maximo'].toUpperCase(),
-                    resultado[i]['nombre_status'].toUpperCase(),
+                    titulojs(resultado[i]['nombre']),
+                    resultado[i]['cantidad_personas'],
+                    titulojs(resultado[i]['simbolo'])+' '+resultado[i]['precio_minimo'],
+                    titulojs(resultado[i]['simbolo'])+' '+resultado[i]['precio_maximo'],
+                    titulojs(resultado[i]['nombre_status']),
                     action
                 ];
                 arrayHabitaciones.push(arrayHabitacionesL);
@@ -743,7 +845,7 @@ function listado_habitaciones() {
                         {"width":"20%"},
                     ],
                     "rowCallback":function(row,data) {
-                        if(data[4]=="ACTIVO") { 
+                        if(data[4]=="Activo") { 
                             $($(row).find("td")[4]).css('color','#FFF');
                             $($(row).find("td")[4]).css('text-align','center');
                             $($(row).find("td")[4]).css('background','#09af01');

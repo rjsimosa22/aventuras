@@ -316,7 +316,7 @@ class Hoteles_models extends CI_Model {
     public function imagen_personal($id) {
 
         if(isset($id)) {
-            $this->db->select('a.id,a.nombre,a.id_hoteles,a.status,a.nombre_extension,b.descripcion as nombre_status,b.color');
+            $this->db->select('a.id,a.nombre,a.id_hoteles,a.alt_seo,a.status,a.nombre_extension,b.descripcion as nombre_status,b.color');
             $this->db->from('bd_hoteles_imagenes as a');
             $this->db->join('bd_estatus_global as b','b.id=a.status');
             $this->db->order_by('a.id','asc');
@@ -329,12 +329,13 @@ class Hoteles_models extends CI_Model {
         }
     }
 
-    public function registrar_imagenes_personal($nombre_extension,$id_hoteles) { 
+    public function registrar_imagenes_personal($nombre_extension,$id_hoteles,$alt_seo) { 
 
         if(!empty($nombre_extension)) {
             $nombre=explode('.',$nombre_extension);
             $bd_hoteles_imagenes=array(
                 'status'=>'1',
+                'alt_seo'=>$alt_seo,
                 'nombre'=>$nombre[0],
                 'id_hoteles'=>$id_hoteles,
                 'nombre_extension'=>$nombre_extension,
@@ -412,10 +413,11 @@ class Hoteles_models extends CI_Model {
     public function listado_imagenes($id) {
         
         if(isset($id)) {
-            $this->db->select('a.id,a.nombre,a.id_hoteles,a.status,a.nombre_extension,b.descripcion as nombre_status,b.color');
+            $this->db->select('a.id,a.nombre,a.id_hoteles,a.alt_seo,a.status,a.nombre_extension,b.descripcion as nombre_status,b.color');
             $this->db->from('bd_hoteles_imagenes as a');
             $this->db->join('bd_estatus_global as b','b.id=a.status');
-            $this->db->order_by('a.id','asc');
+            $this->db->order_by('a.id','desc');
+            $this->db->where('a.status','1');
             $this->db->where('a.id_hoteles',$id);
             
             $query=$this->db->get();
@@ -425,6 +427,20 @@ class Hoteles_models extends CI_Model {
                 }
                 return $data;
             }
+        }
+    }
+
+    function registrar_imagen_alt($id,$alt_seo) {
+        
+        if(isset($id)) {
+            $bd_tours_imagenes=array(
+                'alt_seo'=>$alt_seo,
+            );
+            $this->db->where('id',$id);
+            $this->db->update('bd_hoteles_imagenes',$bd_tours_imagenes);
+            return true;
+        } else {
+            return false;
         }
     }
 

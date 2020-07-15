@@ -31,7 +31,7 @@ class Usuario_models extends CI_Model {
         $this->db->select('a.estatus as status,a.identificacion as usuario_id,a.id,a.clave,a.nombre,a.apellido,a.telefono_movil as celular, a.fecha_creacion as fcreacion, c.descripcion as nombre_status, c.color');
         $this->db->from('bd_usuarios as a');
         $this->db->join('bd_estatus_global as c','c.id=a.estatus');
-        $this->db->order_by('a.fecha_creacion','desc');
+        $this->db->order_by('a.nombre','desc');
         
         $query=$this->db->get();
         if($query->num_rows() > 0) {

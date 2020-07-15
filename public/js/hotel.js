@@ -108,19 +108,44 @@ $(document).ready(function() {
         $("#fileInput:hidden").trigger('click');
     });
     
-    $("#fileInput").on('change', function(){
+    var _URL = window.URL || window.webkitURL;
+    $("#fileInput").on('change',function() {
         var id=$('#id_imagen').val();
         var image=$('#fileInput').val();
-        var img_ex=/(\.jpg|\.jpeg|\.png|\.gif)$/i;
-            
-        if(!img_ex.exec(image)){
-            $('#fileInput').val('');
-            $('#id_imagen').val('');
-            return false;
-        }else{
-            $('.uploadProcess').show();
-            $('#uploadForm').hide();
-            $( "#picUploadForm" ).submit();
+        var img_ex=/(\.jpg|\.jpeg)$/i;
+        var file=document.getElementById("fileInput").files[0];
+   
+        if(file.size <= '2097152') {
+            var file, img;
+            if ((file = this.files[0])) {
+                img = new Image();
+                img.onload = function() {
+                    if(this.width >= 1600 && this.height >= 1060) {
+                        $('.name_errors').hide();
+                        $('#errors_imagen').text('');
+
+                        if(!img_ex.exec(image)){
+                            $('.name_errors').show();
+                            $('#errors_imagen').text('La imagen debe ser JPG o JPEG');
+                            return false;
+                        }else{
+                            $('#uploadForm').hide();
+                            $('.name_errors').hide();
+                            $('.uploadProcess').show();
+                            $('#errors_imagen').text('');
+                            $('#picUploadForm').submit();
+                        }
+                    } else {    
+                        $('.name_errors').show();
+                        $('#errors_imagen').text('La imagen debe tener al menos 1600 x 1060 píxeles');return;
+                    }
+                };
+                img.src=_URL.createObjectURL(file)
+            }
+           
+        } else {
+            $('.name_errors').show();
+            $('#errors_imagen').text('La imagen debe tener un peso menor a 2MB');return;
         }
     });
     
@@ -142,17 +167,51 @@ $(document).ready(function() {
                     var resultado=JSON.parse(data);
                      for(i in resultado) {
                         var id=resultado[i]['id'];
-                        var nombre=resultado[i]['nombre'].toUpperCase();
-                        $("#provincia").select2({data:[{id:"",text:"TODOS"},{id:id,text:nombre}]});
+                        var nombre=titulojs(resultado[i]['nombre']);
+                        $("#provincia").select2({data:[{id:"",text:"Todos"},{id:id,text:nombre}]});
                         $('#provincia').val("").trigger('change.select2');
                     } 
                 } else {
-                    $("#provincia").select2({data:[{id:"",text:"DEBE SELECCIONAR DEPARTAMENTO"}]});
+                    $("#provincia").select2({data:[{id:"",text:"Debe Seleccionar departamento"}]});
                     $('#provincia').val("").trigger('change.select2');
                 }
             });			
         });
-   });
+    });
+
+    $("#FormAltSEO").validate({
+        rules:{
+            alt_imagen: {
+                minlength:3,
+                required:true,
+            }
+        },
+        submitHandler: function(form) { 
+            var url=$('#urlALTSEO').val();
+            var mensj="CONFIRMA QUE LOS DATOS INGRESADO SON CORRECTOS?";
+            var confirma=window.confirm(mensj);	
+            if(confirma) {
+                $.ajax({
+                    url:url,
+                    type:"POST",
+                    data:'alt_imagen='+$('#alt_imagen').val()+'&id_imagen='+$('#id_imagen').val(),
+                    success:function(data) {
+                        if(data=='true') {
+                            $('#name_success').show();
+                            $('#success_imagen').text('Registro exitoso');
+                            setTimeout(function(){$('#name_success').hide();},1000);
+                        } 
+                    }
+                });
+            }
+        },
+        highlight: function(element){
+            $(element).parent().removeClass('has-success').addClass('has-error');
+        },
+        success: function(element){
+            $(element).parent().removeClass('has-error').addClass('has-success');
+        }
+    });
 
     $("#provincia").on('change',function() {
         var url=$('#url').val();
@@ -172,12 +231,12 @@ $(document).ready(function() {
                     var resultado=JSON.parse(data);
                     for(i in resultado) {
                         var id=resultado[i]['id'];
-                        var nombre=resultado[i]['nombre'].toUpperCase();
-                        $("#distrito").select2({data:[{id:"",text:"TODOS"},{id:id,text:nombre}]});
+                        var nombre=titulojs(resultado[i]['nombre']);
+                        $("#distrito").select2({data:[{id:"",text:"Todos"},{id:id,text:nombre}]});
                         $('#distrito').val("").trigger('change.select2');
                     } 
                 } else {
-                    $("#distrito").select2({data:[{id:"",text:"DEBE SELECCIONAR DEPARTAMENTO"}]});
+                    $("#distrito").select2({data:[{id:"",text:"Debe Seleccionar departamento"}]});
                     $('#distrito').val("").trigger('change.select2');
                 }
             });			
@@ -237,9 +296,9 @@ $(document).ready(function() {
                 }
 
                 if($('#id_status').val()=='1') {
-                    var nombre_estatus='ACTIVO'; 
+                    var nombre_estatus='Activo'; 
                 } else {
-                    var nombre_estatus='INACTIVO';
+                    var nombre_estatus='Inactivo';
                 }
 
                 arrayHabitacionL1={
@@ -266,7 +325,7 @@ $(document).ready(function() {
                             var action="<a href='javascript:void(0);' onClick='registrar_habitacion("+arrayHabitacion1[i]['id']+",1)' style='color:#000;text-decoration:none;'><i style='font-size: 20px;' class='icon-eye-open' title='Visualizar'></i></a>&nbsp;<a href='javascript:void(0);' onClick='registrar_habitacion("+arrayHabitacion1[i]['id']+",0)' style='color:#000;text-decoration:none;'><i style='font-size: 20px;' class='icon-edit' title='Editar'></i></a>&nbsp;<a href='javascript:void(0);' onClick='activar_habitacion("+arrayHabitacion1[i]['id']+")' style='color:#000;text-decoration:none;'><i style='font-size: 20px;' class='icon-ok' title='Activar'></i></a>";
                         }
                         arrayHabitacionL2=[
-                            arrayHabitacion1[i]['nombre'],
+                            titulojs(arrayHabitacion1[i]['nombre']),
                             arrayHabitacion1[i]['nombre_moneda'],
                             arrayHabitacion1[i]['precio_minimo'],
                             arrayHabitacion1[i]['precio_maximo'],
@@ -296,7 +355,7 @@ $(document).ready(function() {
                             {"width":"16%"},
                         ],
                         "rowCallback": function(row,data) {
-                            if(data[4]=="ACTIVO") { 
+                            if(data[4]=="Activo") { 
                                 $($(row).find("td")[4]).css('color','#FFF');
                                 $($(row).find("td")[4]).css('text-align','center');
                                 $($(row).find("td")[4]).css('background','#09af01');
@@ -462,9 +521,9 @@ function registrar_habitacion(id,val) {
         if(val > 0) {
             for(i in arrayHabitacion1) {
                 if(arrayHabitacion1[i]['id']==id) {
-                    $('#habitacion').val(id).prop('disabled',true);
                     $('.title-botton').hide();
                     $('.title-botton').text('Editar');
+                    $('#habitacion').val(id).prop('disabled',true);
                     CKEDITOR.instances['servicios_habitacion'].setReadOnly(true);
                     $('#moneda').val(arrayHabitacion1[i]['moneda']).prop('disabled',true);
                     $('#id_status').val(arrayHabitacion1[i]['id_status']).prop('disabled',true); 
@@ -564,7 +623,6 @@ function inactivar_habitacion(id) {
                         arrayHabitacion1.push(arrayHabitacionL1);
 
                         let indice=arrayHabitacion1.findIndex(habitaciones=>habitaciones.id==id && (habitaciones.id_status==0 || habitaciones.id_status==1));
-                        console.log(arrayHabitacion1);
                         if(indice > -1) {
                             arrayHabitacion1.splice(indice,1);
                         }
@@ -577,7 +635,7 @@ function inactivar_habitacion(id) {
                     }
                      
                     arrayHabitacionL2=[
-                        arrayHabitacion1[i]['nombre'],
+                        titulojs(arrayHabitacion1[i]['nombre']),
                         arrayHabitacion1[i]['nombre_moneda'],
                         arrayHabitacion1[i]['precio_minimo'],
                         arrayHabitacion1[i]['precio_maximo'],
@@ -668,7 +726,6 @@ function activar_habitacion(id) {
                         arrayHabitacion1.push(arrayHabitacionL1);
 
                         let indice=arrayHabitacion1.findIndex(habitacionesact=>habitacionesact.id==id && (habitacionesact.id_status==0 || habitacionesact.id_status==1));
-                        console.log(arrayHabitacion1);
                         if(indice > -1) {
                             arrayHabitacion1.splice(indice,1);
                         }
@@ -681,7 +738,7 @@ function activar_habitacion(id) {
                     }
                      
                     arrayHabitacionL2=[
-                        arrayHabitacion1[i]['nombre'],
+                        titulojs(arrayHabitacion1[i]['nombre']),
                         arrayHabitacion1[i]['nombre_moneda'],
                         arrayHabitacion1[i]['precio_minimo'],
                         arrayHabitacion1[i]['precio_maximo'],
@@ -747,14 +804,14 @@ function actualizar_selected_habitacion(id,val,url) {
             if(val=='0') {
             var option=document.createElement("option");
                 option.value='';
-                option.text='SELECCIONAR';
+                option.text='Seleccionar';
                 select.add(option);
             }
 
             for(i in resultado) {
                 option=document.createElement("option");
                 option.value=resultado[i]['id'];
-                option.text=resultado[i]['nombre'].toUpperCase();
+                option.text=titulojs(resultado[i]['nombre']);
                 select.add(option);
             } 
         } else {

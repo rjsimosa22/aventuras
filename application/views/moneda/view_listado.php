@@ -54,16 +54,16 @@
                                             $cn=$c++;
                                 ?>
                                 
-                                            <tr class="odd gradeX" >
-                                                <td><?= strtoupper($row->nombre);?></td>
-                                                <td><?= strtoupper($row->simbolo);?></td>
-                                                <td><?= strtoupper($row->tipo_cambio);?></td>
+                                            <tr class="odd gradeX mayuscula">
+                                                <td><?= $row->nombre;?></td>
+                                                <td><?= $row->simbolo;?></td>
+                                                <td><?= $row->tipo_cambio;?></td>
                                                 <td>
                                                     <?php 
                                                         if(empty($row->descripcion)) { 
                                                             echo "N/A";
                                                         } else { 
-                                                            echo strtoupper($row->descripcion);
+                                                            echo $row->descripcion;
                                                         }
                                                         ?>
                                                 </td>
@@ -116,14 +116,14 @@
                                                         <label class="col-sm-0 control-label">Nombre</label>
                                                         <input type="hidden" name="id" id="id">
                                                         <input type="hidden" name="url" id="url" class="form-control" value="<?= site_url();?>" />
-                                                        <input type="text" name="nombre" id="nombre" class="form-control mayuscula" placeholder="Ingresé nombre" onKeyPress="return soloLetras(event)" autocomplete="off"/>
+                                                        <input type="text" name="nombre" id="nombre" class="form-control" placeholder="Ingresé nombre" onKeyPress="return soloLetras(event)" autocomplete="off"/>
                                                     </div>
                                                 </div>    
 
                                                 <div class="form-group">
                                                     <div class="col-sm-6">
                                                         <label class="col-sm-0 control-label">Símbolo:</label>
-                                                        <input type="text" name="simbolo" id="simbolo" class="form-control mayuscula" placeholder="Ingresé símbolo" autocomplete="off"/>
+                                                        <input type="text" name="simbolo" id="simbolo" class="form-control" placeholder="Ingresé símbolo" autocomplete="off"/>
                                                     </div>
 
                                                     <div class="col-sm-6">
@@ -135,7 +135,7 @@
                                                 <div class="form-group">
                                                     <div class="col-sm-12">
                                                         <label class="col-sm-0 control-label">Descripción:</label>
-                                                        <textarea name="descripcion" id="descripcion" class="form-control mayuscula" placeholder="Ingresé descripción"  autocomplete="off"></textarea>
+                                                        <textarea name="descripcion" id="descripcion" class="form-control" placeholder="Ingresé descripción"  autocomplete="off"></textarea>
                                                     </div>
                                                 </div>
                                                 

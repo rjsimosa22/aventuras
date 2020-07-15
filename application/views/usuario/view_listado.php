@@ -43,7 +43,6 @@
                                             <th width="15%">Apellido</th>
                                             <th width="15%">Rol</th>
                                             <th width="15%"><center>Estatus</center></th>
-                                            <th width="15%"><center>F. de Creación</center></th>
                                             <th width="15%"><center>Acción</center></th>
                                         </tr>
                                     </thead>
@@ -52,13 +51,12 @@
                                         if(count($listado) > 0) {
                                             foreach($listado as $row) {
                                     ?>
-                                                <tr class="odd gradeX">
+                                                <tr class="odd gradeX mayuscula">
                                                     <td><?= $row->usuario_id;?></td>
-                                                    <td><?= strtoupper($row->nombre);?></td>
-                                                    <td><?= strtoupper($row->apellido);?></td>
-                                                    <td>ADMINISTRADOR</td>
-                                                    <td align="center" style="background:<?= $row->color;?>;color:#FFF;"><?= strtoupper($row->nombre_status);?></td>
-                                                    <td align="center"><?= $row->fcreacion;?></td>
+                                                    <td><?= $row->nombre;?></td>
+                                                    <td><?= $row->apellido;?></td>
+                                                    <td>Administrador</td>
+                                                    <td align="center" style="background:<?= $row->color;?>;color:#FFF;"><?= $row->nombre_status;?></td>
                                                     <td align="center">
                                                         <a href="javascript:void(0);" onClick="consultar('<?= $row->usuario_id;?>','ver','<?= site_url();?>')" style="color:#000;text-decoration:none;"><i style="font-size: 20px;"class="icon-eye-open" title="Visualizar"></i></a>&nbsp;&nbsp;
                                                         <a href="javascript:void(0);" onClick="consultar('<?= $row->usuario_id;?>','editar','<?= site_url();?>')" style="color:#000;text-decoration:none;"><i style="font-size: 20px;"class="icon-edit" title="Editar"></i></a>&nbsp;
@@ -113,14 +111,14 @@
 
                                                     <div class="col-sm-6">
                                                         <label class="col-sm-0 control-label">Nombres:</label>
-                                                        <input type="text" name="nombre" id="nombre" class="form-control mayuscula" placeholder="Ingresé nombre" onKeyPress="return soloLetras(event)" autocomplete="off" />
+                                                        <input type="text" name="nombre" id="nombre" class="form-control" placeholder="Ingresé nombre" onKeyPress="return soloLetras(event)" autocomplete="off" />
                                                     </div>
                                                 </div>
 
                                                 <div class="form-group">    
                                                     <div class="col-sm-6">
                                                         <label class="col-sm-0 control-label">Apellidos:</label>
-                                                        <input type="text" name="apellido" id="apellido" class="form-control mayuscula" placeholder="Ingresé apellido" onKeyPress="return soloLetras(event)" autocomplete="off" />
+                                                        <input type="text" name="apellido" id="apellido" class="form-control" placeholder="Ingresé apellido" onKeyPress="return soloLetras(event)" autocomplete="off" />
                                                     </div>
 
                                                     <div class="col-sm-6">
@@ -133,9 +131,9 @@
                                                     <div class="col-sm-12">
                                                         <label class="col-sm-0 control-label">Tipo de Usuario:</label>
                                                         <select name="rol" id="rol" class="form-control">
-                                                            <option value="">SELECCIONAR</option>
-                                                            <option value="1">ADMINISTRADOR</option>
-                                                            <option value="2">OPERADOR</option>
+                                                            <option value="">Seleccionar</option>
+                                                            <option value="1">Administrador</option>
+                                                            <option value="2">Operador</option>
                                                         </select>
                                                     </div>
                                                 </div>

@@ -535,7 +535,7 @@ class Tours_models extends CI_Model {
             $this->db->select('a.id,a.id_tours,a.nombre,a.alt_seo,a.id_tours,a.status,a.nombre_extension,b.descripcion as nombre_status,b.color');
             $this->db->from('bd_tours_imagenes as a');
             $this->db->join('bd_estatus_global as b','b.id=a.status');
-            $this->db->order_by('a.id','asc');
+            $this->db->order_by('a.nombre','desc');
             $this->db->where('a.status','1');
             $this->db->where('a.id_tours',$id);
             $this->db->limit(6);

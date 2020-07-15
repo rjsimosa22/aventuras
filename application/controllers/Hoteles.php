@@ -42,6 +42,7 @@ class Hoteles extends CI_Controller {
             $this->load->view('home/view_footer');
             $this->load->view('common/lib_js');
             $this->load->view('common/lib_hotel_js');
+            $this->load->view('common/lib_dropzone_js');
         } else {
             $this->session->sess_destroy();
             redirect('login');
@@ -307,63 +308,103 @@ class Hoteles extends CI_Controller {
     }
 
     public function registrar_imagenes() {
-
+        
+        $nombre='foto-hotel-';
         if(!empty($_FILES)) {
+            $bytes=$_FILES["file"]["size"];
             $targetPath=$_SERVER['DOCUMENT_ROOT']."/public/img/hoteles/";
             $imagePath=isset($_FILES["file"]["name"]) ? $_FILES["file"]["name"] : "Undefined";
             $imagePath=$targetPath . $imagePath;
             $tempFile=$_FILES['file']['tmp_name'];
+            $size=getimagesize($tempFile);
             $targetFile=$targetPath . $_FILES['file']['name'];
+            if($size[0] >= 1600 && $size[1] >= 1060) {
+                $allowedExts=array("jpg", "jpeg", "gif", "png", "JPG", "GIF", "PNG");
+                $get_extension=explode(".", $_FILES["file"]["name"]);
+                $extension=$get_extension[1];
+                if((($_FILES["file"]["type"] == "image/jpeg") || ($_FILES["file"]["type"] == "image/jpg")) && in_array($extension, $allowedExts)) {
+                        $foto=str_replace(" ","-",$_FILES['file']['name']);
+                        $directorio=$targetPath;
+                        $directorio1=$targetPath.'/small/';
+                        $optFoto=$nombre.''.date('YmdHis').'.'.$extension;
+                        move_uploaded_file($tempFile,$directorio.'/'.$foto);
+                        resizeImagen($directorio.'/',$directorio1.'/',$foto,530,800,$optFoto,$extension);
+                        resizeImagen($directorio.'/',$directorio.'/',$foto,1060,1600,$optFoto,$extension);
+                        unlink($directorio.'/'.$foto);
+                } else { 
+                   echo "false";exit();
+                } 
+            } else {
+                echo "false";exit();
+            }
             
-            if(move_uploaded_file($tempFile,$targetFile)) {
-                $comprobar=$this->Hoteles_models->registrar_imagenes($_FILES['file']['name'],$this->session->userdata('cedula'));
-                
-                if($comprobar==true) { 
-                    echo "true";
-                } else {
-                    echo "false";
-                }
-                
+            $comprobar=$this->Hoteles_models->registrar_imagenes($optFoto,$this->session->userdata('cedula'));
+            if($comprobar==true) { 
+                echo "true";
             } else {
                 echo "false";
-            }
+            } 
         }
     }
 
     public function editar_imagen() {
         
+        $imagena=$_FILES['picture']['name'];
+        $tempFile=$_FILES['picture']['tmp_name'];
         $id_imagen=$this->input->get_post('id_imagen',true);
+        $alt_seo=$this->input->get_post('alt_imagen_2',true);
         $id_hoteles=$this->input->get_post('id_hoteles',true);
+        $nombre_imagen_2=$this->input->get_post('nombre_imagen_2',true);
+        $targetPath=$_SERVER['DOCUMENT_ROOT']."/public/img/hoteles/";
         
-        if(!empty($_FILES['picture']['name'])){
-            $result=0;
-            $uploadDir=$_SERVER['DOCUMENT_ROOT']."/public/img/hoteles/";
-            $fileName=$_FILES['picture']['name'];
-            $nombre=explode('.',$fileName);
-            $targetPath=$uploadDir. $fileName;
+        if(!empty($imagena)) {
+			$allowedExts = array("jpg", "jpeg", "gif", "png", "JPG", "GIF", "PNG");
+        	$get_extension=explode(".",$_FILES["picture"]["name"]);
+			$extension = $get_extension[1];
+        	if((($_FILES["picture"]["type"] == "image/jpeg") || ($_FILES["picture"]["type"] == "image/jpg")) && in_array($extension, $allowedExts)) {
+                $foto=str_replace(" ","-",$_FILES['picture']['name']);
+                $directorio=$targetPath;
+                $directorio1=$targetPath.'/small/';
+                $optFoto='foto-hotel-'.date('YmdHis').'.'.$extension;
+                move_uploaded_file($tempFile,$directorio.'/'.$foto);
+                resizeImagen($directorio.'/',$directorio1.'/',$foto,530,800,$optFoto,$extension);
+                resizeImagen($directorio.'/',$directorio.'/',$foto,1060,1600,$optFoto,$extension);
+                unlink($directorio.'/'.$foto);
+			}else { 
+            	echo "false";exit();
+			}
             
-            if(move_uploaded_file($_FILES['picture']['tmp_name'], $targetPath)) {
-                
-                if($id_imagen && $id_hoteles) {
-                    $accion='editar';
-                    $comprobar=$this->Hoteles_models->editar_imagenes($fileName,$id_imagen);
-                    if($comprobar==true) { 
-                        $result=1;
-                    } else {
-                        echo "false";
-                    }
+            $nombre=explode('.',$optFoto);
+            if($id_imagen && $id_hoteles) {
+                $accion='editar';
+                $comprobar=$this->Hoteles_models->editar_imagenes($optFoto,$id_imagen);
+                if($comprobar==true) {
+                    unlink($directorio.'/'.$nombre_imagen_2);
+                    unlink($directorio1.'/'.$nombre_imagen_2); 
+                    $result=true;
                 } else {
-                    $accion='registrar';
-                    $comprobar=$this->Hoteles_models->registrar_imagenes_personal($fileName,$id_hoteles);
-                    if($comprobar==true) { 
-                        $result=1;
-                    } else {
-                        echo "false";
-                    }
+                    echo "false";
+                }
+            } else {
+                $accion='registrar';
+                $comprobar=$this->Hoteles_models->registrar_imagenes_personal($optFoto,$id_hoteles,$alt_seo);
+                if($comprobar==true) { 
+                    $result=1;
+                } else {
+                    echo "false";
                 }
             }
-            //Load JavaScript function to show the upload status
-            echo '<script type="text/javascript">window.top.window.completeUpload('.$result.',\''.$fileName .'\',\''.site_url('public/img/hoteles/').'\',\''.site_url().'\',\''.$id_hoteles.'\',\''.$nombre[0].'\',\''.$accion.'\');</script>  ';
+            echo '<script type="text/javascript">window.top.window.completeUpload('.$result.',\''.$optFoto .'\',\''.site_url('/public/img/hoteles/').'\',\''.site_url().'\',\''.$id_imagen.'\',\''.$nombre[0].'\',\''.$accion.'\');</script>  ';
+        }
+    }
+
+    public function registrar_imagen_alt() {
+
+        $id=$this->input->get_post('id_imagen',true);
+        $alt_imagen=$this->input->get_post('alt_imagen',true);
+        if(isset($id)) {
+            $comprobar=$this->Hoteles_models->registrar_imagen_alt($id,$alt_imagen);
+            print_r(json_encode($comprobar));
         }
     }
 
@@ -511,4 +552,38 @@ class Hoteles extends CI_Controller {
             print_r(json_encode($comprobar));
         }
     }
+}
+
+function resizeImagen($from,$ruta,$nombre,$alto,$ancho,$nombreN,$extension){
+    $rutaImagenOriginal = $from.$nombre;
+    if($extension == 'GIF' || $extension == 'gif'){
+    $img_original = imagecreatefromgif($rutaImagenOriginal);
+    }
+    if($extension == 'jpg' || $extension == 'JPG'){
+    $img_original = imagecreatefromjpeg($rutaImagenOriginal);
+    }
+    if($extension == 'png' || $extension == 'PNG'){
+    $img_original = imagecreatefrompng($rutaImagenOriginal);
+    }
+    $max_ancho = $ancho;
+    $max_alto = $alto;
+    list($ancho,$alto)=getimagesize($rutaImagenOriginal);
+    $x_ratio = $max_ancho / $ancho;
+    $y_ratio = $max_alto / $alto;
+    
+	if( ($ancho <= $max_ancho) && ($alto <= $max_alto) ){//Si ancho 
+  	$ancho_final = $ancho;
+		$alto_final = $alto;
+	} elseif (($x_ratio * $alto) < $max_alto){
+		$alto_final = ceil($x_ratio * $alto);
+		$ancho_final = $max_ancho;
+	} else{
+		$ancho_final = ceil($y_ratio * $ancho);
+		$alto_final = $max_alto;
+	}
+    $tmp=imagecreatetruecolor($ancho_final,$alto_final);
+    imagecopyresampled($tmp,$img_original,0,0,0,0,$ancho_final, $alto_final,$ancho,$alto);
+    imagedestroy($img_original);
+    $calidad=60;
+    imagejpeg($tmp,$ruta.$nombreN,$calidad);
 }

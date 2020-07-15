@@ -1,4 +1,5 @@
 <div id='wrap'>
+
     <!--Indicador para saber en el modulo que estas ingresado-->
     <div id="page-heading">
         <ol class="breadcrumb">
@@ -34,20 +35,20 @@
                                             <input type="hidden" name="id" id="id" class="form-control" value="<?= $info->id;?>" />
                                             <input type="hidden" name="url" id="url" class="form-control" value="<?= site_url();?>" />
                                             <input type="hidden" name="url1" id="url1" class="form-control" value="<?= site_url('hoteles/editar');?>" />
-                                            <input type="text" name="nombre" id="nombre" class="form-control" placeholder="Ingresé nombre" autocomplete="off" value="<?= strtoupper($info->nombre);?>" />
+                                            <input type="text" name="nombre" id="nombre" class="form-control" placeholder="Ingresé nombre" autocomplete="off" value="<?= $info->nombre;?>" />
                                         </div>
                                     </div>
 
                                     <div class="form-group">
                                         <div class="col-sm-4">
                                             <label class="col-sm-0 control-label" id="title_Depart">Departamento:</label>
-                                            <select class="js-example-basic-single" name="departamento" id="departamento" style="width:100%;">
+                                            <select class="js-example-basic-single mayuscula" name="departamento" id="departamento" style="width:100%;">
                                                 <?php 
                                                     foreach($departamento as $row1) {
                                                         if($info->id_departamento!=$row1->id) {
-                                                            echo '<option value="'.$row1->id.'">'.strtoupper($row1->nombre).'</option>';
+                                                            echo '<option value="'.$row1->id.'">'.$row1->nombre.'</option>';
                                                         } else {
-                                                            echo '<option value="'.$row1->id.'" selected>'.strtoupper($row1->nombre).'</option>';
+                                                            echo '<option value="'.$row1->id.'" selected>'.$row1->nombre.'</option>';
                                                         } 
                                                     }
                                                 ?>
@@ -57,13 +58,13 @@
 
                                         <div class="col-sm-4">
                                             <label class="col-sm-0 control-label" id="title_Prov">Provincia:</label>
-                                            <select class="js-example-basic-single" name="provincia" id="provincia" style="width:100%;">
+                                            <select class="js-example-basic-single mayuscula" name="provincia" id="provincia" style="width:100%;">
                                                 <?php 
                                                     foreach($provincia as $row1) {
                                                         if($info->id_provincia!=$row1->id) {
-                                                            echo '<option value="'.$row1->id.'">'.strtoupper($row1->nombre).'</option>';
+                                                            echo '<option value="'.$row1->id.'">'.$row1->nombre.'</option>';
                                                         } else {
-                                                            echo '<option value="'.$row1->id.'" selected>'.strtoupper($row1->nombre).'</option>';
+                                                            echo '<option value="'.$row1->id.'" selected>'.$row1->nombre.'</option>';
                                                         }   
                                                     }
                                                 ?>
@@ -73,13 +74,13 @@
                                     
                                         <div class="col-sm-4">
                                             <label class="col-sm-0 control-label" id="title_Dist">Distrito:</label>
-                                            <select class="js-example-basic-single" name="distrito" id="distrito" style="width:100%;">
+                                            <select class="js-example-basic-single mayuscula" name="distrito" id="distrito" style="width:100%;">
                                                 <?php 
                                                     foreach($distrito as $row1) {
                                                         if($info->id_distrito!=$row1->id) {
-                                                            echo '<option value="'.$row1->id.'">'.strtoupper($row1->nombre).'</option>';
+                                                            echo '<option value="'.$row1->id.'">'.$row1->nombre.'</option>';
                                                         } else {
-                                                            echo '<option value="'.$row1->id.'" selected>'.strtoupper($row1->nombre).'</option>';
+                                                            echo '<option value="'.$row1->id.'" selected>'.$row1->nombre.'</option>';
                                                         } 
                                                     }
                                                 ?>
@@ -91,7 +92,7 @@
                                     <div class="form-group">
                                         <div class="col-sm-12">
                                             <label class="col-sm-0 control-label" id="title_ServicioP">Servicios Principales:</label>
-                                            <select class="js-example-basic-multiple" name="servicios_popular[]" id="servicios_popular" multiple="multiple" style="width:100%;">
+                                            <select class="js-example-basic-multiple mayuscula" name="servicios_popular[]" id="servicios_popular" multiple="multiple" style="width:100%;">
                                                 <?php 
                                                     foreach ($servicios as $row1) {
                                                         $selected="";
@@ -100,7 +101,7 @@
                                                                 $selected="selected";
                                                             }
                                                         }
-                                                        echo '<option value="'.$row1->id.'" '.$selected.'>'.strtoupper($row1->nombre).'</option>';
+                                                        echo '<option value="'.$row1->id.'" '.$selected.'>'.$row1->nombre.'</option>';
                                                     }
                                                 ?>
                                             </select>
@@ -157,12 +158,13 @@
 
                                             <div class="panel-body collapse in">
                                                 <div class="table-responsive" style="border:0;">
-                                                    <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered datatables" id="example" width="100%">
+                                                    <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered datatables mayuscula" id="example" width="100%">
                                                         <?php include 'application/views/notificacion/alert_modal.php';?>                                                     
                                                         <thead>
                                                             <tr>
                                                                 <th>Imagen</th>
                                                                 <th>Nombre</th>
+                                                                <th>Alt SEO</th>
                                                                 <th><center>Estatus</center></th>
                                                                 <th><center>Accíon</center></th>
                                                             </tr>
@@ -202,7 +204,7 @@
 
                                             <div class="panel-body collapse in">
                                                 <div class="table-responsive" style="border:0;">
-                                                    <table cellpadding="0" cellspacing="0" border="0"  id="example1" width="100%" class="table table-striped table-bordered">
+                                                    <table cellpadding="0" cellspacing="0" border="0"  id="example1" width="100%" class="table table-striped table-bordered mayuscula">
                                                         <?php include 'application/views/notificacion/alert_modal2.php';?>                                                     
                                                         <thead>
                                                             <tr>
@@ -255,11 +257,11 @@
                                                             <div class="col-sm-10">
                                                                 <label class="col-sm-0 control-label">Tipo de Habitación:</label>
                                                                 <input type="hidden" id="id_hotel" nombre="title-botton">
-                                                                <select class="form-control" name="habitacion" id="habitacion" style="width:100%;">
-                                                                    <option value=''>SELECCIONAR</option>
+                                                                <select class="form-control mayuscula" name="habitacion" id="habitacion" style="width:100%;">
+                                                                    <option value=''>Seleccionar</option>
                                                                     <?php 
                                                                         foreach ($habitaciones as $row) {
-                                                                            echo '<option value="'.$row->id.'">'.strtoupper($row->nombre).'</option>';
+                                                                            echo '<option value="'.$row->id.'">'.$row->nombre.'</option>';
                                                                         }
                                                                     ?>
                                                                 </select>
@@ -304,18 +306,18 @@
                                                             <div class="col-sm-5">
                                                                 <label class="col-sm-0 control-label">Disponibilidad:</label>
                                                                 <select class="form-control" name="disponibilidad" id="disponibilidad" style="width:100%;">
-                                                                    <option value='SI'>SI</option>
-                                                                    <option value='NO'>NO</option>                                                
+                                                                    <option value='SI'>Si</option>
+                                                                    <option value='NO'>No</option>                                                
                                                                 </select>
                                                             </div> 
 
                                                             <div class="col-sm-5">
                                                                 <label class="col-sm-0 control-label">Moneda:</label>
-                                                                <select class="form-control" name="moneda" id="moneda" style="width:100%;">
-                                                                    <option value=''>SELECCIONAR</option>
+                                                                <select class="form-control mayuscula" name="moneda" id="moneda" style="width:100%;">
+                                                                    <option value=''>Seleccionar</option>
                                                                     <?php 
                                                                         foreach ($monedas as $row) {
-                                                                            echo '<option value="'.$row->id.'">'.strtoupper($row->nombre).'</option>';
+                                                                            echo '<option value="'.$row->id.'">'.$row->nombre.'</option>';
                                                                         }
                                                                     ?>
                                                                 </select>
@@ -388,6 +390,24 @@
                                     <div class="form-group">
                                         <div class="col-sm-12">
                                             <div class="user-box">
+                                                <div align="center" id="name_success" style="margin-top:20px;display:none;">
+                                                    <div class="alert alert-success alert-dismissable">
+                                                        <strong>¡Bien hecho!</strong> <span id="success_imagen"></span>
+                                                    </div>
+                                                </div>
+
+                                                <form id="FormAltSEO" name="form" action="" method="POST" style="display:none;">
+                                                    <div class="form-group" style="margin-top:20px;">
+                                                        <label class="col-sm-0 control-label">ALT SEO:</label>
+                                                        <input type="hidden" name="urlALTSEO" id="urlALTSEO" value="<?= site_url('hoteles/registrar_imagen_alt');?>">
+                                                        <input type="text" name="alt_imagen" id="alt_imagen" class="form-control" placeholder="Ingresé ALT SEO" autocomplete="off"/>
+                                                        
+                                                        <br class="btnCargarALT">
+                                                        <div align="right"><input type="submit" class="btn-primary btn btnCargarALT" value="Guardar" id="btnCargarALT"></div>
+                                                    </div>
+                                                </form>   
+
+                                                
                                                 <div class="img-relative">
                                                     <div class="overlay uploadProcess" style="display: none;">
                                                         <div class="overlay-content"><img src="<?= site_url('public/img/loader.gif');?>"/></div>
@@ -396,12 +416,24 @@
                                                     <form method="POST" action="<?= site_url('hoteles/editar_imagen');?>" enctype="multipart/form-data" id="picUploadForm" target="uploadTarget">
                                                         <input type="hidden" name="id_hoteles" id="id_hoteles">
                                                         <input type="hidden" name="id_imagen" id="id_imagen">
+                                                        <input type="hidden" name="nombre_imagen_2" id="nombre_imagen_2">
                                                         <input type="file" name="picture" id="fileInput" style="display:none"/>
+
+                                                        <div class="form-group"  id="divAltSEO" style="margin-top:20px;display:none;">
+                                                            <label class="col-sm-0 control-label alt_color">ALT SEO:</label>
+                                                            <input type="text" name="alt_imagen_2" id="alt_imagen_2" class="form-control" placeholder="Ingresé ALT SEO" autocomplete="off" onblur="$('.alt_color').css('color','#527f26')"/>
+                                                        </div>
                                                     </form>
                                                     
                                                     <iframe id="uploadTarget" name="uploadTarget" src="#" style="width:0;height:0;border:0px solid #fff;"></iframe>
-                                                    <a class="editLink" href="javascript:void(0);" id="ocultarbtn"><button class="btn-primary btn" value="Editar Imagen" style="margin-top:-20px;width:100%;">Editar Imagen</button></a>
+                                                    <a class="editLink" href="javascript:void(0);" id="ocultarbtn" style="top:167px;"><button class="btn btn-dark" value="Editar Imagen" style="width:100%;" id="btnEditarIMG">Editar Imagen</button></a>
                                                     <img src="#" id="imagePreview">
+                                                </div>
+
+                                                <div align="center" class="name_errors" id="name_errors" style="margin-top:20px;display:none;">
+                                                    <div class="alert alert-danger alert-dismissable">
+                                                        <strong>¡Error!</strong> <span id="errors_imagen"></span>
+                                                    </div>
                                                 </div>
                                                 
                                                 <div class="name" style="margin-top:20px;">

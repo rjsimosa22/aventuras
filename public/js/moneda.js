@@ -64,10 +64,10 @@ function consultar(val,opc,url) {
                 if(data) {
                     $('#id').val(data['id']);
                     $('#cambio').val(data['tipo_cambio']);
-                    $('#nombre').val(data['nombre'].toUpperCase());
-                    $('#simbolo').val(data['simbolo'].toUpperCase());
-                    $('#descripcion').val(data['descripcion'].toUpperCase());
-                    $('#descripcion').text(data['descripcion'].toUpperCase());
+                    $('#nombre').val(data['nombre']);
+                    $('#simbolo').val(data['simbolo']);
+                    $('#descripcion').val(data['descripcion']);
+                    $('#descripcion').text(data['descripcion']);
 
                     //modal
                     $("#myModal").modal();

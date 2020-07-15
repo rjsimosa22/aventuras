@@ -4,10 +4,10 @@
 <script type='text/javascript' src="<?= base_url();?>public/plugins/dropzone/dropzone.min.js"></script> 
 
 <script type="text/javascript">
-    $("#provincia").select2({data:[{id:"",text:"DEBE SELECCIONAR DEPARTAMENTO"}]});
+    $("#provincia").select2({data:[{id:"",text:"Debe Seleccionar departamento"}]});
     $('#provincia').val("").trigger('change.select2');
     
-    $("#distrito").select2({data:[{id:"",text:"DEBE SELECCIONAR PROVINCIA"}]});
+    $("#distrito").select2({data:[{id:"",text:"Debe Seleccionar provincia"}]});
     $('#distrito').val("").trigger('change.select2');
 
     $(".precio").on({
@@ -25,7 +25,7 @@
     
     $(document).ready(function() {
         $('.js-example-basic-multiple').select2({
-            placeholder: "SELECCIONAR"
+            placeholder: "Seleccionar"
         });
     });
 

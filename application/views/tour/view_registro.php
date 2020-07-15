@@ -34,6 +34,7 @@
                                     <div class="form-group">
                                         <div class="col-sm-12">
                                             <label class="col-sm-0 control-label">Nombre del Tours:</label>
+                                            <input type="hidden" name="ModuloTipo" id="ModuloTipo" class="form-control" value="tours" />
                                             <input type="hidden" name="url1" id="url1" class="form-control" value="<?= site_url();?>" />
                                             <input type="hidden" name="url" id="url" class="form-control" value="<?= site_url('registours/registrar');?>" />
                                             <input type="text" name="nombre" id="nombre" class="form-control" placeholder="Ingresé nombre" autocomplete="off"/>

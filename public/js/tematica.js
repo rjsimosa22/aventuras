@@ -55,9 +55,9 @@ function consultar(val,opc,url) {
             success:function(data) {
                 if(data) {
                     $('#id').val(data['id']);
-                    $('#nombre').val(data['nombre'].toUpperCase());
-                    $('#descripcion').val(data['descripcion'].toUpperCase());
-                    $('#descripcion').text(data['descripcion'].toUpperCase());
+                    $('#nombre').val(data['nombre']);
+                    $('#descripcion').val(data['descripcion']);
+                    $('#descripcion').text(data['descripcion']);
 
                     //modal
                     $("#myModal").modal();

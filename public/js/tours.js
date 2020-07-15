@@ -168,6 +168,7 @@ $(document).ready(function() {
                     data:'alt_imagen='+$('#alt_imagen').val()+'&id_imagen='+$('#id_imagen').val(),
                     success:function(data) {
                         if(data=='true') {
+                            listado_imagenes();
                             $('#name_success').show();
                             $('#success_imagen').text('Registro exitoso');
                             setTimeout(function(){$('#name_success').hide();},1000);

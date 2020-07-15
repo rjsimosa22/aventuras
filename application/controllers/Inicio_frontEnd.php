@@ -37,8 +37,8 @@ class Inicio_frontEnd extends CI_Controller {
         $data['url_paquetes']=site_url("paquetes/listado/$moneda");
         $data['tematicas']=$this->Tematicas_models->listado_tematicas();
         $data['cantidad_paquetes']=$this->Paquetes_models->paquetes_cantidad();
-        $data['tours']=$this->visualizacion_tours('6','listado','',$moneda,'140','0');
-        $data['paquetes']=$this->visualizacion_paquetes('4','listado','',$moneda,'140','0');
+        $data['tours']=$this->visualizacion_tours('6','listado','',$moneda,'140','0','small/');
+        $data['paquetes']=$this->visualizacion_paquetes('4','listado','',$moneda,'140','0','small/');
 
         //Cargamos archivos de vista   
         $this->load->view('front-end/common/lib_css',$data);
@@ -61,8 +61,8 @@ class Inicio_frontEnd extends CI_Controller {
         $data['url_paquetes']=site_url("paquetes/listado/$moneda");
         $data['monedaI']=$this->Monedas_models->consultar($moneda);
         $data['tematicas']=$this->Tematicas_models->listado_tematicas();
-        $data['tours']=$this->visualizacion_tours('6','listado','',$moneda,'140','1');
-        $data['paquetes']=$this->visualizacion_paquetes('4','listado','',$moneda,'140','1');
+        $data['tours']=$this->visualizacion_tours('6','listado','',$moneda,'140','1','small/');
+        $data['paquetes']=$this->visualizacion_paquetes('4','listado','',$moneda,'140','1','small/');
         $data['cantidad_paquetes']=$this->Paquetes_models->paquetes_cantidad();
         
         //Cargamos archivos de vista   
@@ -107,7 +107,7 @@ class Inicio_frontEnd extends CI_Controller {
             $data['info']->precio=round(ceil($data['info']->precio_minimo / $data['info']->tipo_cambio),2); 
         }
 
-        $data['tours']=$this->visualizacion_tours_detalle('3',$data["info"]->id_distrito,$data['info']->id,$moneda,'1');
+        $data['tours']=$this->visualizacion_tours_detalle('3',$data["info"]->id_distrito,$data['info']->id,$moneda,'1','small/');
         if($data['tours']) {
             if(count($data['tours']) < 1) {
                 $data['info']->distrito='aventuras';
@@ -115,7 +115,7 @@ class Inicio_frontEnd extends CI_Controller {
                 $data['tours']=$this->Tours_models->tours_mas_vistos('3','listado',$id);
             }
         } else {
-            $data['tours']=$this->visualizacion_tours_detalle('3','tarapoto',$data['info']->id,$moneda,'1');
+            $data['tours']=$this->visualizacion_tours_detalle('3','tarapoto',$data['info']->id,$moneda,'1','small/');
             if(count($data['tours']) < 1) {
                 $data['info']->distrito='aventuras';
                 $data['url_tours']=site_url("tours/listado/");
@@ -164,7 +164,7 @@ class Inicio_frontEnd extends CI_Controller {
             $data['info']->precio=round(ceil($data['info']->precio_minimo / $data['info']->tipo_cambio),2); 
         }
 
-        $data['tours']=$this->visualizacion_tours_detalle('3',$data["info"]->id_distrito,$data['info']->id,$moneda,'1');
+        $data['tours']=$this->visualizacion_tours_detalle('3',$data["info"]->id_distrito,$data['info']->id,$moneda,'1','small/');
         if($data['tours']) {
             if(count($data['tours']) < 1) {
                 $data['info']->distrito='aventuras';
@@ -172,7 +172,7 @@ class Inicio_frontEnd extends CI_Controller {
                 $data['tours']=$this->Tours_models->tours_mas_vistos('3','listado',$id);
             }
         } else {
-            $data['tours']=$this->visualizacion_tours_detalle('3','tarapoto',$data['info']->id,$moneda,'1');
+            $data['tours']=$this->visualizacion_tours_detalle('3','tarapoto',$data['info']->id,$moneda,'1','small/');
             if(count($data['tours']) < 1) {
                 $data['info']->distrito='aventuras';
                 $data['url_tours']=site_url("tours/listado/");
@@ -238,7 +238,6 @@ class Inicio_frontEnd extends CI_Controller {
         }
 
         $data['paquetes_seleccion']=$this->Paquetes_models->paquetes_seleccion($data['info']->id);
-        //print_r($data['paquetes_seleccion']);exit();
         if($data['paquetes_seleccion']) {
             foreach($data['paquetes_seleccion'] as $paquetes_seleccion) {
                 $paquetes_seleccion->imagen_tours=$this->Tours_models->listado_imagenes($paquetes_seleccion->id_tours_basico);
@@ -252,7 +251,7 @@ class Inicio_frontEnd extends CI_Controller {
             } 
         }
 
-        $data['paquetes']=$this->visualizacion_paquetes_detalle('3',$data["info"]->id_distrito,$data['info']->id,$moneda,'0');
+        $data['paquetes']=$this->visualizacion_paquetes_detalle('3',$data["info"]->id_distrito,$data['info']->id,$moneda,'0','small/');
         if($data['paquetes']) {
             if(count($data['paquetes']) < 1) {
                 $data['info']->distrito='aventuras';
@@ -260,7 +259,7 @@ class Inicio_frontEnd extends CI_Controller {
                 $data['paquetes']=$this->Paquetes_models->paquetes_mas_vistos('3','listado',$data['info']->id);
             }
         } else {
-            $data['paquetes']=$this->visualizacion_paquetes_detalle('3','tarapoto',$data['info']->id,$moneda,'0');
+            $data['paquetes']=$this->visualizacion_paquetes_detalle('3','tarapoto',$data['info']->id,$moneda,'0','small/');
             if(count($data['paquetes']) < 1) {
                 $data['info']->distrito='aventuras';
                 $data['url_tours']=site_url("paquetes/listado/");
@@ -338,7 +337,7 @@ class Inicio_frontEnd extends CI_Controller {
             } 
         }
 
-        $data['paquetes']=$this->visualizacion_paquetes_detalle('3',$data["info"]->id_distrito,$data['info']->id,$moneda,'0');
+        $data['paquetes']=$this->visualizacion_paquetes_detalle('3',$data["info"]->id_distrito,$data['info']->id,$moneda,'0','small/');
         if($data['paquetes']) {
             if(count($data['paquetes']) < 1) {
                 $data['info']->distrito='aventuras';
@@ -346,7 +345,7 @@ class Inicio_frontEnd extends CI_Controller {
                 $data['paquetes']=$this->Paquetes_models->paquetes_mas_vistos('3','listado',$data['info']->id);
             }
         } else {
-            $data['paquetes']=$this->visualizacion_paquetes_detalle('3','tarapoto',$data['info']->id,$moneda,'0');
+            $data['paquetes']=$this->visualizacion_paquetes_detalle('3','tarapoto',$data['info']->id,$moneda,'0','small/');
             if(count($data['paquetes']) < 1) {
                 $data['info']->distrito='aventuras';
                 $data['url_tours']=site_url("paquetes/listado/");
@@ -390,7 +389,7 @@ class Inicio_frontEnd extends CI_Controller {
         $data['monedaI']=$this->Monedas_models->consultar('pen');
         $data['tematicas']=$this->Tours_models->tours_tematicas($distrito);
         $data['cantidad_paquetes']=$this->Paquetes_models->paquetes_cantidad();
-        $data['tours']=$this->visualizacion_tours('',$distrito,'',$moneda,'200','0');
+        $data['tours']=$this->visualizacion_tours('',$distrito,'',$moneda,'200','0','small/');
         $imagen=$data['tours'][0]->imagen;
         
         if($distrito!='Seleccionar' && $distrito!='listado') {
@@ -424,7 +423,7 @@ class Inicio_frontEnd extends CI_Controller {
         $data['monedaI']=$this->Monedas_models->consultar($moneda);
         $data['tematicas']=$this->Tours_models->tours_tematicas($distrito);
         $data['cantidad_paquetes']=$this->Paquetes_models->paquetes_cantidad();
-        $data['tours']=$this->visualizacion_tours('',$distrito,'',$moneda,'200','1');
+        $data['tours']=$this->visualizacion_tours('',$distrito,'',$moneda,'200','1','small/');
         $imagen=$data['tours'][0]->imagen;
         
         if($distrito!='Seleccionar' && $distrito!='listado') {
@@ -518,7 +517,7 @@ class Inicio_frontEnd extends CI_Controller {
         $data['monedaI']=$this->Monedas_models->consultar('pen');
         $data['destinos']=$this->Paquetes_models->paquetes_destino();
         $data['cantidad_tours']=$this->Tours_models->tours_cantidad();
-        $data['paquetes']=$this->visualizacion_paquetes('',$distrito,'',$moneda,'200','0');
+        $data['paquetes']=$this->visualizacion_paquetes('',$distrito,'',$moneda,'200','0','small/');
         $imagen=$data['paquetes'][0]->imagen;
        
         if($distrito!='Seleccionar' && $distrito!='listado') {
@@ -551,7 +550,7 @@ class Inicio_frontEnd extends CI_Controller {
         $data['monedaI']=$this->Monedas_models->consultar($moneda);
         $data['destinos']=$this->Paquetes_models->paquetes_destino();
         $data['cantidad_tours']=$this->Tours_models->tours_cantidad();
-        $data['paquetes']=$this->visualizacion_paquetes('',$distrito,'',$moneda,'200','1');
+        $data['paquetes']=$this->visualizacion_paquetes('',$distrito,'',$moneda,'200','1','small/');
         $imagen=$data['paquetes'][0]->imagen;
        
         if($distrito!='Seleccionar' && $distrito!='listado') {
@@ -701,7 +700,7 @@ class Inicio_frontEnd extends CI_Controller {
         if($this->session->userdata('datos_personales')!='') {
             $data['datos_personales']=$this->session->userdata('datos_personales');
         }
-        
+      
         //Cargamos archivos de vista   
         $this->load->view('front-end/common/lib_css',$data);
         $this->load->view('front-end/common/lib_datos_css');
@@ -743,10 +742,11 @@ class Inicio_frontEnd extends CI_Controller {
 
     public function rpago($tipo) {
 
+        require_once "./application/libraries/mercadopago/sdk/lib/mercadopago.php";
+        
         $data['moneda']='';
         $data['url']="pago/".$tipo.'/';
         $data['imagen_tours']='tours.jpg'; 
-        require_once "./application/libraries/mercadopago/sdk/lib/mercadopago.php";
         $data['titulo']='Realizar pago - Aventuras';
         $data['monedas']=$this->Monedas_models->listado();
         $data['monedaI']=$this->Monedas_models->consultar('pen');
@@ -762,10 +762,11 @@ class Inicio_frontEnd extends CI_Controller {
 
     public function rpago_moneda($tipo,$moneda) {
 
+        require_once "./application/libraries/mercadopago/sdk/lib/mercadopago.php";
+        
         $data['url']="pago/".$tipo.'/';
         $data['moneda']=$moneda;
         $data['imagen_tours']='tours.jpg'; 
-        require_once "./application/libraries/mercadopago/sdk/lib/mercadopago.php";
         $data['titulo']='Realizar pago - Aventuras';
         $data['monedas']=$this->Monedas_models->listado();
         $data['monedaI']=$this->Monedas_models->consultar($moneda);
@@ -942,13 +943,14 @@ class Inicio_frontEnd extends CI_Controller {
         }
     }
 
-    public function visualizacion_tours($cantidad,$distrito,$id,$moneda,$dilimitar,$activo) {
+    public function visualizacion_tours($cantidad,$distrito,$id,$moneda,$dilimitar,$activo,$carpeta_base) {
+
         $data['tours']=$this->Tours_models->tours_mas_vistos($cantidad,$distrito,$id);
         if($data['tours']) {
             foreach($data['tours'] as $tours) {
                 $nombre=str_replace(" ","-",$tours->nombre);
                 $tours->imagen=$this->Tours_models->imagen_tours($tours->id);
-                $tours->urlimg=base_url()."public/img/tours/".$tours->imagen;
+                $tours->urlimg=base_url()."public/img/tours/".$carpeta_base."".$tours->imagen;
                 $tours->url=site_url("tour/".strtolower($tours->distrito)."/".strtolower($nombre)."/");
                 if($activo > 0) {
                     $tours->url=site_url("tour/".strtolower($tours->distrito)."/".strtolower($nombre)."/".$moneda);
@@ -970,7 +972,7 @@ class Inicio_frontEnd extends CI_Controller {
         return $data['tours'];
     }
 
-    public function visualizacion_paquetes($cantidad,$distrito,$id,$moneda,$dilimitar,$activo) {
+    public function visualizacion_paquetes($cantidad,$distrito,$id,$moneda,$dilimitar,$activo,$carpeta_base) {
 
         $data['paquetes']=$this->Paquetes_models->paquetes_mas_vistos($cantidad,$distrito,$id);
         if($data['paquetes']) {
@@ -979,7 +981,7 @@ class Inicio_frontEnd extends CI_Controller {
                 $paquetes->inf_costo=$this->Tours_models->costo_tours($paquetes->id);
                 $paquetes->inf_habitacion=$this->Hoteles_models->imagen_hoteles($paquetes->id);
                 $paquetes->imagen=$this->Tours_models->imagen_tours($paquetes->id_tours_basico);
-                $paquetes->urlimg=base_url()."public/img/tours/".$paquetes->imagen;
+                $paquetes->urlimg=base_url()."public/img/tours/".$carpeta_base."".$paquetes->imagen;
                 $paquetes->url=site_url("paquete/".strtolower($paquetes->distrito)."/".strtolower($nombre)."/");
                 if($activo > 0) { 
                     $paquetes->url=site_url("paquete/".strtolower($paquetes->distrito)."/".strtolower($nombre)."/".$moneda);
@@ -1011,14 +1013,14 @@ class Inicio_frontEnd extends CI_Controller {
         return $data['paquetes'];
     }
 
-    public function visualizacion_tours_detalle($cantidad,$distrito,$id,$moneda,$activo) {
+    public function visualizacion_tours_detalle($cantidad,$distrito,$id,$moneda,$activo,$carpeta_base) {
 
         $data['tours']=$this->Tours_models->tours_mas_vistos($cantidad,$distrito,$id);
         if($data['tours']) {
             foreach($data['tours'] as $tours) {
                 $nombre=str_replace(" ","-",$tours->nombre);
                 $tours->imagen=$this->Tours_models->imagen_tours($tours->id);
-                $tours->urlimg=base_url()."public/img/tours/".$tours->imagen;
+                $tours->urlimg=base_url()."public/img/tours/".$carpeta_base."".$tours->imagen;
                 $tours->url=site_url("tour/".strtolower($tours->distrito)."/".strtolower($nombre)."/");
                 if($activo > 0) {
                     $tours->url=site_url("tour/".strtolower($tours->distrito)."/".strtolower($nombre)."/".$moneda);
@@ -1040,7 +1042,7 @@ class Inicio_frontEnd extends CI_Controller {
         return $data['tours'];
     }
 
-    public function visualizacion_paquetes_detalle($cantidad,$distrito,$id,$moneda,$activo) {
+    public function visualizacion_paquetes_detalle($cantidad,$distrito,$id,$moneda,$activo,$carpeta_base) {
 
         $data['paquetes']=$this->Paquetes_models->paquetes_mas_vistos($cantidad,$distrito,$id);
         if($data['paquetes']) {
@@ -1049,7 +1051,7 @@ class Inicio_frontEnd extends CI_Controller {
                 $paquetes->inf_costo=$this->Tours_models->costo_tours($paquetes->id);
                 $paquetes->inf_habitacion=$this->Hoteles_models->imagen_hoteles($paquetes->id);
                 $paquetes->imagen=$this->Tours_models->imagen_tours($paquetes->id_tours_basico);
-                $paquetes->urlimg=base_url()."public/img/tours/".$paquetes->imagen;
+                $paquetes->urlimg=base_url()."public/img/tours/".$carpeta_base."".$paquetes->imagen;
                 $paquetes->url=site_url("paquete/".strtolower($paquetes->distrito)."/".strtolower($nombre)."/");
                 if($activo > 0) {
                     $paquetes->url=site_url("paquete/".strtolower($paquetes->distrito)."/".strtolower($nombre)."/".$moneda);

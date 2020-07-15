@@ -35,52 +35,59 @@
                                          <input type="text" name="nombre" id="nombre" class="form-control" placeholder="Ingresé nombre" autocomplete="off" value="<?= $info->nombre;?>" disabled/>
                                     </div>
                                 </div>
+
+                                <div class="form-group">
+                                    <div class="col-sm-12">
+                                        <label class="col-sm-0 control-label">Nombre del Paquete SEO:</label>
+                                        <input type="text" name="nombre_posic" id="nombre_posic" class="form-control" placeholder="Ingresé nombre posicionamiento" onKeyPress="return soloLetras(event)" autocomplete="off" value="<?= $info->nombre_posic;?>" disabled />
+                                    </div>
+                                </div>
                                     
                                 <div class="form-group">
-                                    <div class="col-sm-4">
+                                    <div class="col-sm-3">
                                         <label class="col-sm-0 control-label" id="title_Depart">Departamento:</label>
-                                        <select class="form-control" name="departamento" id="departamento" style="width:100%;" disabled>
-                                            <option value=''><?= strtoupper($info->departamento);?></option>
+                                        <select class="form-control mayuscula" name="departamento" id="departamento" style="width:100%;" disabled>
+                                            <option value=''><?= $info->departamento;?></option>
                                         </select>
                                         <label for="" id="val_Depart" style="display:none;">Campo requerido.</label>    
                                     </div>
 
-                                    <div class="col-sm-4">
+                                    <div class="col-sm-3">
                                         <label class="col-sm-0 control-label" id="title_Prov">Provincia:</label>
-                                        <select class="form-control" name="provincia" id="" style="width:100%;" disabled>
-                                            <option value=''><?= strtoupper($info->provincia);?></option>
+                                        <select class="form-control mayuscula" name="provincia" id="" style="width:100%;" disabled>
+                                            <option value=''><?= $info->provincia;?></option>
                                         </select>
                                         <label for="" id="val_Prov" style="display:none;">Campo requerido.</label>    
                                     </div>
                                     
-                                    <div class="col-sm-4">
+                                    <div class="col-sm-3">
                                         <label class="col-sm-0 control-label" id="title_Dist">Distrito:</label>
-                                        <select class="form-control" name="distrito" id="" style="width:100%;" disabled>
-                                            <option value=''><?= strtoupper($info->distrito);?></option>
+                                        <select class="form-control mayuscula" name="distrito" id="" style="width:100%;" disabled>
+                                            <option value=''><?= $info->distrito;?></option>
                                         </select>
                                         <label for="" id="val_Dist" style="display:none;">Campo requerido.</label>    
-                                    </div>    
-                                </div>
+                                    </div>
 
-                                <div class="form-group">
-                                    <div class="col-sm-4">
+                                    <div class="col-sm-3">
                                         <label class="col-sm-0 control-label">Días del Paquete:</label>
                                         <select class="form-control" name="cantidad_dia" id="cantidad_dia" style="width:100%;" disabled>
                                             <option value=''><?= $info->cantidad_dias;?></option>
                                         </select>
-                                    </div>
+                                    </div>    
+                                </div>
 
+                                <div class="form-group" style="display:none;">
                                     <div class="col-sm-4">
                                         <label class="col-sm-0 control-label">Tipo de Descuento:</label>
                                         <select class="form-control" name="tipo_descuento" id="tipo_descuento" style="width:100%;" disabled>
                                             <?php 
                                                 if($info->tipo_descuento=='1') {
                                             ?>
-                                                    <option value='1'>POR PORCENTAJE</option>
+                                                    <option value='1'>Por porcentaje</option>
                                             <?php
                                                 } else {
                                             ?>
-                                                    <option value='2'>POR PRECIO</option>
+                                                    <option value='2'>Por precio</option>
                                             <?php 
                                                 }
                                             ?>            
@@ -97,6 +104,13 @@
                                     <div class="col-sm-12">
                                         <label class="col-sm-0 control-label">Desripción:</label>
                                         <textarea id="descripcions" name="descripcions" style="display:none;" class="mayuscula" disabled><?= $info->descripcion;?></textarea>
+                                    </div> 
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="col-sm-12">
+                                        <label class="col-sm-0 control-label">Descripción SEO:</label>
+                                        <textarea id="descripcion_posic" name="descripcion_posic" style="display:none;" class="mayuscula" disabled><?= $info->descripcion_posic;?></textarea>
                                     </div> 
                                 </div>
 
@@ -139,12 +153,12 @@
                                                             if(count($tours) > 0) {
                                                                 foreach($tours as $row) {
                                                         ?>
-                                                                    <tr class="odd gradeX">
+                                                                    <tr class="odd gradeX mayuscula">
                                                                         <td><?= $row->dias;?></td>
-                                                                        <td><?= strtoupper($row->tours_basico)?></td>
-                                                                        <td><?= strtoupper($row->tours_exclusivo)?></td>
-                                                                        <td><?= strtoupper($row->tours_recomendado)?></td>
-                                                                        <td align="center" style="background:<?= $row->color;?>;color:#FFF;"><?= strtoupper($row->nombre_status);?></td>
+                                                                        <td><?= $row->tours_basico;?></td>
+                                                                        <td><?= $row->tours_exclusivo;?></td>
+                                                                        <td><?= $row->tours_recomendado;?></td>
+                                                                        <td align="center" style="background:<?= $row->color;?>;color:#FFF;"><?= $row->nombre_status;?></td>
                                                                     </tr>
                                                         <?php        
                                                                 }
@@ -186,9 +200,9 @@
                                                             if(count($hoteles) > 0) {
                                                                 foreach($hoteles as $row) {
                                                         ?>
-                                                                    <tr class="odd gradeX">
-                                                                        <td><?= strtoupper($row->nombre)?></td>
-                                                                        <td align="center" style="background:<?= $row->color;?>;color:#FFF;"><?= strtoupper($row->nombre_status);?></td>
+                                                                    <tr class="odd gradeX mayuscula">
+                                                                        <td><?= $row->nombre;?></td>
+                                                                        <td align="center" style="background:<?= $row->color;?>;color:#FFF;"><?= $row->nombre_status;?></td>
                                                                     </tr>
                                                         <?php        
                                                                 }

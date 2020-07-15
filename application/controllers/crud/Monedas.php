@@ -44,7 +44,7 @@ class Monedas extends CI_Controller {
     public function consultar() {
 
         $id=$this->input->get_post('id');
-        $data=$this->Monedas_models->consultar($id);
+        $data=$this->Monedas_models->consultar_listado($id);
         print_r(json_encode($data));
     }
 

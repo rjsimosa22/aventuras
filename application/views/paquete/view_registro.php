@@ -39,39 +39,44 @@
                                             <input type="text" name="nombre" id="nombre" class="form-control" placeholder="Ingresé nombre" autocomplete="off" />
                                         </div>
                                     </div>
+
+                                    <div class="form-group">
+                                        <div class="col-sm-12">
+                                            <label class="col-sm-0 control-label">Nombre del Paquete SEO:</label>
+                                            <input type="text" name="nombre_posic" id="nombre_posic" class="form-control" placeholder="Ingresé nombre SEO" autocomplete="off" />
+                                        </div>
+                                    </div>
                                     
                                     <div class="form-group">
-                                        <div class="col-sm-4">
+                                        <div class="col-sm-3">
                                             <label class="col-sm-0 control-label" id="title_Depart">Departamento:</label>
-                                            <select class="js-example-basic-single" name="departamento" id="departamento" style="width:100%;">
-                                                <option value=''>SELECCIONAR</option>
+                                            <select class="js-example-basic-single mayuscula" name="departamento" id="departamento" style="width:100%;">
+                                                <option value=''>Seleccionar</option>
                                                 <?php 
                                                     foreach ($departamento as $row) {
-                                                        echo '<option value="'.$row->id.'">'.($row->nombre).'</option>';
+                                                        echo '<option value="'.$row->id.'">'.$row->nombre.'</option>';
                                                     }
                                                 ?>
                                             </select>
                                             <label for="" id="val_Depart" style="display:none;">Campo requerido.</label>    
                                         </div>
 
-                                        <div class="col-sm-4">
+                                        <div class="col-sm-3">
                                             <label class="col-sm-0 control-label" id="title_Prov">Provincia:</label>
-                                            <select class="js-example-basic-single" name="provincia" id="provincia" style="width:100%;"></select>
+                                            <select class="js-example-basic-single mayuscula" name="provincia" id="provincia" style="width:100%;"></select>
                                             <label for="" id="val_Prov" style="display:none;">Campo requerido.</label>    
                                         </div>
 
-                                        <div class="col-sm-4">
+                                        <div class="col-sm-3">
                                             <label class="col-sm-0 control-label" id="title_Dist">Distrito:</label>
-                                            <select class="js-example-basic-single" name="distrito" id="distrito" style="width:100%;"></select>
+                                            <select class="js-example-basic-single mayuscula" name="distrito" id="distrito" style="width:100%;"></select>
                                             <label for="" id="val_Dist" style="display:none;">Campo requerido.</label>    
                                         </div>
-                                    </div>
 
-                                    <div class="form-group">
-                                        <div class="col-sm-4">
+                                        <div class="col-sm-3">
                                             <label class="col-sm-0 control-label">Días del Paquete:</label>
                                             <select class="form-control" name="cantidad_dia" id="cantidad_dia" style="width:100%;">
-                                                <option value=''>SELECCIONAR</option>
+                                                <option value=''>Seleccionar</option>
                                                 <option value='1'>1</option>
                                                 <option value='2'>2</option>
                                                 <option value='3'>3</option>
@@ -84,17 +89,19 @@
                                                 <option value='10'>10</option> 
                                             </select>
                                         </div>
+                                    </div>
 
-                                        <div class="col-sm-4">
+                                    <div class="form-group" style="display:none;">
+                                        <div class="col-sm-4" style="display:none;">
                                             <label class="col-sm-0 control-label">Tipo de Descuento:</label>
                                             <select class="form-control" name="tipo_descuento" id="tipo_descuento" style="width:100%;">
-                                                <option value=''>SELECCIONAR</option>
-                                                <option value='1'>POR PORCENTAJE</option>
-                                                <option value='2'>POR PRECIO</option>
+                                                <option value=''>Seleccionar</option>
+                                                <option value='1'>Por porcentaje</option>
+                                                <option value='2'>Por precio</option>
                                             </select>
                                         </div>
                                         
-                                        <div class="col-sm-4">
+                                        <div class="col-sm-4" style="display:none;">
                                             <label class="col-sm-0 control-label">Monto de Descuento:</label>
                                             <input type="text" name="monto_descuento" id="monto_descuento" class="form-control precio" placeholder="Ingresé descuento" onKeyPress="return soloNumeros(event)" autocomplete="off" />
                                         </div>    
@@ -104,6 +111,13 @@
                                         <div class="col-sm-12">
                                             <label class="col-sm-0 control-label">Descripción:</label>
                                             <textarea id="descripcions" name="descripcions" style="display:none;" class="mayuscula"></textarea>
+                                        </div> 
+                                    </div>
+
+                                    <div class="form-group">
+                                        <div class="col-sm-12">
+                                            <label class="col-sm-0 control-label">Descripción SEO:</label>
+                                            <textarea id="descripcion_posic" name="descripcion_posic" style="display:none;" class="mayuscula"></textarea>
                                         </div> 
                                     </div>
 
@@ -147,33 +161,33 @@
                                                                     <tr class="tr_<?= $i;?>" style="display:none;">
                                                                         <td><input type="hidden" name="dias[]" id="dias<?= $i;?>" class="form-control" value="<?= ($i+1);?>"><?= ($i+1);?></td>
                                                                         <td>
-                                                                            <select class="js-example-basic-single tours_basico" name="tours_basico[]" id="tours_basico_<?= $i;?>" style="width:100%;display:none;">
-                                                                            <option value=''>SELECCIONAR</option>
+                                                                            <select class="js-example-basic-single tours_basico mayuscula" name="tours_basico[]" id="tours_basico_<?= $i;?>" style="width:100%;display:none;">
+                                                                            <option value=''>Seleccionar</option>
                                                                                 <?php 
                                                                                     foreach ($tours as $row) {
-                                                                                        echo '<option value="'.$row->id.'">'.($row->nombre).'</option>';
+                                                                                        echo '<option value="'.$row->id.'">'.$row->nombre.'</option>';
                                                                                     }
                                                                                 ?>
                                                                             </select>
                                                                             <label for="" id="val_basico_<?= $i;?>" style="display:none;">Campo requerido.</label>  
                                                                         </td>
                                                                         <td class="tr_<?= $i;?>" style="display:none;">
-                                                                            <select class="js-example-basic-single tours_exclusivo" name="tours_exclusivo[]" id="tours_exclusivo_<?= $i;?>" style="width:100%;display:none;">
-                                                                                <option value=''>SELECCIONAR</option>
+                                                                            <select class="js-example-basic-single tours_exclusivo mayuscula" name="tours_exclusivo[]" id="tours_exclusivo_<?= $i;?>" style="width:100%;display:none;">
+                                                                                <option value=''>Seleccionar</option>
                                                                                 <?php 
                                                                                     foreach ($tours as $row) {
-                                                                                        echo '<option value="'.$row->id.'">'.($row->nombre).'</option>';
+                                                                                        echo '<option value="'.$row->id.'">'.$row->nombre.'</option>';
                                                                                     }
                                                                                 ?>
                                                                             </select>
                                                                             <label for="" id="val_exclusivo_<?= $i;?>" style="display:none;">Campo requerido.</label> 
                                                                         </td>
                                                                         <td class="tr_<?= $i;?>" style="display:none;">
-                                                                            <select class="js-example-basic-single tours_recomendado" name="tours_recomendado[]" id="tours_recomendado_<?= $i;?>" style="width:100%;display:none;">
-                                                                                <option value=''>SELECCIONAR</option>
+                                                                            <select class="js-example-basic-single tours_recomendado mayuscula" name="tours_recomendado[]" id="tours_recomendado_<?= $i;?>" style="width:100%;display:none;">
+                                                                                <option value=''>Seleccionar</option>
                                                                                 <?php 
                                                                                     foreach ($tours as $row) {
-                                                                                        echo '<option value="'.$row->id.'">'.($row->nombre).'</option>';
+                                                                                        echo '<option value="'.$row->id.'">'.$row->nombre.'</option>';
                                                                                     }
                                                                                 ?>
                                                                             </select>
@@ -220,11 +234,11 @@
                                                             ?> 
                                                                     <tr class="tr_<?= $i;?>" style="display:none;">
                                                                         <td>
-                                                                            <select class="js-example-basic-single hoteles_seleccionado" name="hoteles_seleccionado[]" id="hoteles_seleccionado_<?= $i;?>" style="width:100%;text-align:left;">
-                                                                            <option value=''>SELECCIONAR</option>
+                                                                            <select class="js-example-basic-single hoteles_seleccionado mayuscula" name="hoteles_seleccionado[]" id="hoteles_seleccionado_<?= $i;?>" style="width:100%;text-align:left;">
+                                                                            <option value=''>Seleccionar</option>
                                                                                 <?php 
                                                                                     foreach ($hoteles as $row) {
-                                                                                        echo '<option value="'.$row->id.'">'.($row->nombre).'</option>';
+                                                                                        echo '<option value="'.$row->id.'">'.$row->nombre.'</option>';
                                                                                     }
                                                                                 ?>
                                                                             </select>

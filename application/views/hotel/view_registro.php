@@ -34,6 +34,7 @@
                                         <div class="col-sm-12">
                                             <label class="col-sm-0 control-label">Nombre del Hotel:</label>
                                             <input type="hidden" name="url" id="url" class="form-control" value="<?= site_url();?>" />
+                                            <input type="hidden" name="ModuloTipo" id="ModuloTipo" class="form-control" value="hotel" />
                                             <input type="hidden" name="url1" id="url1" class="form-control" value="<?= site_url('hoteles/registrar');?>" />
                                             <input type="text" name="nombre" id="nombre" class="form-control" placeholder="Ingresé nombre" autocomplete="off" />
                                         </div>
@@ -42,11 +43,11 @@
                                     <div class="form-group">
                                         <div class="col-sm-4">
                                             <label class="col-sm-0 control-label" id="title_Depart">Departamento:</label>
-                                            <select class="js-example-basic-single" name="departamento" id="departamento" style="width:100%;">
-                                                <option value=''>SELECCIONAR</option>
+                                            <select class="js-example-basic-single mayuscula" name="departamento" id="departamento" style="width:100%;">
+                                                <option value=''>Seleccionar</option>
                                                 <?php 
                                                     foreach ($departamento as $row) {
-                                                        echo '<option value="'.$row->id.'">'.strtoupper($row->nombre).'</option>';
+                                                        echo '<option value="'.$row->id.'">'.$row->nombre.'</option>';
                                                     }
                                                 ?>
                                             </select>
@@ -55,13 +56,13 @@
 
                                         <div class="col-sm-4">
                                             <label class="col-sm-0 control-label" id="title_Prov">Provincia:</label>
-                                            <select class="js-example-basic-single" name="provincia" id="provincia" style="width:100%;"></select>
+                                            <select class="js-example-basic-single mayuscula" name="provincia" id="provincia" style="width:100%;"></select>
                                             <label for="" id="val_Prov" style="display:none;">Campo requerido.</label>    
                                         </div>
                                     
                                         <div class="col-sm-4">
                                             <label class="col-sm-0 control-label" id="title_Dist">Distrito:</label>
-                                            <select class="js-example-basic-single" name="distrito" id="distrito" style="width:100%;"></select>
+                                            <select class="js-example-basic-single mayuscula" name="distrito" id="distrito" style="width:100%;"></select>
                                             <label for="" id="val_Dist" style="display:none;">Campo requerido.</label>    
                                         </div>    
                                     </div>
@@ -69,10 +70,10 @@
                                     <div class="form-group">
                                         <div class="col-sm-12">
                                             <label class="col-sm-0 control-label" id="title_ServicioP">Servicios Principales:</label>
-                                            <select class="js-example-basic-multiple" name="servicios_popular[]" id="servicios_popular" multiple="multiple" style="width:100%;">
+                                            <select class="js-example-basic-multiple mayuscula" name="servicios_popular[]" id="servicios_popular" multiple="multiple" style="width:100%;">
                                                 <?php 
                                                     foreach ($servicios as $row) {
-                                                        echo '<option value="'.$row->id.'">'.strtoupper($row->nombre).'</option>';
+                                                        echo '<option value="'.$row->id.'">'.$row->nombre.'</option>';
                                                     }
                                                 ?>
                                             </select>
@@ -112,7 +113,8 @@
                                         <div class="col-sm-12">
                                             <label class="col-sm-0 control-label">Subir Imágenes:</label>
                                             <input type="hidden" name="imagenes" id="imagenes" />
-                                            <div name="frmImage" action="<?= site_url('hoteles/registrar_imagenes');?>" class="dropzone" id="dropzone"></div> 
+                                            <input type="hidden" name="urlinsertImg" id="urlinsertImg" value="<?= site_url('hoteles/registrar_imagenes');?>">
+                                            <div name="frmImage" class="dropzone" id="dropzone"></div> 
                                         </div>
                                     </div>                      
                                 </fieldset>
@@ -146,7 +148,7 @@
                                             </div>
 
                                             <div class="panel-body collapse in">
-                                                <div class="table-responsive" style="border:0;">
+                                                <div class="table-responsive mayuscula" style="border:0;">
                                                     <table cellpadding="0" cellspacing="0" border="0"  id="example" width="100%" class="table table-striped table-bordered">
                                                         <?php include 'application/views/notificacion/alert_modal.php';?>                                                     
                                                         <thead>
@@ -200,11 +202,11 @@
                                                             <div class="col-sm-10">
                                                                 <label class="col-sm-0 control-label">Tipo de Habitación:</label>
                                                                 <input type="hidden" id="id_status" nombre="id_status" value="1">
-                                                                <select class="form-control" name="habitacion" id="habitacion" style="width:100%;">
-                                                                    <option value=''>SELECCIONAR</option>
+                                                                <select class="form-control mayuscula" name="habitacion" id="habitacion" style="width:100%;">
+                                                                    <option value=''>Seleccionar</option>
                                                                     <?php 
                                                                         foreach ($habitaciones as $row) {
-                                                                            echo '<option value="'.$row->id.'">'.strtoupper($row->nombre).'</option>';
+                                                                            echo '<option value="'.$row->id.'">'.$row->nombre.'</option>';
                                                                         }
                                                                     ?>
                                                                 </select>
@@ -256,11 +258,11 @@
 
                                                             <div class="col-sm-5">
                                                                 <label class="col-sm-0 control-label">Moneda:</label>
-                                                                <select class="form-control" name="moneda" id="moneda" style="width:100%;">
-                                                                    <option value=''>SELECCIONAR</option>
+                                                                <select class="form-control mayuscula" name="moneda" id="moneda" style="width:100%;">
+                                                                    <option value=''>Seleccionar</option>
                                                                     <?php 
                                                                         foreach ($monedas as $row) {
-                                                                            echo '<option value="'.$row->id.'">'.strtoupper($row->nombre).'</option>';
+                                                                            echo '<option value="'.$row->id.'">'.$row->nombre.'</option>';
                                                                         }
                                                                     ?>
                                                                 </select>

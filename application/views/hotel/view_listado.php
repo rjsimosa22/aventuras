@@ -29,7 +29,6 @@
                                         <tr>
                                             <th width="20%">Nombre</th>
                                             <th width="20%">Ubicación</th>
-                                            <th width="20%">F. de Registro</th>
                                             <th width="20%"><center>Estatus</center></th>
                                             <th width="20%"><center>Acción</center></th>
                                         </tr>
@@ -39,11 +38,10 @@
                                         if(count($listado) > 0) {
                                             foreach($listado as $row) {
                                     ?>
-                                                <tr class="odd gradeX">
+                                                <tr class="odd gradeX mayuscula">
                                                     <td><?= $row->nombre;?></td>
                                                     <td><?= $row->departamento.' / '.$row->provincia.' / '.$row->distrito;?></td>
-                                                    <td><?= $row->fecha_registro;?></td>
-                                                    <td align="center" style="background:<?= $row->color;?>;color:#FFF;"><?= strtoupper($row->nombre_status);?></td>
+                                                    <td align="center" style="background:<?= $row->color;?>;color:#FFF;"><?= $row->nombre_status;?></td>
                                                     <td align="center">
                                                         <a href="javascript:void(0);" onClick="visualizar('<?= site_url('hoteles/consultar?id='.base64_encode($row->id));?>')" style="color:#000;text-decoration:none;"><i style="font-size: 20px;"class="icon-eye-open" title="Visualizar"></i></a>&nbsp;
                                                         <a href="javascript:void(0);" onClick="modificar( '<?= site_url('hoteles/visualizar?id='.base64_encode($row->id));?>')" style="color:#000;text-decoration:none;"><i style="font-size: 20px;"class="icon-edit" title="Editar"></i></a>&nbsp;
@@ -75,4 +73,4 @@
         </div>
         <!--Fin Container-->
     </div> 
-</div>         
+</div>  

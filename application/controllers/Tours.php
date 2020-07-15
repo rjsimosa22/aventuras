@@ -355,7 +355,8 @@ class Tours extends CI_Controller {
     }
 
     public function registrar_imagenes() {
-        $nombre=$this->input->get_post('name',true);
+
+        $nombre=$nombre='foto-tour-';
         if(!empty($_FILES)) {
             $bytes=$_FILES["file"]["size"];
             $targetPath=$_SERVER['DOCUMENT_ROOT']."/public/img/tours/";
@@ -401,7 +402,7 @@ class Tours extends CI_Controller {
         $id_imagen=$this->input->get_post('id_imagen',true);
         $alt_seo=$this->input->get_post('alt_imagen_2',true);
         $nombre_imagen_2=$this->input->get_post('nombre_imagen_2',true);
-        $targetPath=$_SERVER['DOCUMENT_ROOT']."/aventuras/public/img/tours/";
+        $targetPath=$_SERVER['DOCUMENT_ROOT']."/public/img/tours/";
         
         if(!empty($imagena)) {
 			$allowedExts = array("jpg", "jpeg", "gif", "png", "JPG", "GIF", "PNG");

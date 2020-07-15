@@ -18,7 +18,8 @@
             <li><a href="javascript:;"><i class="icon-cogs"></i> <span>Configuración</span> </a>
                 <ul class="acc-menu">
                     <li><a href="<?= site_url('crud/monedas/');?>">Monedas</a></li>
-                    <li><a href="<?= site_url('crud/tematicas/');?>">Temáticas Tours</a></li>
+                    <li><a href="<?= site_url('crud/tematicas/');?>">Temáticas</a></li>
+                    <li><a href="<?= site_url('crud/descuentos/');?>">Descuentos y Aumentos</a></li>
                 </ul>
             </li>
 			
@@ -84,7 +85,7 @@
                 </ul>
             </li-->
             
-            <li><a href="javascript:;"><i class="icon-file-text-alt"></i><span>Tours</span></a>
+            <li><a href="javascript:;"><i class="icon-th-list"></i><span>Tours</span></a>
                 <ul class="acc-menu">
                     <li><a href="<?= site_url('regtours/index');?>">Nuevo Tours</a></li>
                     <li><a href="<?= site_url('listours/listado');?>">Listado Tours</a></li>
@@ -98,7 +99,7 @@
                 </ul>
             </li>
 
-            <li><a href="javascript:;"><i class="icon-dropbox"></i><span>Paquetes</span></a>
+            <li><a href="javascript:;"><i class="icon-th-list"></i><span>Paquetes</span></a>
                 <ul class="acc-menu">
                     <li><a href="<?= site_url('regpaquetes/index');?>">Nuevo Paquete</a></li>
                     <li><a href="<?= site_url('listpaquetes/listado');?>">Listado Paquetes</a></li>

@@ -32,31 +32,31 @@
                                 <div class="form-group">
                                     <div class="col-sm-12">
                                         <label class="col-sm-0 control-label">Nombre del Hotel:</label>
-                                         <input type="text" name="nombre" id="nombre" class="form-control" placeholder="Ingresé nombre" onKeyPress="return soloLetras(event)" autocomplete="off" value="<?= strtoupper($info->nombre);?>" disabled />
+                                         <input type="text" name="nombre" id="nombre" class="form-control mayuscula" placeholder="Ingresé nombre" onKeyPress="return soloLetras(event)" autocomplete="off" value="<?= $info->nombre;?>" disabled />
                                     </div>
                                 </div>
 
                                 <div class="form-group">
                                     <div class="col-sm-4">
                                         <label class="col-sm-0 control-label" id="title_Depart">Departamento:</label>
-                                        <select class="form-control" name="departamento" id="departamento" style="width:100%;" disabled>
-                                            <option value=''><?= strtoupper($info->departamento);?></option>
+                                        <select class="form-control mayuscula" name="departamento" id="departamento" style="width:100%;" disabled>
+                                            <option value=''><?= $info->departamento;?></option>
                                         </select>
                                         <label for="" id="val_Depart" style="display:none;">Campo requerido.</label>    
                                     </div>
 
                                     <div class="col-sm-4">
                                         <label class="col-sm-0 control-label" id="title_Prov">Provincia:</label>
-                                        <select class="form-control" name="provincia" id="" style="width:100%;" disabled>
-                                            <option value=''><?= strtoupper($info->provincia);?></option>
+                                        <select class="form-control mayuscula" name="provincia" id="" style="width:100%;" disabled>
+                                            <option value=''><?= $info->provincia;?></option>
                                         </select>
                                         <label for="" id="val_Prov" style="display:none;">Campo requerido.</label>    
                                     </div>
                                     
                                     <div class="col-sm-4">
                                         <label class="col-sm-0 control-label" id="title_Dist">Distrito:</label>
-                                        <select class="form-control" name="distrito" id="" style="width:100%;" disabled>
-                                            <option value=''><?= strtoupper($info->distrito);?></option>
+                                        <select class="form-control mayuscula" name="distrito" id="" style="width:100%;" disabled>
+                                            <option value=''><?= $info->distrito;?></option>
                                         </select>
                                         <label for="" id="val_Dist" style="display:none;">Campo requerido.</label>    
                                     </div>    
@@ -65,7 +65,7 @@
                                 <div class="form-group">
                                     <div class="col-sm-12">
                                         <label class="col-sm-0 control-label" id="title_ServicioP">Servicios Principales:</label>
-                                        <select class="js-example-basic-multiple" name="servicios_popular[]" id="servicios_popular" multiple="multiple" style="width:100%;" disabled>
+                                        <select class="js-example-basic-multiple mayuscula" name="servicios_popular[]" id="servicios_popular" multiple="multiple" style="width:100%;" disabled>
                                             <?php 
                                                 foreach ($servicios as $row1) {
                                                     $selected="";
@@ -74,7 +74,7 @@
                                                             $selected="selected";
                                                         }
                                                     }
-                                                    echo '<option value="'.$row1->id.'" '.$selected.'>'.strtoupper($row1->nombre).'</option>';
+                                                    echo '<option value="'.$row1->id.'" '.$selected.'>'.$row1->nombre.'</option>';
                                                 }
                                             ?>
                                         </select>
@@ -130,12 +130,12 @@
 
                                                     <?php
                                                         if(count($listado_imagenes) > 0) {
-                                                            foreach($tours as $row) {
+                                                            foreach($listado_imagenes as $row) {
                                                     ?>
-                                                                <tr class="odd gradeX">
-                                                                    <td><img src="<?= site_url('public/img/hoteles/'.$row->nombre_extension);?>" width="120px" height="70px" /></td>
-                                                                    <td><?= strtoupper($row->nombre);?></td>
-                                                                    <td align="center" style="background:<?= $row->color;?>;color:#FFF;"><?= strtoupper($row->nombre_status);?></td>
+                                                                <tr class="odd gradeX mayuscula">
+                                                                    <td><img src="<?= site_url('public/img/hoteles/small/'.$row->nombre_extension);?>" width="120px" height="70px" /></td>
+                                                                    <td><?= $row->nombre;?></td>
+                                                                    <td align="center" style="background:<?= $row->color;?>;color:#FFF;"><?= $row->nombre_status;?></td>
                                                                 </tr>
                                                     <?php        
                                                             }
@@ -179,12 +179,12 @@
                                                         if(count($listado_habitaciones) > 0) {
                                                             foreach($listado_habitaciones as $row) {
                                                     ?>
-                                                                <tr class="odd gradeX">
-                                                                    <td><?= strtoupper($row->nombre);?></td>
+                                                                <tr class="odd gradeX mayuscula">
+                                                                    <td><?= $row->nombre;?></td>
                                                                     <td><?= $row->cantidad_personas;?></td>
                                                                     <td><?= $row->simbolo.' '.$row->precio_minimo;?></td>
                                                                     <td><?= $row->simbolo.' '.$row->precio_maximo;?></td>
-                                                                    <td align="center" style="background:<?= $row->color;?>;color:#FFF;"><?= strtoupper($row->nombre_status);?></td>
+                                                                    <td align="center" style="background:<?= $row->color;?>;color:#FFF;"><?= $row->nombre_status;?></td>
                                                                 </tr>
                                                     <?php        
                                                         }

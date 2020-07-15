@@ -83,12 +83,12 @@ function consultar(val,opc,url) {
             success:function(data) {
                 if(data) {
                     $('#rol').val(data['rol']);
+                    $('#nombre').val(data['nombre']);
                     $('#dni').val(data['usuario_id']);
                     $('#telefono').val(data['celular']);
+                    $('#apellido').val(data['apellido']);
                     $('#clave1').val('').prop('required',false);
                     $('#clave2').val('').prop('required',false);
-                    $('#nombre').val(data['nombre'].toUpperCase());
-                    $('#apellido').val(data['apellido'].toUpperCase());
                     
                     //modal
                     $("#myModal").modal();

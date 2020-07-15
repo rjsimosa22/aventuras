@@ -42,12 +42,12 @@
 
                                 <div class="col-sm-4">
                                     <label class="col-sm-0 control-label">Nombre:</label>
-                                    <input type="text" name="nom" id="nom" class="form-control" placeholder="Ingresé nom del usuario" onKeyPress="return soloLetras(event)" autocomplete="off" value="<?= ucwords($row['nom']);?>" />
+                                    <input type="text" name="nom" id="nom" class="form-control" placeholder="Ingresé nom del usuario" onKeyPress="return soloLetras(event)" autocomplete="off" value="<?= $row['nom'];?>" />
                                 </div>
 
                                 <div class="col-sm-4">
                                     <label class="col-sm-0 control-label">Apellido:</label>
-                                    <input type="text" name="ape" id="ape" class="form-control" placeholder="Ingresé ape del usuario" onKeyPress="return soloLetras(event)" autocomplete="off" value="<?= ucwords($row['ape']);?>" />
+                                    <input type="text" name="ape" id="ape" class="form-control" placeholder="Ingresé ape del usuario" onKeyPress="return soloLetras(event)" autocomplete="off" value="<?= $row['ape'];?>" />
                                 </div>
                             </div>
 

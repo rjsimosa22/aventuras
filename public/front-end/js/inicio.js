@@ -275,32 +275,32 @@ $('.btn-continuar').on("click",function(e) {
         $('.btn-continuar').attr("disabled", true);
 
         for(i in listado_compra) {
-                var arrayServicioL= {
-                    'textfecha':listado_compra[i]['textfecha'],
-                    'textimagen':listado_compra[i]['textimagen'],
-                    'textprecio':listado_compra[i]['textprecio'],
-                    'textevento':listado_compra[i]['textevento'],
-                    'textmoneda':listado_compra[i]['textmoneda'],
-                    'infoPrecio':listado_compra[i]['infoPrecio'],
-                    'textqtyNino':listado_compra[i]['textqtyNino'],
-                    'textidhotel':listado_compra[i]['textidhotel'],
-                    'textidpaises':listado_compra[i]['textidpaises'],
-                    'textdistrito':listado_compra[i]['textdistrito'],
-                    'textduracion':listado_compra[i]['textduracion'],
-                    'textservicio':listado_compra[i]['textservicio'],
-                    'textqtyAdulto':listado_compra[i]['textqtyAdulto'],
-                    'texttipocambio':listado_compra[i]['texttipocambio'],
-                    'textidservicio':listado_compra[i]['textidservicio'],
-                    'textfechacompra':listado_compra[i]['textfechacompra'],
-                    'textprecio_tours':listado_compra[i]['textprecio_tours'],
-                    'textidhabitacion':listado_compra[i]['textidhabitacion'],
-                    'textprecio_hotel':listado_compra[i]['textprecio_hotel'],
-                    'textrecojores':$('#textrecojores_'+listado_compra[i]['textidservicio']).val(),
-                    'textcomentariores':$('#textcomentariores_'+listado_compra[i]['textidservicio']).val(),
-                    'textrenumerovuelores':$('#textrenumerovuelores_'+listado_compra[i]['textidservicio']).val(),
-                    'textairolineavuelores':$('#textairolineavuelores_'+listado_compra[i]['textidservicio']).val(),
-                };
-                arrayServicio.push(arrayServicioL);
+            var arrayServicioL= {
+                'textfecha':listado_compra[i]['textfecha'],
+                'textimagen':listado_compra[i]['textimagen'],
+                'textprecio':listado_compra[i]['textprecio'],
+                'textevento':listado_compra[i]['textevento'],
+                'textmoneda':listado_compra[i]['textmoneda'],
+                'infoPrecio':listado_compra[i]['infoPrecio'],
+                'textqtyNino':listado_compra[i]['textqtyNino'],
+                'textidhotel':listado_compra[i]['textidhotel'],
+                'textidpaises':listado_compra[i]['textidpaises'],
+                'textdistrito':listado_compra[i]['textdistrito'],
+                'textduracion':listado_compra[i]['textduracion'],
+                'textservicio':listado_compra[i]['textservicio'],
+                'textqtyAdulto':listado_compra[i]['textqtyAdulto'],
+                'texttipocambio':listado_compra[i]['texttipocambio'],
+                'textidservicio':listado_compra[i]['textidservicio'],
+                'textfechacompra':listado_compra[i]['textfechacompra'],
+                'textprecio_tours':listado_compra[i]['textprecio_tours'],
+                'textidhabitacion':listado_compra[i]['textidhabitacion'],
+                'textprecio_hotel':listado_compra[i]['textprecio_hotel'],
+                'textrecojores':$('#textrecojores_'+listado_compra[i]['textidservicio']).val(),
+                'textcomentariores':$('#textcomentariores_'+listado_compra[i]['textidservicio']).val(),
+                'textrenumerovuelores':$('#textrenumerovuelores_'+listado_compra[i]['textidservicio']).val(),
+                'textairolineavuelores':$('#textairolineavuelores_'+listado_compra[i]['textidservicio']).val(),
+            };
+            arrayServicio.push(arrayServicioL);
         }
 
         var arrayDatosPersonalesL= {

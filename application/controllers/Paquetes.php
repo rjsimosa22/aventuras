@@ -56,10 +56,12 @@ class Paquetes extends CI_Controller {
         $provincia=$this->input->get_post('provincia',true);
         $descripcion=$this->input->get_post('descripcions',true);
         $departamento=$this->input->get_post('departamento',true);
+        $nombre_posic=$this->input->get_post('nombre_posic',true);
         $cantidad_dias=$this->input->get_post('cantidad_dia',true); 
         $tipo_descuento=$this->input->get_post('tipo_descuento',true);
         $arraytours_basico=$this->input->get_post('tours_basico',true);
         $monto_descuento=$this->input->get_post('monto_descuento',true);
+        $descripcion_posic=$this->input->get_post('descripcion_posic',true);
         $arraytours_exclusivo=$this->input->get_post('tours_exclusivo',true);
         $arraytours_recomendado=$this->input->get_post('tours_recomendado',true);
         $arrayhoteles_seleccionado=$this->input->get_post('hoteles_seleccionado',true);
@@ -72,11 +74,13 @@ class Paquetes extends CI_Controller {
                 'id_distrito'=>$distrito,
                 'id_provincia'=>$provincia,
                 'descripcion'=>$descripcion,
+                'nombre_posic'=>$nombre_posic,
                 'cantidad_dias'=>$cantidad_dias,
                 'id_departamento'=>$departamento,
                 'tipo_descuento'=>$tipo_descuento,
                 'monto_descuento'=>$monto_descuento,
-                'fecha_registro'=>date('Y-m-d H:i:s')
+                'fecha_registro'=>date('Y-m-d H:i:s'),
+                'descripcion_posic'=>$descripcion_posic,
             );
             
             $id=$this->Paquetes_models->registrar($bd_paquetes,$arraydias,$arrayhoteles_seleccionado,$arraytours_basico,$arraytours_exclusivo,$arraytours_recomendado);
@@ -115,6 +119,7 @@ class Paquetes extends CI_Controller {
             $this->load->view('paquete/view_listado',$data);
             $this->load->view('home/view_footer');
             $this->load->view('common/lib_js');
+            $this->load->view('common/lib_paquete_js');
         } else {
             $this->session->sess_destroy();
             redirect('login');
@@ -236,13 +241,15 @@ class Paquetes extends CI_Controller {
         $arraydias=$this->input->get_post('dias',true);
         $distrito=$this->input->get_post('distrito',true);
         $servicios=$this->input->get_post('servicios',true);
-        $descripcion=$this->input->get_post('descripcions',true);
         $provincia=$this->input->get_post('provincia',true);
+        $descripcion=$this->input->get_post('descripcions',true);
+        $nombre_posic=$this->input->get_post('nombre_posic',true);
         $departamento=$this->input->get_post('departamento',true);
         $cantidad_dias=$this->input->get_post('cantidad_dia',true); 
         $tipo_descuento=$this->input->get_post('tipo_descuento',true);
         $arraytours_basico=$this->input->get_post('tours_basico',true);
         $monto_descuento=$this->input->get_post('monto_descuento',true);
+        $descripcion_posic=$this->input->get_post('descripcion_posic',true);
         $arraytours_exclusivo=$this->input->get_post('tours_exclusivo',true);
         $arraytours_recomendado=$this->input->get_post('tours_recomendado',true);
         $arrayhoteles_seleccionado=$this->input->get_post('hoteles_seleccionado',true);
@@ -254,10 +261,12 @@ class Paquetes extends CI_Controller {
                 'id_distrito'=>$distrito,
                 'id_provincia'=>$provincia,
                 'descripcion'=>$descripcion,
+                'nombre_posic'=>$nombre_posic,
                 'cantidad_dias'=>$cantidad_dias,
                 'id_departamento'=>$departamento,
                 'tipo_descuento'=>$tipo_descuento,
                 'monto_descuento'=>$monto_descuento,
+                'descripcion_posic'=>$descripcion_posic,
             );
         
             $comprobar=$this->Paquetes_models->editar($id,$bd_paquetes,$arraydias,$arrayhoteles_seleccionado,$arraytours_basico,$arraytours_exclusivo,$arraytours_recomendado);

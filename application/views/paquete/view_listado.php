@@ -30,7 +30,6 @@
                                             <th width="20%">Nombre</th>
                                             <th width="20%">Ubicación</th>
                                             <th width="10%">Día</th>
-                                            <th width="10%">Descuento</th>
                                             <th width="15%"><center>Estatus</center></th>
                                             <th width="15%"><center>Acción</center></th>
                                         </tr>
@@ -40,11 +39,10 @@
                                         if(count($listado) > 0) {
                                             foreach($listado as $row) {
                                     ?>
-                                                <tr class="odd gradeX">
+                                                <tr class="odd gradeX mayuscula">
                                                     <td><?= $row->nombre;?></td>
                                                     <td><?= $row->departamento.' / '.$row->provincia.' / '.$row->distrito;?></td>
                                                     <td><?= $row->cantidad_dias;?></td>
-                                                   <td><?= $row->monto_descuento;?> %</td>
                                                     <td align="center" style="background:<?= $row->color;?>;color:#FFF;"><?= $row->nombre_status;?></td>
                                                     <td align="center">
                                                         <a href="javascript:void(0);" onClick="visualizar('<?= site_url('vispaquetes/consultar?id='.base64_encode($row->id));?>')" style="color:#000;text-decoration:none;"><i style="font-size: 20px;"class="icon-eye-open" title="Visualizar"></i></a>&nbsp;

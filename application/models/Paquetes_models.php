@@ -69,7 +69,7 @@ class Paquetes_models extends CI_Model {
     
     public function listado() {
         
-        $this->db->select('a.id,a.id_provincia,a.id_departamento,a.descripcion,a.id_distrito,a.cantidad_dias,a.nombre,a.servicios,a.tipo_descuento,a.monto_descuento,a.status,b.descripcion as nombre_status,b.color,d.nombre AS provincia,f.nombre AS distrito,g.nombre AS departamento');
+        $this->db->select('a.id,a.id_provincia,a.id_departamento,a.descripcion,a.fecha_registro,a.id_distrito,a.cantidad_dias,a.nombre,a.servicios,a.tipo_descuento,a.monto_descuento,a.status,b.descripcion as nombre_status,b.color,d.nombre AS provincia,f.nombre AS distrito,g.nombre AS departamento');
         $this->db->from('bd_paquetes as a');
         $this->db->join('bd_estatus_global as b','b.id=a.status');
         $this->db->join('bd_provincias as d','a.id_provincia=d.id');
@@ -89,7 +89,7 @@ class Paquetes_models extends CI_Model {
     public function consultar($id) {
 
         if(isset($id)) {
-            $this->db->select('a.id,a.id_provincia,a.id_departamento,a.descripcion,a.servicios,a.id_distrito,a.cantidad_dias,a.nombre,a.servicios,a.tipo_descuento,a.monto_descuento,a.status,b.descripcion as nombre_status,b.color,d.nombre AS provincia,f.nombre AS distrito,g.nombre AS departamento,i.id_tours_basico');
+            $this->db->select('a.id,a.id_provincia,a.id_departamento,a.descripcion,a.nombre_posic,a.descripcion_posic,a.servicios,a.id_distrito,a.cantidad_dias,a.nombre,a.servicios,a.tipo_descuento,a.monto_descuento,a.status,b.descripcion as nombre_status,b.color,d.nombre AS provincia,f.nombre AS distrito,g.nombre AS departamento,i.id_tours_basico');
             $this->db->from('bd_paquetes as a');
             $this->db->join('bd_estatus_global as b','b.id=a.status');
             $this->db->join('bd_provincias as d','a.id_provincia=d.id');

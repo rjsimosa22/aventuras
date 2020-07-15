@@ -19,12 +19,6 @@ $(document).ready(function() {
             cantidad_dia: {
                 required:true,
             },
-            tipo_descuento: {
-                required:true
-            },
-            monto_descuento: {
-                required:true
-            },
             descripcions:{ 
                 required:function(){CKEDITOR.instances.descripcions.updateElement();}, 
                 minlength:5 
@@ -168,8 +162,8 @@ $(document).ready(function() {
                         for(var e=0;e<resultado.length;e++) {
                             if(!$('#tours_basico_'+i).val()) {
                                 var id=resultado[e]['id'];
-                                var nombre=resultado[e]['nombre'].toUpperCase();
-                                $('#tours_basico_'+i).select2({data:[{id:'',text:'SELECCIONAR'},{id:id,text:nombre}]});
+                                var nombre=titulojs(resultado[e]['nombre']);
+                                $('#tours_basico_'+i).select2({data:[{id:'',text:'Seleccionar'},{id:id,text:nombre}]});
                                 $('#tours_basico_'+i).val('').trigger('change.select2');
                             }    
                         }
@@ -177,7 +171,7 @@ $(document).ready(function() {
                 } else {
                     for(var i=0;i<contante;i++) {
                         if(!$('#tours_basico_'+i).val()) {
-                            $('#tours_basico_'+i).select2({data:[{id:'',text:"NO HAY REGISTRO DISPONIBLE"}]});
+                            $('#tours_basico_'+i).select2({data:[{id:'',text:"No hay registro disponible"}]});
                             $('#tours_basico_'+i).val('').trigger('change.select2');
                         }    
                     }
@@ -185,7 +179,7 @@ $(document).ready(function() {
             } else {
                 for(var i=0;i<contante;i++) {
                     if(!$('#tours_basico_'+i).val()) {
-                        $('#tours_basico_'+i).select2({data:[{id:'',text:"NO HAY REGISTRO DISPONIBLE"}]});
+                        $('#tours_basico_'+i).select2({data:[{id:'',text:"No hay registro disponible"}]});
                         $('#tours_basico_'+i).val('').trigger('change.select2');
                     }    
                 }
@@ -220,8 +214,8 @@ $(document).ready(function() {
                         for(var e=0;e<resultado.length;e++) {
                             if(!$('#tours_exclusivo_'+i).val()) {
                                 var id=resultado[e]['id'];
-                                var nombre=resultado[e]['nombre'].toUpperCase();
-                                $('#tours_exclusivo_'+i).select2({data:[{id:'',text:'SELECCIONAR'},{id:id,text:nombre}]});
+                                var nombre=titulojs(resultado[e]['nombre']);
+                                $('#tours_exclusivo_'+i).select2({data:[{id:'',text:'Seleccionar'},{id:id,text:nombre}]});
                                 $('#tours_exclusivo_'+i).val('').trigger('change.select2');
                             }    
                         }
@@ -229,7 +223,7 @@ $(document).ready(function() {
                 } else {
                     for(var i=0;i<contante;i++) {
                         if(!$('#tours_exclusivo_'+i).val()) {
-                            $('#tours_exclusivo_'+i).select2({data:[{id:'',text:"NO HAY REGISTRO DISPONIBLE"}]});
+                            $('#tours_exclusivo_'+i).select2({data:[{id:'',text:"No hay registro disponible"}]});
                             $('#tours_exclusivo_'+i).val('').trigger('change.select2');
                         }    
                     }
@@ -237,7 +231,7 @@ $(document).ready(function() {
             } else {
                 for(var i=0;i<contante;i++) {
                     if(!$('#tours_exclusivo_'+i).val()) {
-                        $('#tours_exclusivo_'+i).select2({data:[{id:'',text:"NO HAY REGISTRO DISPONIBLE"}]});
+                        $('#tours_exclusivo_'+i).select2({data:[{id:'',text:"No hay registro disponible"}]});
                         $('#tours_exclusivo_'+i).val('').trigger('change.select2');
                     }    
                 }
@@ -272,8 +266,8 @@ $(document).ready(function() {
                         for(var e=0;e<resultado.length;e++) {
                             if(!$('#tours_recomendado_'+i).val()) {
                                 var id=resultado[e]['id'];
-                                var nombre=resultado[e]['nombre'].toUpperCase();
-                                $('#tours_recomendado_'+i).select2({data:[{id:'',text:'SELECCIONAR'},{id:id,text:nombre}]});
+                                var nombre=titulojs(resultado[e]['nombre']);
+                                $('#tours_recomendado_'+i).select2({data:[{id:'',text:'Seleccionar'},{id:id,text:nombre}]});
                                 $('#tours_recomendado_'+i).val('').trigger('change.select2');
                             }    
                         }
@@ -281,7 +275,7 @@ $(document).ready(function() {
                 } else {
                     for(var i=0;i<contante;i++) {
                         if(!$('#tours_recomendado_'+i).val()) {
-                            $('#tours_recomendado_'+i).select2({data:[{id:'',text:"NO HAY REGISTRO DISPONIBLE"}]});
+                            $('#tours_recomendado_'+i).select2({data:[{id:'',text:"No hay registro disponible"}]});
                             $('#tours_recomendado_'+i).val('').trigger('change.select2');
                         }    
                     }
@@ -289,7 +283,7 @@ $(document).ready(function() {
             } else {
                 for(var i=0;i<contante;i++) {
                     if(!$('#tours_recomendado_'+i).val()) {
-                        $('#tours_recomendado_'+i).select2({data:[{id:'',text:"NO HAY REGISTRO DISPONIBLE"}]});
+                        $('#tours_recomendado_'+i).select2({data:[{id:'',text:"No hay registro disponible"}]});
                         $('#tours_recomendado_'+i).val('').trigger('change.select2');
                     }    
                 }
@@ -328,8 +322,8 @@ $(document).ready(function() {
                         for(var e=0;e<resultado.length;e++) {
                             if(!$('#hoteles_seleccionado_'+i).val()) {
                                 var id=resultado[e]['id'];
-                                var nombre=resultado[e]['nombre'].toUpperCase();
-                                $('#hoteles_seleccionado_'+i).select2({data:[{id:'',text:'SELECCIONAR'},{id:id,text:nombre}]});
+                                var nombre=titulojs(resultado[e]['nombre']);
+                                $('#hoteles_seleccionado_'+i).select2({data:[{id:'',text:'Seleccionar'},{id:id,text:nombre}]});
                                 $('#hoteles_seleccionado_'+i).val('').trigger('change.select2');
                             }    
                         }
@@ -337,7 +331,7 @@ $(document).ready(function() {
                 } else {
                     for(var i=0;i<contante;i++) {
                         if(!$('#hoteles_seleccionado_'+i).val()) {
-                            $('#hoteles_seleccionado_'+i).select2({data:[{id:'',text:"NO HAY REGISTRO DISPONIBLE"}]});
+                            $('#hoteles_seleccionado_'+i).select2({data:[{id:'',text:"No hay registro disponible"}]});
                             $('#hoteles_seleccionado_'+i).val('').trigger('change.select2');
                         }    
                     }
@@ -345,7 +339,7 @@ $(document).ready(function() {
             } else {
                 for(var i=0;i<contante;i++) {
                     if(!$('#hoteles_seleccionado_'+i).val()) {
-                        $('#hoteles_seleccionado_'+i).select2({data:[{id:'',text:"NO HAY REGISTRO DISPONIBLE"}]});
+                        $('#hoteles_seleccionado_'+i).select2({data:[{id:'',text:"No hay registro disponible"}]});
                         $('#hoteles_seleccionado_'+i).val('').trigger('change.select2');
                     }    
                 }
@@ -370,12 +364,12 @@ $(document).ready(function() {
                     var resultado=JSON.parse(data);
                     for(var i=0;i<resultado.length;i++) {
                         var id=resultado[i]['id'];
-                        var nombre=resultado[i]['nombre'].toUpperCase();
-                        $("#provincia").select2({data:[{id:"",text:"TODOS"},{id:id,text:nombre}]});
+                        var nombre=titulojs(resultado[i]['nombre']);
+                        $("#provincia").select2({data:[{id:"",text:"Todos"},{id:id,text:nombre}]});
                         $('#provincia').val("").trigger('change.select2');
                     } 
                 } else {
-                    $("#provincia").select2({data:[{id:"",text:"DEBE SELECCIONAR DEPARTAMENTO"}]});
+                    $("#provincia").select2({data:[{id:"",text:"Debe Seleccionar departamento"}]});
                     $('#provincia').val("").trigger('change.select2');
                 }
             });			
@@ -399,12 +393,12 @@ $(document).ready(function() {
                     var resultado=JSON.parse(data);
                     for(var i=0;i<resultado.length;i++) {
                         var id=resultado[i]['id'];
-                        var nombre=resultado[i]['nombre'].toUpperCase();
-                        $("#distrito").select2({data:[{id:"",text:"TODOS"},{id:id,text:nombre}]});
+                        var nombre=titulojs(resultado[i]['nombre']);
+                        $("#distrito").select2({data:[{id:"",text:"Todos"},{id:id,text:nombre}]});
                         $('#distrito').val("").trigger('change.select2');
                     } 
                 } else {
-                    $("#distrito").select2({data:[{id:"",text:"DEBE SELECCIONAR DEPARTAMENTO"}]});
+                    $("#distrito").select2({data:[{id:"",text:"Debe Seleccionar departamento"}]});
                     $('#distrito').val("").trigger('change.select2');
                 }
             });			
