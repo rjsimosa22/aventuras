@@ -271,7 +271,7 @@
 
                             echo '
                                     <ul class="cart_details">
-                                        <li class="titulo-detalle"><img src="'.$imagen.'" alt="" class="img-fluid mr-3"></li>
+                                        <li class="titulo-detalle"><img loading="lazy" src="'.$imagen.'" alt="" class="img-fluid mr-3"></li>
                                         <li class="titulo-detalle"><b>'.$row['textservicio'].'</b></li>
                                         <li>Llegada:<span>'.$row['textfecha'].'</span></li>
                                         <li>Personas:<span>'.$row['textqtyAdulto'].' Adultos<br>'.$row['textqtyNino'].' Niños</span></li>

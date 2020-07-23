@@ -111,6 +111,8 @@ $route['regtours/(:any)']='Tours/index/$1';
 $route['registours/(:any)']='Tours/registrar/$1';
 // listados de tours
 $route['listours/(:any)']='Tours/listado/$1';
+// listados de destinos por tours
+$route['listours_destinos/(:any)']='Tours/listado_destino/$1';
 // inactivar tours
 $route['inactours/(:any)']='tours/inactivar/$1';
 // activar tours
@@ -148,6 +150,8 @@ $route['regpaquetes/(:any)']='Paquetes/index/$1';
 $route['regispaquetes/(:any)']='Paquetes/registrar/$1';
 // listados de paquetes
 $route['listpaquetes/(:any)']='Paquetes/listado/$1';
+// listados de destinos por tours
+$route['listpaquetes_destinos/(:any)']='Paquetes/listado_destino/$1';
 // inactivar paquetes
 $route['inactpaquetes/(:any)']='paquetes/inactivar/$1';
 // activar paquetes

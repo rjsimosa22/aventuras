@@ -57,7 +57,7 @@
 						<div>
 							<table class="tam-table">
 								<tr height="80px">
-									<td class="tam-td-1"><img src="<?=base_url('public/img/facebook/stefany_carrion.jpg');?>" alt="" class="img-fluid mr-3 radius-redondo"></td>
+									<td class="tam-td-1"><img loading="lazy" src="<?=base_url('public/img/facebook/stefany_carrion.jpg');?>" alt="" class="img-fluid mr-3 radius-redondo"></td>
 									<td class="tam-td-2"><span class="name_review">Stefany Carrion</span><br/><span>Viajero</span></td>	
 								</tr>
 							</table>		
@@ -73,7 +73,7 @@
 						<div>
 							<table class="tam-table">
 								<tr height="80px">
-									<td class="tam-td-1"><img src="<?=base_url('public/img/facebook/ruben_fernandez.jpg');?>" alt="" class="img-fluid mr-3 radius-redondo"></td>
+									<td class="tam-td-1"><img loading="lazy" src="<?=base_url('public/img/facebook/ruben_fernandez.jpg');?>" alt="" class="img-fluid mr-3 radius-redondo"></td>
 									<td class="tam-td-2"><span class="name_review">Ruben Fernandez</span><br/><span>Viajero</span></td>	
 								</tr>
 							</table>		
@@ -89,7 +89,7 @@
 						<div>
 							<table class="tam-table">
 								<tr height="80px">
-									<td class="tam-td-1"><img src="<?=base_url('public/img/facebook/flor_marticorena.jpg');?>" alt="" class="img-fluid mr-3 radius-redondo"></td>
+									<td class="tam-td-1"><img loading="lazy" src="<?=base_url('public/img/facebook/flor_marticorena.jpg');?>" alt="" class="img-fluid mr-3 radius-redondo"></td>
 									<td class="tam-td-2"><span class="name_review">Flor Marticorena</span><br/><span>Viajero</span></td>	
 								</tr>
 							</table>		

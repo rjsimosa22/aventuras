@@ -326,6 +326,23 @@ class Tours extends CI_Controller {
         }
     }
 
+    public function listado_destino() {
+        $id=$this->input->get_post('id',true);
+        $sel=$this->input->get_post('sel',true);
+        if($sel==0) {
+            $data["listado_destino"]=$this->Tours_models->tours_destino();
+            $data["listado_servicio"]=$this->Tours_models->filtros_tours('listado','all','','');   
+        } else {
+            if($id > 0) {
+                $id=$id;
+            } else {
+                $id='listado';
+            }
+            $data["listado_servicio"]=$this->Tours_models->filtros_tours($id,'all','','');
+        }
+        print_r(json_encode($data));
+    }
+    
     public function listado_tours() {
        
         $id=$this->input->get_post('id',true);

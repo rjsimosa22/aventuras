@@ -1,9 +1,9 @@
-<link href="<?= base_url();?>public/front-end/css/toastr.min.css?v=<?= time();?>" rel="stylesheet">
-<link rel='stylesheet' type='text/css' href='<?= base_url();?>public/front-end/css/select2.css?v=<?= time();?>'/> 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js?v=<?= time();?>"></script>
-<script src="<?= base_url();?>public/front-end/js/jquery.smooth-scroll.min.js?v=<?= time();?>"></script>
-<script src="<?= base_url();?>public/front-end/js/waypoints.min.js?v=<?= time();?>"></script>
-<link  href="<?= base_url();?>public/front-end/css/fotorama.css?v=<?= time();?>" rel="stylesheet">
+<link href="<?= base_url();?>public/front-end/css/toastr.min.css" rel="stylesheet">
+<link  href="<?= base_url();?>public/front-end/css/fotorama.css" rel="stylesheet">
+<link rel='stylesheet' type='text/css' href='<?= base_url();?>public/front-end/css/select2.css'/> 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script src="<?= base_url();?>public/front-end/js/jquery.smooth-scroll.min.js"></script>
+<script src="<?= base_url();?>public/front-end/js/waypoints.min.js"></script>
         
 
 <script>

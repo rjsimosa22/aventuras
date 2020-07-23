@@ -14,12 +14,13 @@
         <!-- FAVICONS -->
         <link rel="shortcut icon" href="<?= base_url();?>public/front-end/img/favicon.ico" type="image/x-icon">     
         <!-- GOOGLE WEB FONT -->
-        <link href="<?= base_url();?>public/front-end/css/googleapis.css?v=<?= time();?>" rel="stylesheet">
-        <link href="<?= base_url();?>public/front-end/css/bootstrap.min.css?v=<?= time();?>" rel="stylesheet">
-        <link href="<?= base_url();?>public/front-end/css/style.css?v=<?= time();?>" rel="stylesheet">
-        <link href="<?= base_url();?>public/front-end/css/vendors.css?v=<?= time();?>" rel="stylesheet">
-        <link href="<?= base_url();?>public/front-end/css/jquery-ui.css?v=<?= time();?>" rel="stylesheet">
-		<link rel="canonical" href="https://www.aventuras.pe/" />
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous" rel="stylesheet">
+        <link async href="<?= base_url();?>public/front-end/css/vendors.css" rel="stylesheet">
+        <link async href="<?= base_url();?>public/front-end/css/style.css" rel="stylesheet">
+        <link async href="<?= base_url();?>public/front-end/css/googleapis.css" rel="stylesheet">
+        <link async href="<?= base_url();?>public/front-end/css/jquery-ui.css" rel="stylesheet">
+        <!-- GOOGLE WEB FONT -->
+      	<link rel="canonical" href="https://www.aventuras.pe/" />
         <!-- Global site tag (gtag.js) - Google Analytics -->
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-065KQG1VB8"></script>
         <script>
@@ -68,8 +69,8 @@
                 <div id="logo">
                     <?php $moneda=strtolower($moneda);?>
                     <a href="<?= base_url($moneda);?>">
-                        <img src="<?= site_url("public/front-end/img/aventuras.png");?>" width="110" height="36" data-retina="true" alt="" class="logo_normal">
-                        <img src="<?= site_url("public/front-end/img/aventuras.png");?>" width="110" height="36" data-retina="true" alt="" class="logo_sticky">
+                        <img loading="lazy" src="<?= site_url("public/front-end/img/aventuras.png");?>" width="110" height="36" data-retina="true" alt="" class="logo_normal">
+                        <img loading="lazy" src="<?= site_url("public/front-end/img/aventuras.png");?>" width="110" height="36" data-retina="true" alt="" class="logo_sticky">
                     </a>
                 </div>
 

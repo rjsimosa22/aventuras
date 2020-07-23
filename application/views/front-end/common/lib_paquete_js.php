@@ -1,6 +1,6 @@
-<script type='text/javascript' src="<?= base_url();?>public/js/pace.js?v=<?= time();?>"></script>
-<script type="text/javascript" src="<?= base_url();?>public/js/paquete.js?v=<?= time();?>"></script>
-<script type='text/javascript' src="<?= base_url();?>public/js/select2.js?v=<?= time();?>"></script> 
+<script type='text/javascript' src="<?= base_url();?>public/js/pace.js"></script>
+<script type="text/javascript" src="<?= base_url();?>public/js/paquete.js"></script>
+<script type='text/javascript' src="<?= base_url();?>public/js/select2.js"></script> 
 
 <script type="text/javascript">
     $("#provincia").select2({data:[{id:"",text:"DEBE SELECCIONAR DEPARTAMENTO"}]});

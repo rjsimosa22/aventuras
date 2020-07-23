@@ -1,1 +1,1 @@
-<link href="<?= base_url();?>public/front-end/css/toastr.min.css?v=<?= time();?>" rel="stylesheet">
+<link href="<?= base_url();?>public/front-end/css/toastr.min.css" rel="stylesheet">

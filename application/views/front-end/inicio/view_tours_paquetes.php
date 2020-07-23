@@ -20,7 +20,7 @@
                 <p>&nbsp;</p>
                 <div class="ftco-media-1">
                     <div class="ftco-media-1-inner">
-                        <a href="<?= site_url('tours/'.strtolower($row->distrito).'/'.strtolower($nombre).'/'.$row->id);?>" class="d-inline-block mb-4"><img src="<?= base_url();?>public/img/tours/<?= $row->imagen;?>" alt="" class="img-fluid" style="width:400px;height:200px;"></a>
+                        <a href="<?= site_url('tours/'.strtolower($row->distrito).'/'.strtolower($nombre).'/'.$row->id);?>" class="d-inline-block mb-4"><img loading="lazy" src="<?= base_url();?>public/img/tours/<?= $row->imagen;?>" alt="" class="img-fluid" style="width:400px;height:200px;"></a>
                         <div class="ftco-media-details">
                             <h3><?= ucfirst(strtolower($row->nombre));?></h3>
                             <p><i class="icon-map-marker font-img"></i>&nbsp;<?= ucfirst(strtolower($row->distrito));?></p>
@@ -64,7 +64,7 @@
                 <p>&nbsp;</p>
                 <div class="ftco-media-1">
                     <div class="ftco-media-1-inner">
-                        <a href="property-single.html" class="d-inline-block mb-4"><img src="<?= base_url();?>public/img/hoteles/<?= $row->inf_habitacion->nombre_extension;?>" alt="" class="img-fluid" style="width:400px;height:200px;"></a>
+                        <a href="property-single.html" class="d-inline-block mb-4"><img loading="lazy" src="<?= base_url();?>public/img/hoteles/<?= $row->inf_habitacion->nombre_extension;?>" alt="" class="img-fluid" style="width:400px;height:200px;"></a>
                         <div class="ftco-media-details">
                             <h3><?= ucfirst(strtolower($row->nombre));?></h3>
                             <p><i class="icon-map-marker font-img"></i>&nbsp;<?= ucfirst(strtolower($row->distrito));?></p>

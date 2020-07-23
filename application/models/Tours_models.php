@@ -283,7 +283,7 @@ class Tours_models extends CI_Model {
                 $this->db->order_by('a.precio_minimo','desc');
             }
         } else {
-            $this->db->order_by('a.nombre','desc');
+            $this->db->order_by('a.nombre','asc');
         }
         
         $this->db->group_by('a.id');

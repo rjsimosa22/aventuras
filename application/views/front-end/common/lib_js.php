@@ -91,25 +91,11 @@
         <a href="https://api.whatsapp.com/send?phone=51979180559&text=Hola%20me%20brindas%20informaci%C3%B3n%20sobre%20el%20paquete%20que%20vi%20en%20la%20web&source=&data=" target="_blank"><div id="toTopWhat" class="chat-expancion" style="display:none;" title="Contactar con aventuras"></div></a><!-- Back to whatssap button -->
         <!-- Chat llamada-->
         <a href="tel://+51910926882" target="_blank"><div id="toTopLlamada" class="chat-expancion" style="display:none;" title="Contactar con aventuras"></div></a><!-- Back to whatssap button -->
-        
-        <!-- Chat facebook -->
-        <!--a href="https://m.me/AventurasdelPeru" target="_blank"><div id="toTopFace" class="chat-expancion" style="display:none;"></div></a--><!-- Back to facebook button -->
-        
-        <!--section class="chat-container chat-expancion" style="display:none;">
-            <div class="chat-button">
-                Chat
-            </div>
-            <div class="chat-content">
-                <iframe src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2FAventurasdelPeru&tabs=messages&width=340&height=500&small_header=true&adapt_container_width=true&hide_cover=false&show_facepile=true&app Id" width="340" height="500" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allow="encrypted-media"></iframe>
-            </div>
-        </section-->
-
-        <!-- COMMON SCRIPTS -->
-        <?php if(!isset($variable)) { ?><script src="<?= base_url();?>public/front-end/js/jquery-1.12.4.js?v=<?= time();?>"></script><?php }?>
-        <script src="<?= base_url();?>public/front-end/js/jquery-ui.js?v=<?= time();?>"></script>
-        <script src="<?= base_url();?>public/front-end/js/common_scripts.js?v=<?= time();?>"></script>
-        <script src="<?= base_url();?>public/front-end/js/main.js?v=<?= time();?>"></script>
-    
+        <!--COMMON JS-->
+        <?php if(!isset($variable)) { ?><script src="<?= base_url();?>public/front-end/js/jquery-1.12.4.js"></script><?php }?>
+        <script src="<?= base_url();?>public/front-end/js/jquery-ui.js"></script>
+        <script src="<?= base_url();?>public/front-end/js/common_scripts.js"></script>
+        <script src="<?= base_url();?>public/front-end/js/main.js"></script>
         <script>
             $(document).ready(function() {
                 setTimeout(function() {

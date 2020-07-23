@@ -12,6 +12,7 @@ class Inicio_frontEnd extends CI_Controller {
         $this->load->model('Paises_models'); 
         $this->load->model('Ventas_models');
         $this->load->model('Hoteles_models');   
+        $this->load->model('Ofertas_models');
         $this->load->model('Monedas_models'); 
         $this->load->model('Paquetes_models'); 
         $this->load->model('Tematicas_models'); 
@@ -37,7 +38,7 @@ class Inicio_frontEnd extends CI_Controller {
         $data['url_paquetes']=site_url("paquetes/listado/$moneda");
         $data['tematicas']=$this->Tematicas_models->listado_tematicas();
         $data['cantidad_paquetes']=$this->Paquetes_models->paquetes_cantidad();
-        $data['tours']=$this->visualizacion_tours('6','listado','',$moneda,'140','0','small/');
+        $data['tours']=$this->visualizacion_tours('4','listado','',$moneda,'140','0','small/');
         $data['paquetes']=$this->visualizacion_paquetes('4','listado','',$moneda,'140','0','small/');
 
         //Cargamos archivos de vista   
@@ -466,7 +467,7 @@ class Inicio_frontEnd extends CI_Controller {
                 foreach($data['tours'] as $tours) {
                     $nombre=str_replace(" ","-",$tours->nombre);
                     $tours->imagen=$this->Tours_models->imagen_tours($tours->id);
-                    $tours->urlimg=base_url()."public/img/tours/".$tours->imagen;
+                    $tours->urlimg=base_url()."public/img/tours/small/".$tours->imagen;
                     $tours->descripcion=substr(ucfirst($tours->descripcion),0,220);
                     $imagen=$tours->imagen=$this->Tours_models->imagen_tours($tours->id);
                     $tours->url=site_url("tour/".strtolower($tours->distrito)."/".strtolower($nombre)."/");
@@ -597,7 +598,7 @@ class Inicio_frontEnd extends CI_Controller {
                     $paquetes->descripcion=substr(ucfirst($paquetes->descripcion),0,220);
                     $paquetes->inf_habitacion=$this->Hoteles_models->imagen_hoteles($paquetes->id);
                     $imagen=$paquetes->imagen=$this->Tours_models->imagen_tours($paquetes->id_tours_basico);
-                    $paquetes->urlimg=base_url()."public/img/tours/".$paquetes->imagen;
+                    $paquetes->urlimg=base_url()."public/img/tours/small/".$paquetes->imagen;
                     $paquetes->duracion=$paquetes->cantidad_dias.' días '.($paquetes->cantidad_dias - 1).' noches';
                     $paquetes->url=site_url("paquete/".strtolower($paquetes->distrito)."/".strtolower($nombre)."/");
                     if(!empty($moneda)) {
@@ -952,21 +953,52 @@ class Inicio_frontEnd extends CI_Controller {
                 $tours->imagen=$this->Tours_models->imagen_tours($tours->id);
                 $tours->urlimg=base_url()."public/img/tours/".$carpeta_base."".$tours->imagen;
                 $tours->url=site_url("tour/".strtolower($tours->distrito)."/".strtolower($nombre)."/");
-                if($activo > 0) {
-                    $tours->url=site_url("tour/".strtolower($tours->distrito)."/".strtolower($nombre)."/".$moneda);
-                }
+                $tours->aumento_programado=$this->Ofertas_models->consultar_oferta_mayor($tours->id,1);
+                $tours->descuento_programado=$this->Ofertas_models->consultar_oferta_mayor($tours->id,3);
+                if(strlen($tours->descripcion) <= $dilimitar) { $tours->puntos=''; } else { $tours->puntos='...'; }
+                if($activo > 0) { $tours->url=site_url("tour/".strtolower($tours->distrito)."/".strtolower($nombre)."/".$moneda); }
 
-                if(strlen($tours->descripcion) <= $dilimitar){
-                    $tours->puntos='';
-                } else {
-                    $tours->puntos='...';
-                }
+                // Verifico el aumento
+                    if($tours->aumento_programado) {
+                        if($tours->precio_minimo >= $tours->aumento_programado->monto_min && $tours->aumento_programado->min_persona=='0') {
+                            if($tours->aumento_programado->regla_monto_oferta==1) {  //Porcentaje
+                                $aumento=(($tours->precio_minimo * $tours->aumento_programado->monto_oferta) / 100);
+                                $tours->precio_minimo=($tours->precio_minimo + $aumento);
+                            } else { //soles
+                                $aumento=$tours->aumento_programado->monto_oferta;
+                                $tours->precio_minimo=($tours->precio_minimo + $aumento);
+                            }
+                        } 
+                    } 
+                // Fin 
+
+                // Verifico el descuento
+                    $oferta_descuento=0;
+                    $tours->descuento=0;
+                    if($tours->descuento_programado) {
+                        if($tours->precio_minimo >= $tours->descuento_programado->monto_min && $tours->descuento_programado->min_persona=='0') {
+                            if($tours->descuento_programado->regla_monto_oferta==1) {  //Porcentaje
+                                $descuento=(($tours->precio_minimo * $tours->descuento_programado->monto_oferta) / 100);
+                                $oferta_descuento=($tours->precio_minimo - $descuento);
+                            } else { //soles
+                                $descuento=$tours->descuento_programado->monto_oferta;
+                                $oferta_descuento=($tours->precio_minimo - $descuento);
+                            }
+                        }
+                    }  
+                // Fin      
 
                 if($moneda=='') {
+                    if($oferta_descuento > 0) {
+                        $tours->descuento=round(ceil($oferta_descuento),2);
+                    }
                     $tours->precio=round(ceil($tours->precio_minimo),2);
                 } else {
+                    if($oferta_descuento > 0) {
+                        $tours->descuento=round(ceil($oferta_descuento / $tours->tipo_cambio),2);
+                    }
                     $tours->precio=round(ceil($tours->precio_minimo / $tours->tipo_cambio),2); 
-                }
+                }    
             }
         }
         return $data['tours'];
@@ -982,6 +1014,8 @@ class Inicio_frontEnd extends CI_Controller {
                 $paquetes->inf_habitacion=$this->Hoteles_models->imagen_hoteles($paquetes->id);
                 $paquetes->imagen=$this->Tours_models->imagen_tours($paquetes->id_tours_basico);
                 $paquetes->urlimg=base_url()."public/img/tours/".$carpeta_base."".$paquetes->imagen;
+                $paquetes->aumento_programado=$this->Ofertas_models->consultar_oferta_mayor($paquetes->id,1);
+                $paquetes->descuento_programado=$this->Ofertas_models->consultar_oferta_mayor($paquetes->id,3);
                 $paquetes->url=site_url("paquete/".strtolower($paquetes->distrito)."/".strtolower($nombre)."/");
                 if($activo > 0) { 
                     $paquetes->url=site_url("paquete/".strtolower($paquetes->distrito)."/".strtolower($nombre)."/".$moneda);
@@ -1002,12 +1036,51 @@ class Inicio_frontEnd extends CI_Controller {
                         $total_hotel=$paquetes->inf_habitacion->precio_minimo;
                     }
                 }
+                
+                // Verifico el aumento
+                    $precio=($paquetes->inf_costo['total_soles'] + $total_hotel);
+                    /*if($paquetes->aumento_programado) {
+                        if($precio >= $paquetes->aumento_programado->monto_min && $paquetes->aumento_programado->min_persona=='0') {
+                            if($paquetes->aumento_programado->regla_monto_oferta==1) {  //Porcentaje
+                                $aumento=(($precio * $paquetes->aumento_programado->monto_oferta) / 100);
+                                $precio=($precio + $aumento);
+                            } else { //soles
+                                $aumento=$paquetes->aumento_programado->monto_oferta;
+                                $precio=($precio + $aumento);
+                            }
+                        } 
+                    }*/
+                // Fin
+
+                
+
+                // Verifico el descuento
+                    $oferta_descuento=0;
+                    $paquetes->descuento=0;
+                    if($paquetes->descuento_programado) {
+                        if($precio >= $paquetes->descuento_programado->monto_min && $paquetes->descuento_programado->min_persona=='0') {
+                            if($paquetes->descuento_programado->regla_monto_oferta==1) {  //Porcentaje
+                                $descuento=(($precio * $paquetes->descuento_programado->monto_oferta) / 100);
+                                $oferta_descuento=($precio - $descuento);
+                            } else { //soles
+                                $descuento=$paquetes->descuento_programado->monto_oferta;
+                                $oferta_descuento=($precio - $descuento);
+                            }
+                        }
+                    }  
+                // Fin
 
                 if($moneda=='') {
+                    if($oferta_descuento > 0) {
+                        $paquetes->descuento=round(ceil($oferta_descuento),2);
+                    }
                     $paquetes->precio=round(ceil($paquetes->inf_costo['total_soles'] + $total_hotel),2);
                 } else {
+                    if($oferta_descuento > 0) {
+                        $paquetes->descuento=round(ceil($oferta_descuento / $tours->tipo_cambio),2);
+                    }
                     $paquetes->precio=round(ceil((($paquetes->inf_costo['total_soles'] + $total_hotel) / $paquetes->inf_costo['tipo_cambio'])),2);
-                } 
+                }         
             }    
         }
         return $data['paquetes'];

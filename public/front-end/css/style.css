@@ -3723,8 +3723,12 @@ a.box_feat h3 {
 .font-precio {
   font-size:20px;
 }
+.descuentolineal{
+  text-decoration:line-through;
+  font-size:13px;
+}
 .font-precio-1 {
-  font-size:25px;
+  font-size:22px;
 }
 .color-precio{
   color:#de1c2f;

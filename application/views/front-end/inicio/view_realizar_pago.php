@@ -104,7 +104,7 @@
                                                 <td style="display:none;" id="textevento_'.$row['textidservicio'].'">'.$row['textevento'].'</td>
                                                 
                                                 <td>
-                                                    <div class="thumb_cart"><img src="'.$imagen.'" alt="Image"></div>
+                                                    <div class="thumb_cart"><img loading="lazy" src="'.$imagen.'" alt="Image"></div>
                                                 </td>
 
                                                 <td>

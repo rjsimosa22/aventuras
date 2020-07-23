@@ -186,7 +186,7 @@ class Paquetes_models extends CI_Model {
         $this->db->join('bd_paquetes_tours as i','i.id_paquetes=a.id');
         $this->db->where('a.status','1');
         $this->db->group_by('a.nombre');
-        $this->db->order_by('a.nombre','desc');
+        $this->db->order_by('a.nombre','asc');
         
         if($distrito!='Seleccionar' && $distrito!='all') {
             if(is_numeric($distrito)) {
@@ -239,7 +239,7 @@ class Paquetes_models extends CI_Model {
         $this->db->join('bd_distrito as f','a.id_distrito=f.id');
         $this->db->where('a.status','1');
         $this->db->group_by('e.id,e.nombre');
-        $this->db->order_by('a.nombre','desc');  
+        $this->db->order_by('a.nombre','asc');  
         
         $query=$this->db->get();
         if($query->num_rows() > 0) {

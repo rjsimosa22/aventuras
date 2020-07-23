@@ -65,10 +65,10 @@ class Tematicas extends CI_Controller {
             
             if($comprobar==true) {
                 $this->session->set_flashdata('regsi','La temática <b>'.strtoupper($bd_Tematicas["nombre"]).'</b> se ha registrado correctamente.');
-                redirect('crud/tematicas');
+                redirect('crud/tematicas/');
             } else {
                 $this->session->set_flashdata('regno','temática <b>'.strtoupper($bd_Tematicas["nombre"]).'</b> existente, haz algunos cambios antes de volver a enviar el formulario.');
-                redirect('crud/tematicas');
+                redirect('crud/tematicas/');
             }     
         } 
     }
@@ -89,10 +89,10 @@ class Tematicas extends CI_Controller {
             
             if($comprobar==true) {
                 $this->session->set_flashdata('modsi','La temática <b>'.strtoupper($bd_Tematicas["nombre"]).'</b> se modificado correctamente.');
-                redirect('crud/tematicas');
+                redirect('crud/tematicas/');
             } else {
                 $this->session->set_flashdata('modno','temática <b>'.strtoupper($bd_Tematicas["nombre"]).'</b> no se ha podido modificar.');
-                redirect('crud/tematicas');
+                redirect('crud/tematicas/');
             }
         } 
     }

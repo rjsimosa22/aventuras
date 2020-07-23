@@ -14,7 +14,7 @@
             <div class="options">
                 <div class="btn-toolbar">
                     <a href="javascript:void(0);" onClick="consultar('','','')" style="color:#000;text-decoration:none;">
-                        <button class="btn btn-default" title='Nueva Moneda'>
+                        <button class="btn btn-default" title='Nueva Temática'>
                             <i class="icon-plus"></i> 
                             <span class="hidden-xs hidden-sm">Nueva Temática</span>
                         </button>

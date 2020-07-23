@@ -73,7 +73,7 @@
                             <?php 
                                 if($listado_imagenes) {
                                     foreach($listado_imagenes as $row) {
-                                        echo '<img src="'.$url_base.''.$row->nombre_extension.'"  width="100" height="56">'; 
+                                        echo '<img loading="lazy" src="'.$url_base.''.$row->nombre_extension.'"  width="100" height="56">'; 
                                     }
                                 }
                             ?>

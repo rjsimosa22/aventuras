@@ -119,7 +119,6 @@ class Paquetes extends CI_Controller {
             $this->load->view('paquete/view_listado',$data);
             $this->load->view('home/view_footer');
             $this->load->view('common/lib_js');
-            $this->load->view('common/lib_paquete_js');
         } else {
             $this->session->sess_destroy();
             redirect('login');
@@ -312,5 +311,22 @@ class Paquetes extends CI_Controller {
                 redirect('listpaquetes/listado');
             }
         }
+    }
+
+    public function listado_destino() {
+        $id=$this->input->get_post('id',true);
+        $sel=$this->input->get_post('sel',true);
+        if($sel==0) {
+            $data["listado_destino"]=$this->Paquetes_models->paquetes_destino();
+            $data["listado_servicio"]=$this->Paquetes_models->filtros_paquetes('all','','');   
+        } else {
+            if($id > 0) {
+                $id=$id;
+            } else {
+                $id='all';
+            }
+            $data["listado_servicio"]=$this->Paquetes_models->filtros_paquetes($id,'','');
+        }
+        print_r(json_encode($data));
     }
 }

@@ -20,7 +20,7 @@
 .daterangepicker.opensright .ranges, .daterangepicker.opensright .calendar {
   float: right;
   margin: 0;
-  padding: 5px;
+  padding: 0px;
 }
 
 .daterangepicker .ranges {
@@ -51,13 +51,12 @@
 .daterangepicker .ranges label {
   color: #333;
   display: block;
-  font-size: 11px;
+  font-size: 14px;
   font-weight: normal;
   height: 20px;
   line-height: 20px;
   margin-bottom: 2px;
   text-shadow: #fff 1px 1px 0px;
-  text-transform: uppercase;
   width: 74px;
 }
 
@@ -68,7 +67,7 @@
 .daterangepicker .ranges .input-mini {
   background-color: #f7f8fa;
   border: 1px solid #cdced1;
-  color: rgba(26, 26, 26, 0.5);
+  color: rgb(77, 77, 77);
   display: block;
   font-size: 12px;
   height: 30px;
@@ -124,6 +123,7 @@
   top: 100px;
   left: 20px;
   padding: 5px;
+  z-index: 1600;
 }
 
 .daterangepicker table {

@@ -19,7 +19,7 @@
                 <ul class="acc-menu">
                     <li><a href="<?= site_url('crud/monedas/');?>">Monedas</a></li>
                     <li><a href="<?= site_url('crud/tematicas/');?>">Temáticas</a></li>
-                    <li><a href="<?= site_url('crud/descuentos/');?>">Descuentos y Aumentos</a></li>
+                    <li><a href="<?= site_url('crud/ofertas/');?>">Ofertas</a></li>
                 </ul>
             </li>
 			

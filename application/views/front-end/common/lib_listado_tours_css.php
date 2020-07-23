@@ -1,1 +1,1 @@
-<link rel='stylesheet' type='text/css' href='<?= base_url();?>public/front-end/css/select2.css?v=<?= time();?>'/> 
+<link rel='stylesheet' type='text/css' href='<?= base_url();?>public/front-end/css/select2.css'/> 
